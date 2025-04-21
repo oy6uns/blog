@@ -7,7 +7,7 @@ tags:
   - "#hello"
 ---
 
-![[Pasted image 20250421105042.png]]
+
 국밥 마시따
 
 
@@ -19,7 +19,7 @@ print(1)
 print("hello everyone")
 ```
 
-[[1 dohun]]
+[[dohun's 어록]]
 
 > [!Warning] Title
 > Contents
