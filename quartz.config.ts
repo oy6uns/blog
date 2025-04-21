@@ -17,7 +17,7 @@ const config: QuartzConfig = {
     },
     locale: "en-US",
     baseUrl: "quartz.jzhao.xyz",
-    ignorePatterns: ["private", "templates", ".obsidian", "**/assets/**"],
+    ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
@@ -36,7 +36,7 @@ const config: QuartzConfig = {
           dark:      "#111827",  // Gray‑900 (header/icons)
           secondary: "#3b82f6",  // Blue‑500  ← 링크·버튼
           tertiary:  "#6366f1",  // Indigo‑500 ← hover/visited
-          highlight: "rgba(59,130,246,0.08)", // Blue‑500 @ 8 %
+          highlight: "rgba(147,197,253,0.35)", // Blue‑200 @ 35 %
           textHighlight: "#fde04788",         // Amber‑300 @ 50 %
 
           // 옵시디언 기본
@@ -58,7 +58,7 @@ const config: QuartzConfig = {
           dark:      "#f3f4f6",  // Gray‑100 (글자)
           secondary: "#60a5fa",  // Blue‑400
           tertiary:  "#a5b4fc",  // Indigo‑300
-          highlight: "rgba(59,130,246,0.15)", // Blue‑500 @ 15 %
+          highlight: "rgba(96,165,250,0.25)", // Blue‑400 @ 25 %
           textHighlight: "#fbbf2488",         // Amber‑400 @ 50 %
           // 옵시디언 기본
           // light: "#161618",
