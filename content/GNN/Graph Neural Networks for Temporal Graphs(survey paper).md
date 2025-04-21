@@ -1,3 +1,4 @@
+> [paper link](https://arxiv.org/pdf/2302.01018)
 # 5. Temporal Graph에서의 Learning Task
 다양한 학습 과제(task)와 학습 설정(setting)을 정리
 어떤 종류의 예측이나 분류 문제를 풀 수 있는지, 그 문제들을 어떤 맥락에서 접근할 수 있는지를 체계적으로 설명
@@ -33,22 +34,21 @@
 
 
 # 6. 다양한 TGNN 방법론들
-![[IMG-20250421200807-1.png]]
+![[IMG-20250421201205.png]]
 ## 6.1 Snapshot-based Models
 **“Snapshot”**: <span style="background:rgba(205, 244, 105, 0.55)">일정한 시간 간격</span>으로 전체 그래프(노드/엣지/속성 등)의 스냅샷을 연속적으로 나열한다. 
 - 대표적 예시: 하루/1시간마다 찍힌 전체 네트워크 상태
 ### 6.1.1 Model Evolution
 - **GNN 모델 파라미터 자체**를 시간에 따라 업데이트
 - 대표 모델:
-	- [EvolveGCN]: GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![[IMG-20250421200037-1.png]]
+	- [EvolveGCN](https://arxiv.org/pdf/1902.10191): GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![[IMG-20250421201146-1.png]]
 ### 6.1.2 Embedding Evolution
 - 각 시점의 노드 임베딩(h)을 RNN(혹은 attention)으로 시간축 상에서 직접 업데이트
 $$h_{v(t_i)}=REC(h_v(t_{i-j}), \dots)$$
 - 대표 모델:
-	- [DySAT]: 구조적인 self-attention + 시간축 self-attention을 결합
+	- [DySAT](https://arxiv.org/pdf/1812.09430): 구조적인 self-attention + 시간축 self-attention을 결합
 	  → 즉, snapshot 내 + 시계열 간
-	- [VGRNN]: 각 snapshot에서 VGAE → 이후, 임베딩을 LSTM등으로 진화
-	- [SSGNN]: 시계열 + 공간정보 동시처리를 위한 reservoir 방식
+	- [VGRNN](https://arxiv.org/pdf/1908.09710): 각 snapshot에서 VGAE → 이후, 임베딩을 LSTM등으로 진화
 
 ## 6.2 Event-based Models 
 **“Event”**: <span style="background:rgba(205, 244, 105, 0.55)">개별 노드/엣지의 생성/삭제/변화의 ‘이벤트’ 단위</span>로 시간 정보를 다룬다. 
@@ -69,7 +69,7 @@ $$ h_v​(t)=COMBINE((h_v​(t),g_​),AGGREGATE({(h_u​(t^′),g_{t−t^′​
 
 ▶️ 즉, "시간+이웃" 정보를 동시에 활용! (이게 기존 GNN/layered-RNN과 다름)
 - 대표 모델:
-	- [TGAT]: Random Fourier Features Encoding을 사용해 각 edge마다 ‘시간차 임베딩’을 생성한다. 
+	- [TGAT](https://arxiv.org/pdf/2002.07962): Random Fourier Features Encoding을 사용해 각 edge마다 ‘시간차 임베딩’을 생성한다. 
 	  (이웃 $u$가 $t’$에 나와 연결됐으면~) $[h_{u}(t'), g_{{t-t'}}]$을 attention의 입력으로 사용하여 여러 이웃 중 의미있는 이웃만을 강조
 
 ### 6.2.2 Temporal Neighborhood Methods (“Mailbox” 방식)
@@ -81,14 +81,14 @@ $$ h_v​(t)=COMBINE((h_v​(t),g_​),AGGREGATE({(h_u​(t^′),g_{t−t^′​
 $$h_v(t)=COMBINE(h_v(t),AGGREGATE(m_ϵ,ϵ=이벤트 로그))$$
 ▶️ “내가 최근에 누구와 어떤 종류의 상호작용/연결/이벤트를 가졌는가”를 자연스럽게 반영
 - 대표 모델:
-	- [TGN(Temporal Graph Networks)]: 각 노드마다 **메모리(memory)** 와 **메일박스(mailbox)** 를 모두 운영
+	- [TGN(Temporal Graph Networks)](https://arxiv.org/pdf/2006.10637): 각 노드마다 **메모리(memory)** 와 **메일박스(mailbox)** 를 모두 운영
 	  이벤트 발생 시, mailbox로 메시지 날라오면
 		- **memory** (과거 이력 반영하는 hidden-state)를 **업데이트**
 		- 업데이트 후 **embedding**을 산출
 		노드들의 mailbox는 병렬적으로 처리 가능 → 대규모 속도 및 효율성에서 뛰어남!
-	- [DGNN]: 메일이 단순히 저장만이 아니라 이웃과의 **과거 상호작용 히스토리를 LSTM으로 처리**
-	- [APAN]: 누가 나에게 메시지를 보낼지/받을지, 그리고 어떤 메시지에 더 집중해야 할지(중요도)를 attention으로 결정
-	- [TGL]: 엄청나게 큰 그래프에서 최근 n개만 저장하여 memory/messaging 효율 강화
+	- [DGNN](https://arxiv.org/pdf/2401.15584): 메일이 단순히 저장만이 아니라 이웃과의 **과거 상호작용 히스토리를 LSTM으로 처리**
+	- [APAN](https://arxiv.org/pdf/2011.11545): 누가 나에게 메시지를 보낼지/받을지, 그리고 어떤 메시지에 더 집중해야 할지(중요도)를 attention으로 결정
+	- [TGL](https://arxiv.org/pdf/2203.14883): 엄청나게 큰 그래프에서 최근 n개만 저장하여 memory/messaging 효율 강화
 ``` python
 [Mailbox]   (메일함)
    |
@@ -103,24 +103,24 @@ aggregate(최근 메시지들)
 ```
 
 # 7. Open challenges
-## 7.11. 평가 (Evaluation) 문제
+## 7.1 평가 (Evaluation) 문제
 
-### ● 표준화의 부재
+### 7.1.1 표준화의 부재
 - **정적 GNN 연구**에서는 OGB(Open Graph Benchmark) 같은 표준 데이터·평가 패키지가 있음.
 - 하지만 ==TGNN에는 이런 표준화된 벤치마크와 프로토콜이 아직 없다.==
 - 현재 각 연구는 각기 다른(작은/특화된) 데이터셋·성능 척도를 쓰기 때문에, TGNN 모델들의 실력을 ‘직접적으로’ 비교하기가 어렵다.
 - 예: TGL 논문은은 수억 개의 엣지(초대형) 데이터셋을 만들었지만, 그 데이터에서 오직 자기 모델만 테스트함.
 
-### ● 설명가능성(Explainability) 부족
+### 7.1.2 설명가능성(Explainability) 부족
 - 기존 GNN에서는 ==설명가능성 연구==가 활발(왜 이 결과가 나왔는지), 그러나 TGNN에서는 극히 드문 상태임
 
-## 2. 표현력(Expressiveness) 한계
+## 7.2 표현력(Expressiveness) 한계
 
-### ● 기존 GNN의 표현력 연구
+### 7.2.1 기존 GNN의 표현력 연구
 - 정적 GNN은 **WL(Weisfeiler-Lehman) 테스트**의 그래프 구분능력과 이론적 한계, 확장(Ring, k-WL 등)에 대한 연구가 많음.
 - GNN이 무엇까지(몇 단계까지) 구분/학습할 수 있는가, 어떤 패턴은 못 배우는가가 잘 정립되어 있음.
 
-### ● TGNN에는?
+### 7.2.2 TGNN에는?
 - **TGNN의 표현력/이론 연구는 매우 초창기**다!
     - 시간/동역학적 이웃의 의미 정의나 WL 테스트의 시간 확장 같은 근본적 난제가 많음.
 - 일부 논문이 DTTG(이산시간 TG), ETG(이벤트 기반 TG)에 대한 동적 WL test 제안
@@ -132,11 +132,11 @@ aggregate(최근 메시지들)
 
 ## 3. 학습 가능성(Learnability) 문제
 
-### ● GNN의 학습 한계
+### 7.3.1 GNN의 학습 한계
 - ==깊은 GNN에서 정보의 over-smoothing/over-squashing==(멀리서 온 정보가 모두 뭉개짐, bottleneck) 현상은 여전히 큰 문제.
 - 해결책(드롭아웃, virtual node, neighbor sampling 등)도 아직 근본적이지 못함.
 
-### ● TGNN에서의 난점
+### 7.3.2 TGNN에서의 난점
 - TGNN에서는 이 문제에 ==시간축의 긴 의존성(long-term dependency)까지 더해져 한층 더 복잡해짐.==
     - 예: 오래 전에 있었던 중요한 이벤트의 영향도 잘 반영해야 함
 - 실제로 안정적이면서도 깊고 복잡한(스냅샷/이벤트 많음) TGNN을 학습하는 기술은 아직 초기 단계
@@ -144,7 +144,7 @@ aggregate(최근 메시지들)
 
 ## 4. 실제 활용(Real-world Applications)에서의 도전 과제
 
-### ● 미해결 첨단 활용처들
+### 7.4.1 미해결 첨단 활용처들
 - TGNN이 쓰일 법한 분야들은 많지만, 그간 너무 제한적이고, 아직 본격적으로 활용되지 못함:
     - **과학계산/물리 기반**:
         - Ex) 물리법칙과 신경망(Physics Informed NN) 결합, 시뮬레이션
