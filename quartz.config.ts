@@ -23,21 +23,33 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
+        header: "Inter",
+        body: "Inter",
         code: "IBM Plex Mono",
       },
       colors: {
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
+          // 노션 theme
+          light: "#ffffff",        // page bg
+          lightgray: "#ebeced",    // subtle separators
+          gray: "#9b9a97",         // secondary text
+          darkgray: "#5b5b5b",
+          dark: "#37352f",         // main text
+          secondary: "#2f76fe",    // link / accent
+          tertiary: "#e03e3e",     // call‑out red 등
+          highlight: "rgba(47,118,254,0.08)",
           textHighlight: "#fff23688",
+
+          // 옵시디언 기본
+          // light: "#faf8f8",
+          // lightgray: "#e5e5e5",
+          // gray: "#b8b8b8",
+          // darkgray: "#4e4e4e",
+          // dark: "#2b2b2b",
+          // secondary: "#284b63",
+          // tertiary: "#84a59d",
+          // highlight: "rgba(143, 159, 169, 0.15)",
+          // textHighlight: "#fff23688",
         },
         darkMode: {
           light: "#161618",

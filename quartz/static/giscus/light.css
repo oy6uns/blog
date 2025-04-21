@@ -85,6 +85,15 @@ main {
   --color-scale-gray-1: #eaeef2;
   --color-scale-blue-1: #b6e3ff;
 
+  /* … */
+  --color-btn-text: var(--darkgray);
+  --color-btn-bg:   var(--light);
+  --color-btn-border: rgb(43 43 43 / 15%);
+
+  --color-btn-primary-bg: var(--tertiary);
+  --color-btn-primary-hover-bg: var(--secondary);
+  /* 필요한 항목만 이렇게 교체 */
+
   /*! Extensions from @primer/css/alerts/flash.scss */
   --color-social-reaction-bg-hover: var(--color-scale-gray-1);
   --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);

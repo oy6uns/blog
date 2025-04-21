@@ -15,7 +15,7 @@
 	- 미래 패턴을 예측하는 것이 목적이다. 
 → 결과적으로 네 가지 조합(Transductive/Inductive × Past/Future)이 나올 수 있다. 
 
-## 5.2 ==Supervised== Learning Tasks
+## 5.2 Supervised Learning Tasks
 1. Node Classificaiton
 2. Edge Classification
 3. (sub)Graph Classification
