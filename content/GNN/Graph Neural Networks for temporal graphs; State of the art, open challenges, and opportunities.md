@@ -1,24 +1,3 @@
-# TGNN Taxanomy
-## 1. Snapshot-based Methods (**스냅샷 기반**, STG 기반)
-- 그래프가 일정 시간 간격(스냅샷)으로 분리되어 있고, 각 시점별로 정적인 그래프처럼 처리함.
-- 시간적 연속성은 여러스냅샷 간의 관계를 모델링함으로써 학습됨.
-- **하위 분류:**
-    - **Model Evolution:**
-        - GNN의 파라미터 자체가 시간에 따라 변화(진화)하도록 학습하는 방식. 예: EvolveGCN.
-    - **Embedding Evolution:**
-        - 각 노드 임베딩을 시간 축을 따라 순차적으로 업데이트(진화)하는 방식. 예: DySAT, VGRNN.
-
-## 2. Event-based Methods (**이벤트 기반**, ETG 기반)
-- 그래프 변화가 스냅샷이 아니라 **개별 이벤트(노드/에지의 추가, 삭제 등)** 수준에서 기록되고 모델링됨.
-- 연속적이고 비정기적인 시점에서의 변화, 혹은 개별 이벤트가 시간적으로 중요한 경우에 강점.
-- **하위 분류:**
-    - **Temporal Embedding:**
-        - 시간 임베딩(ex: Random Fourier Features 등)과 노드/에지 임베딩을 결합해, 순서 혹은 시간 차를 명시적으로 표현.
-        - Attention 또는 RNN 계열로 시간 정보를 처리. 예: TGAT, NAT.
-    - **Temporal Neighborhood:**
-        - 각 노드의 이웃과 과거 이벤트를 모아두는 Mailbox/Memory 등 특수 구조를 사용해 동적으로 임베딩 업데이트.
-        - 예: TGN, APAN, DGNN.
-
 # 5. Temporal Graph에서의 Learning Task
 다양한 학습 과제(task)와 학습 설정(setting)을 정리
 어떤 종류의 예측이나 분류 문제를 풀 수 있는지, 그 문제들을 어떤 맥락에서 접근할 수 있는지를 체계적으로 설명
@@ -54,14 +33,14 @@
 
 
 # 6. 다양한 TGNN 방법론들
-![[Assets/blog/content/GNN/Graph Neural Networks for temporal graphs; State of the art, open challenges, and opportunities/IMG-20250421200037.png]]
+![[IMG-20250421200807-1.png]]
 ## 6.1 Snapshot-based Models
 **“Snapshot”**: <span style="background:rgba(205, 244, 105, 0.55)">일정한 시간 간격</span>으로 전체 그래프(노드/엣지/속성 등)의 스냅샷을 연속적으로 나열한다. 
 - 대표적 예시: 하루/1시간마다 찍힌 전체 네트워크 상태
 ### 6.1.1 Model Evolution
 - **GNN 모델 파라미터 자체**를 시간에 따라 업데이트
 - 대표 모델:
-	- [EvolveGCN]: GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![[Assets/blog/content/GNN/Graph Neural Networks for temporal graphs; State of the art, open challenges, and opportunities/IMG-20250421200037-1.png]]
+	- [EvolveGCN]: GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![[IMG-20250421200037-1.png]]
 ### 6.1.2 Embedding Evolution
 - 각 시점의 노드 임베딩(h)을 RNN(혹은 attention)으로 시간축 상에서 직접 업데이트
 $$h_{v(t_i)}=REC(h_v(t_{i-j}), \dots)$$
@@ -124,11 +103,11 @@ aggregate(최근 메시지들)
 ```
 
 # 7. Open challenges
-## 1. 평가 (Evaluation) 문제
+## 7.11. 평가 (Evaluation) 문제
 
 ### ● 표준화의 부재
 - **정적 GNN 연구**에서는 OGB(Open Graph Benchmark) 같은 표준 데이터·평가 패키지가 있음.
-- 하지만 **==TGNN**에는 이런 표준화된 벤치마크와 프로토콜이 아직 없다.==
+- 하지만 ==TGNN에는 이런 표준화된 벤치마크와 프로토콜이 아직 없다.==
 - 현재 각 연구는 각기 다른(작은/특화된) 데이터셋·성능 척도를 쓰기 때문에, TGNN 모델들의 실력을 ‘직접적으로’ 비교하기가 어렵다.
 - 예: TGL 논문은은 수억 개의 엣지(초대형) 데이터셋을 만들었지만, 그 데이터에서 오직 자기 모델만 테스트함.
 
@@ -173,4 +152,4 @@ aggregate(최근 메시지들)
     - **기후/환경/질병 등**:
         - TGNN의 시간+공간+관계 복합성 포착 능력이 특히 필요
         - 하지만 실제 대규모 예측/regression 과제엔 아직 소극적으로 적용됨
-- ==**회귀 문제**(연속값 예측)에서 TGNN 응용은 거의 미개척== 상태
+- ==회귀 문제(연속값 예측)에서 TGNN 응용은 거의 미개척== 상태
