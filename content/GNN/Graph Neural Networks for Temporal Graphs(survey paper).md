@@ -34,14 +34,14 @@
 
 
 # 6. 다양한 TGNN 방법론들
-![[IMG-20250421201205.png]]
+![[IMG-20250421202904.png]]
 ## 6.1 Snapshot-based Models
 **“Snapshot”**: <span style="background:rgba(205, 244, 105, 0.55)">일정한 시간 간격</span>으로 전체 그래프(노드/엣지/속성 등)의 스냅샷을 연속적으로 나열한다. 
 - 대표적 예시: 하루/1시간마다 찍힌 전체 네트워크 상태
 ### 6.1.1 Model Evolution
 - **GNN 모델 파라미터 자체**를 시간에 따라 업데이트
 - 대표 모델:
-	- [EvolveGCN](https://arxiv.org/pdf/1902.10191): GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![[IMG-20250421201146-1.png]]
+	- [EvolveGCN](https://arxiv.org/pdf/1902.10191): GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![[IMG-20250421201146.png]]
 ### 6.1.2 Embedding Evolution
 - 각 시점의 노드 임베딩(h)을 RNN(혹은 attention)으로 시간축 상에서 직접 업데이트
 $$h_{v(t_i)}=REC(h_v(t_{i-j}), \dots)$$
@@ -78,7 +78,7 @@ $$ h_v​(t)=COMBINE((h_v​(t),g_​),AGGREGATE({(h_u​(t^′),g_{t−t^′​
 1. 노드는 자신 mailbox에 있는 여러 메시지들을 Aggregate(예: mean, attention, LSTM 등)으로 요약
 2. 그리고 지금 나의 임베딩 $h_v(t)$와 $Aggregate$한 것들을 Combine(예: sum, concatenate 등)한다. 
 3. 그 결과가 최신 임베딩 $h_v(t)$!
-$$h_v(t)=COMBINE(h_v(t),AGGREGATE(m_ϵ,ϵ=이벤트 로그))$$
+$$h_v(t)=COMBINE(h_v(t),AGGREGATE(m_ϵ,ϵ= Event \; Log))$$
 ▶️ “내가 최근에 누구와 어떤 종류의 상호작용/연결/이벤트를 가졌는가”를 자연스럽게 반영
 - 대표 모델:
 	- [TGN(Temporal Graph Networks)](https://arxiv.org/pdf/2006.10637): 각 노드마다 **메모리(memory)** 와 **메일박스(mailbox)** 를 모두 운영
