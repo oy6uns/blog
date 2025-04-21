@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "oy6uns.dev",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -29,16 +29,15 @@ const config: QuartzConfig = {
       },
       colors: {
         lightMode: {
-          // 노션 theme
-          light: "#ffffff",        // page bg
-          lightgray: "#ebeced",    // subtle separators
-          gray: "#9b9a97",         // secondary text
-          darkgray: "#5b5b5b",
-          dark: "#37352f",         // main text
-          secondary: "#2f76fe",    // link / accent
-          tertiary: "#e03e3e",     // call‑out red 등
-          highlight: "rgba(47,118,254,0.08)",
-          textHighlight: "#fff23688",
+          light:     "#ffffff",  // bg
+          lightgray: "#f1f5f9",  // Slate‑100
+          gray:      "#6b7280",  // Gray‑500
+          darkgray:  "#374151",  // Gray‑700
+          dark:      "#111827",  // Gray‑900 (header/icons)
+          secondary: "#3b82f6",  // Blue‑500  ← 링크·버튼
+          tertiary:  "#6366f1",  // Indigo‑500 ← hover/visited
+          highlight: "rgba(59,130,246,0.08)", // Blue‑500 @ 8 %
+          textHighlight: "#fde04788",         // Amber‑300 @ 50 %
 
           // 옵시디언 기본
           // light: "#faf8f8",
@@ -52,15 +51,25 @@ const config: QuartzConfig = {
           // textHighlight: "#fff23688",
         },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          light:     "#1f2937",  // Gray‑800
+          lightgray: "#374151",  // Gray‑700
+          gray:      "#9ca3af",  // Gray‑400
+          darkgray:  "#d1d5db",  // Gray‑300
+          dark:      "#f3f4f6",  // Gray‑100 (글자)
+          secondary: "#60a5fa",  // Blue‑400
+          tertiary:  "#a5b4fc",  // Indigo‑300
+          highlight: "rgba(59,130,246,0.15)", // Blue‑500 @ 15 %
+          textHighlight: "#fbbf2488",         // Amber‑400 @ 50 %
+          // 옵시디언 기본
+          // light: "#161618",
+          // lightgray: "#393639",
+          // gray: "#646464",
+          // darkgray: "#d4d4d4",
+          // dark: "#ebebec",
+          // secondary: "#7b97aa",
+          // tertiary: "#84a59d",
+          // highlight: "rgba(143, 159, 169, 0.15)",
+          // textHighlight: "#b3aa0288",
         },
       },
     },
