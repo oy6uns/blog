@@ -19,7 +19,7 @@ function convertImageLinks(filePath) {
   const before = content
 
   // ![[IMG-20250421202904.png]] → ![](/img/IMG-20250421202904.png)
-  content = content.replace(/!\[\[([\w-]+\.(png|jpg|jpeg|gif|svg))\]\]/gi, (_, filename) => {
+  content = content.replace(/!\[\[([^\]]+\.(?:png|jpe?g|gif|svg))\]\]/gi, (_, filename) => {
     return `![](/img/${filename})`
   })
 
