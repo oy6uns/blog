@@ -1,6 +1,6 @@
 > The GNN Master
 
 
-Steven Hong King
+‘Steven Hong King’
 ![[Pasted image 20250423134834.png]]
 
