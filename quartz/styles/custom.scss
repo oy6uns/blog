@@ -1,3 +1,16 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+.katex-display {
+	display: block;
+	text-align: center;
+  }
+
+  /* Quartz – 블록 수식 가운데 정렬 */
+mjx-container[jax="CHTML"][display="true"] {
+	display: block !important;
+	text-align: center !important;
+	margin: 1em 0 !important;   /* 위아래 여백은 취향 */
+  }
+  
