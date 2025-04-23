@@ -17,9 +17,9 @@ Node Classification task를 해결하기 위한 graph-based semi-supervised lear
 그래프 정규화 항은 <b><font color="#49a01f">인접한 노드들의 특징 벡터 차이를 최소화하는 역할</font></b>을 한다!
 
 $$
-\mathcal{L}_{reg} = \sum_{i,j} A_{ij}(f(X_i)^\top f(X_i) - 2f(X_i)^\top f(X_j) + f(X_j)^\top f(X_j)) \\
-= 2(f(X)^\top Df(X) - f(X)^\top Af(X)) \\
-= 2(f(X)^\top (D - A)f(X)) \\
+\mathcal{L}_{reg} = \sum_{i,j} A_{ij}(f(X_i)^\top f(X_i) - 2f(X_i)^\top f(X_j) + f(X_j)^\top f(X_j)) \\ \\
+= 2(f(X)^\top Df(X) - f(X)^\top Af(X)) \\ \\
+= 2(f(X)^\top (D - A)f(X)) \\ \\
 = 2(f(X)^\top \Delta f(X))
 $$
 
