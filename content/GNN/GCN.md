@@ -1,4 +1,4 @@
-> Semi-Supervised Classification with Graph Convolutional Networks
+> Semi-Supervised Classification with Graph Convolutional Networks (ICLR ‘17)
 > https://arxiv.org/pdf/1609.02907
 
 ## 수식 (1)
