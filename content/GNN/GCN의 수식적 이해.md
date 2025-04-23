@@ -32,7 +32,9 @@ $$
 
 > [!success] 해결 방안
 > <span style="background:rgba(208, 235, 166, 0.55)">이 논문은 학습하는 함수 $f(X, A)$ 를 제시하여</span>
-> 연결된 노드들의 **표현을 유사하게 만들도록 강제하는 정규화 항을 손실함수에 추가하는 대신,** <span style="background:rgba(208, 235, 166, 0.55)">**신경망 자체가 그래프 구조(인접행렬 $A$)를 직접 학습하도록 설계한다.</span>→** 인접행렬을 학습시에 사용하면, <span style="background:rgba(208, 235, 166, 0.55)">⭐️ **레이블이 있는 노드뿐만 아니라 없는 노드의 정보도 학습할 수 있게 된다.** ⭐️</span>
+> 연결된 노드들의 표현을 유사하게 만들도록 강제하는 정규화 항을 손실함수에 추가하는 대신, <span style="background:rgba(208, 235, 166, 0.55)">신경망 자체가 그래프 구조(인접행렬 $A$)를 직접 학습하도록 설계한다.</span>
+> 
+> → 인접행렬을 학습시에 사용하면, <span style="background:rgba(208, 235, 166, 0.55)">⭐️ 레이블이 있는 노드뿐만 아니라 없는 노드의 정보도 학습할 수 있게 된다.⭐️</span>
 
 ## 논문의 2가지 Contribution
 1. graph에서 **직접적으로 작동하는 neural networks model**을 설계하기 위한 simple & well behaved **layer-wise propagation rule 을 제시**한다. 
