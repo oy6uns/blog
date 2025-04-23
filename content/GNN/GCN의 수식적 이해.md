@@ -2,7 +2,9 @@
 > https://arxiv.org/pdf/1609.02907
 
 ## 수식 (1)
-$$ \mathcal{L}=\mathcal{L}_0+λ\mathcal{L}_{reg},\\ \; \\where\;\mathcal{L}_{reg}=∑_{i,j}A_{ij}∥f(X_i)−f(X_j)∥^ 2=f(X)^⊤Δf(X). $$
+$$ 
+\mathcal{L}=\mathcal{L}_0+λ\mathcal{L}_{reg},\\ \; \\where\;\mathcal{L}_{reg}=∑_{i,j}A_{ij}∥f(X_i)−f(X_j)∥^ 2=f(X)^⊤Δf(X). 
+$$
 
 Node Classification task를 해결하기 위한 graph-based semi-supervised learning에서
 
@@ -51,16 +53,22 @@ $$
 <span style="background:rgba(208, 235, 166, 0.55)"> --------- </span>
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
 
-$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\;(3) $$
+$$
+g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\;(3) 
+$$
 
-$$g_θ \;⋆ \;x ≈ θ(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x\;\;\cdot\cdot\cdot\;\; (7)$$
+$$
+g_θ \;⋆ \;x ≈ θ(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x\;\;\cdot\cdot\cdot\;\; (7)
+$$
 
 수식 (3)은 filter를 통해 spectral convolution을 정의하는 것이고, 수식 (7)은 결과적으로 convolution 식이 인접 행렬(자기자신) 및 라플라시안 행렬(주변 노드)의 합으로 유도될 수 있다는 것을 보여준다. 이제 하나씩 알아보자.
 
 ## 수식 (3)
 Graph Signal $x \in R^N$와 filter $g_\theta$ 에 대해 spectral convolution은 다음과 같이 정의된다.
 
-$$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; (3)$$
+$$
+g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; (3)
+$$
 
 1. $x$ : 각 노드가 가지고 있는 특징(feature) 값
 2. $U$: 정규화된 그래프 라플라시안 $L$의 고유벡터 행렬
@@ -98,7 +106,9 @@ $$ g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(
 이를 해결하기 위해, truncated Chebyshev expansion을 통해 $g_\theta(Λ)$를 다항식으로 근사한다.
 ## 수식 (4)
 
-$$g_{θ^′}(Λ) ≈ \sum^K_{k=0} \theta'_kT_k(\tildeΛ)$$
+$$
+g_{θ^′}(Λ) ≈ \sum^K_{k=0} \theta'_kT_k(\tildeΛ)
+$$
 
 여기서 $\tildeΛ = \frac{2}{\lambda_{max}}Λ-I$로 정의한다.
 
@@ -108,7 +118,9 @@ Chebyshev 다항식은 $(−1,1)$에서 동작하므로, $L$의 가장 큰 eigen
 $\tilde L = \frac{2}{\lambda_{max}}L-I$에 대해,
 ## 수식(5)
 
-$$ g_θ \;⋆\;x≈\sum^K_{k=0} \theta'_kT_k(\tilde L)x = y$$
+$$
+g_θ \;⋆\;x≈\sum^K_{k=0} \theta'_kT_k(\tilde L)x = y
+$$
 
 위 수식이 특별한 이유는 각 node에 대해 localized 되어 있기 때문이다. 우선 graph Laplacian $L$은 다음과 같이 localization 특성을 가진다.
 
@@ -154,12 +166,16 @@ $\lambda_{max}\approx2$ 로 근사한다. 따라서, $\tilde L = \frac{2}{\lambd
 $T_0(x) =1, T_1(x) =x$ 이므로, 대입해서 정리한 식은 다음과 같다.
 ## 수식 (6)
 
-$$g_θ \;⋆\;x≈\sum^K_{k=0} \theta'_kT_k(\tilde L)x = \theta'_0x+\theta'_1(L-I)x = \theta'_0x-\theta'_1D^{-\frac{1}{2}}AD^{-\frac{1}{2}}x$$
+$$
+g_θ \;⋆\;x≈\sum^K_{k=0} \theta'_kT_k(\tilde L)x = \theta'_0x+\theta'_1(L-I)x = \theta'_0x-\theta'_1D^{-\frac{1}{2}}AD^{-\frac{1}{2}}x
+$$
 
 더 나아가, 계산을 줄이기 위해 $parameter\; \theta = \theta'_0 = -\theta'_1$ 만을 사용한다면, 다음과 같은 간단한 결과를 얻을 수 있다!
 ## 수식 (7)
 
-$$g_θ \;⋆\;x≈\theta \Big(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}} \Big)x$$
+$$
+g_θ \;⋆\;x≈\theta \Big(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}} \Big)x
+$$
 
 $D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$의 eigenvalue는 $[-1, 1]$ 구간에 속하기 때문에,
 
@@ -174,16 +190,27 @@ $I_N +D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$의 eigenvalue는 $[0, 2]$ 구간에 속
 
 **Renormalization Trick**을 적용하면 인접 행렬을 다음과 같이 바꾼다.
 
-- 자기 자신 연결(Self-loop) 추가:  $$ \tilde{A} = A + I $$
-- 새로운 차수 행렬:  $$ \tilde{D}_{ii} = \sum_j \tilde{A}_{ij} $$
-- 새롭게 정규화된 인접 행렬:  $$ \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} $$
+- 자기 자신 연결(Self-loop) 추가:  
+$$ 
+\tilde{A} = A + I 
+$$
+- 새로운 차수 행렬:  
+$$ 
+\tilde{D}_{ii} = \sum_j \tilde{A}_{ij} 
+$$
+- 새롭게 정규화된 인접 행렬:  
+$$ 
+\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} 
+$$
 새롭게 정규화된 인접행렬의 eigenvalue는 $[0, 1]$ 범위로 좁혀진다!!!
 
 이렇게 되면 고유값이 더 안정적인 범위에 놓이고, 모델이 여러층을 쌓아도 기울기 폭발/소실 문제가 줄어들게 된다!!
 
 **결과적으로 $I_N +D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$ 대신, $\tilde D^{-\frac{1}{2}}\tilde A\tilde D^{-\frac{1}{2}}$ 를 이용해 다음과 같이 convolutional filter를 정의한다.**
 
-$$ g_θ∗x≈θ\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}x $$
+$$
+g_θ∗x≈θ\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}x
+$$
 
 위의 결과는 각 node가 1차원의 feature를 가질 때로 한정되어 있다. 이제 각 node마다 $C$차원의 feature vector를 가지는 상황을 고려해보자!
 
@@ -197,8 +224,9 @@ $$ g_θ∗x≈θ\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}x $$
 
 결과적으로 일반화된 식은 아래와 같다.
 ## 수식 (8)
-
-$$Z = \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}XΘ$$
+$$
+Z = \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}XΘ
+$$
 
 그래프의 엣지 개수를 $|\mathcal{E}|$라고 하면,
 각 노드는 평균적으로 $\frac{|\mathcal{E}|}{N}$개의 이웃을 가지므로, 전체 노드 $N$개에 대해
@@ -210,9 +238,9 @@ $l$번째 layer와 $l+1$번째 layer의 activation을 다음과 같이 정의하
 - $H^{(l)} \in \mathbb{R}^{N \times C_l}$
 - $H^{(l+1)} \in \mathbb{R}^{N \times C_{l+1}}$
 이때, 학습 가능한 가중치 행렬 $W^{(l)} \in \mathbb{R}^{C_l \times C_{l+1}}$ 와 활성화 함수 $\sigma$(예: ReLU, tanh)를 사용하여 layer-wise propagation rule을 정의하면:
-
-$$H^{(l+1)} = \sigma \left( \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} H^{(l)} W^{(l)} \right)$$
-
+$$
+H^{(l+1)} = \sigma \left( \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} H^{(l)} W^{(l)} \right)
+$$
 이 공식은 GCN에서 각 레이어의 특징을 다음 레이어로 전달하는 방법을 나타낸다!
 
 # 3. Semi-Supervised Node Classification
@@ -220,7 +248,9 @@ $$H^{(l+1)} = \sigma \left( \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} H^{(l)} 
 GCN Paper에서는 2-Layer GCN을 예로 들어 설명한다.
 ## 수식(9)
 
-$$Z=f(X,A)=softmax(A^⋅ReLU(A^XW^{(0)})W^{(1)})$$
+$$
+Z=f(X,A)=softmax(A^⋅ReLU(A^XW^{(0)})W^{(1)})
+$$
 
 위와 같이 두 개의 layer를 가지는 model을 만들 수 있다.
 
@@ -235,7 +265,9 @@ $$Z=f(X,A)=softmax(A^⋅ReLU(A^XW^{(0)})W^{(1)})$$
 
 ## 수식(10)
 
-$$\mathcal{L} = - \sum_{l \in \text{labeled}} \sum_{f=1}^{\text{output dim}} Y_{lf} \ln Z_{lf}$$
+$$
+\mathcal{L} = - \sum_{l \in \text{labeled}} \sum_{f=1}^{\text{output dim}} Y_{lf} \ln Z_{lf}
+$$
 
 마지막 output layer를 거친 후,
 Loss function으로 **label 이 있는 node 들에 대해서만 cross-entropy error 를 계산**합니다.
