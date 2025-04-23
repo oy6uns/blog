@@ -148,7 +148,7 @@ $$
 또한 normalized graph Laplacian$\big(L = I_N − D^{-\frac{1}{2}}AD^{-\frac{1}{2}}\big)$의 eigenvalue들은 $[0, 2]$ 구간에 속하기 때문에,
 
 > [!callout]- 참고
-> ![[스크린샷 2025-04-23 오후 11.44.30.png]]
+> ![[Pasted image 20250424005022.png]]
 
 $\lambda_{max}\approx2$ 로 근사한다. 따라서, $\tilde L = \frac{2}{\lambda_{max}}L-I = L-I = -D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$가 된다.
 
@@ -162,8 +162,12 @@ $\lambda_{max}\approx2$ 로 근사한다. 따라서, $\tilde L = \frac{2}{\lambd
 > 이 식을 다시 보면:
 > $$ L_{\text{norm}} X = (I_N - D^{-1/2} A D^{-1/2}) X $$
 > **정규화된 인접 행렬**은 아래와 같이 나타낼 수 있다.
-> $$ D^{-1/2}AD^{-1/2} = \begin{bmatrix} 0 & \frac{1}{\sqrt{d_1d_2}} & \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_1d_4}} \\ \frac{1}{\sqrt{d_1d_2}} & 0 & \frac{1}{\sqrt{d_2d_3}} & 0 \\ \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_2d_3}} & 0 & 0 \\ \frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 0 \end{bmatrix}  \\ $$ 
-> $$ I_N - D^{-1/2}AD^{-1/2} = \begin{bmatrix} 1 & -\frac{1}{\sqrt{d_1d_2}} & -\frac{1}{\sqrt{d_1d_3}} & -\frac{1}{\sqrt{d_1d_4}} \\ -\frac{1}{\sqrt{d_1d_2}} & 1 & -\frac{1}{\sqrt{d_2d_3}} & 0 \\ -\frac{1}{\sqrt{d_1d_3}} & -\frac{1}{\sqrt{d_2d_3}} & 1 & 0 \\ -\frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 1 \end{bmatrix}$$
+> $$ 
+> D^{-1/2}AD^{-1/2} = \begin{bmatrix} 0 & \frac{1}{\sqrt{d_1d_2}} & \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_1d_4}} \\ \frac{1}{\sqrt{d_1d_2}} & 0 & \frac{1}{\sqrt{d_2d_3}} & 0 \\ \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_2d_3}} & 0 & 0 \\ \frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 0 \end{bmatrix}  \\ 
+> $$ 
+> $$ 
+> I_N - D^{-1/2}AD^{-1/2} = \begin{bmatrix} 1 & -\frac{1}{\sqrt{d_1d_2}} & -\frac{1}{\sqrt{d_1d_3}} & -\frac{1}{\sqrt{d_1d_4}} \\ -\frac{1}{\sqrt{d_1d_2}} & 1 & -\frac{1}{\sqrt{d_2d_3}} & 0 \\ -\frac{1}{\sqrt{d_1d_3}} & -\frac{1}{\sqrt{d_2d_3}} & 1 & 0 \\ -\frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 1 \end{bmatrix}
+> $$
 > > 즉, **자기 자신**($I_N X$)에서 **정규화된 이웃 정보**($D^{-1/2} A D^{-1/2} X$)를 빼는 연산을 수행.
 > - **그래프에서 노드가 주변과 얼마나 다른지를 분석**할 수 있다.
 > - 결과적으로 **노드 간 차이를 줄이고, 스무딩** 역할을 수행한다.
