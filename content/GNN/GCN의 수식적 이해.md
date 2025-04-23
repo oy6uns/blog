@@ -129,13 +129,7 @@ $$ g_θ \;⋆\;x≈\sum^K_{k=0} \theta'_kT_k(\tilde L)x = y$$
 또한 normalized graph Laplacian$\big(L = I_N − D^{-\frac{1}{2}}AD^{-\frac{1}{2}}\big)$의 eigenvalue들은 $[0, 2]$ 구간에 속하기 때문에,
 
 > [!callout]- 참고
-> | 성질                      | 일반 Laplacian $L$                 | 정규화 Laplacian $L_{\text{sym}}$         |
-|---------------------------|------------------------------------|--------------------------------------------|
-| 대칭성                   | ✅ 대칭                             | ✅ 대칭                                     |
-| 양의 준정부호            | ✅ 항상 0 이상의 고유값            | ✅ 항상 0 이상의 고유값                    |
-| 0 고유값 개수 = 연결 성분 개수 | ✅ 성립                          | ✅ 성립                                     |
-| 고유값 범위              | $[0, n]$                            | $[0, 2]$                                   |
-| 행 합이 0                | ✅ 성립 ($L\mathbf{1} = 0$)         | ❌ 일반적으로 성립하지 않음               |
+> ![[스크린샷 2025-04-23 오후 11.44.30.png]]
 
 $\lambda_{max}\approx2$ 로 근사한다. 따라서, $\tilde L = \frac{2}{\lambda_{max}}L-I = L-I = -D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$가 된다.
 
@@ -244,7 +238,7 @@ Loss function으로 **label 이 있는 node 들에 대해서만 cross-entropy er
 이를 통해 수식 (9)의 weight matrix $W^{(0)}$와 $W^{(1)}$은 gradient descent를 통해 업데이트 한다!
 
 # 5. Experiments
-크게 네 가지 dataset: Citeseer, Cora, Pubmed, NELL 을 실험에 사용하였다.\
+크게 네 가지 dataset: Citeseer, Cora, Pubmed, NELL 을 실험에 사용하였다.
 각 데이터셋에 대한 **baseline method** 들과 **two-layer GCN 의 classification accuracy** 는 다음과 같다.
 ![[Pasted image 20250423164504.png]]
 GCN 의 정확도가 다른 baseline method 들에 비해 월등히 높은 것을 볼 수 있다. 
