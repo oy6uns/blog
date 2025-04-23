@@ -143,7 +143,7 @@ $\lambda_{max}\approx2$ 로 근사한다. 따라서, $\tilde L = \frac{2}{\lambd
 > 이 식을 다시 보면:
 > $$ L_{\text{norm}} X = (I_N - D^{-1/2} A D^{-1/2}) X $$
 > **정규화된 인접 행렬**은 아래와 같이 나타낼 수 있다.
-> $$ D^{-1/2}AD^{-1/2} = \begin{bmatrix} 0 & \frac{1}{\sqrt{d_1d_2}} & \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_1d_4}} \\ \frac{1}{\sqrt{d_1d_2}} & 0 & \frac{1}{\sqrt{d_2d_3}} & 0 \\ \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_2d_3}} & 0 & 0 \\ \frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 0 \end{bmatrix}  $$
+> $$ D^{-1/2}AD^{-1/2} = \begin{bmatrix} 0 & \frac{1}{\sqrt{d_1d_2}} & \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_1d_4}} \\ \frac{1}{\sqrt{d_1d_2}} & 0 & \frac{1}{\sqrt{d_2d_3}} & 0 \\ \frac{1}{\sqrt{d_1d_3}} & \frac{1}{\sqrt{d_2d_3}} & 0 & 0 \\ \frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 0 \end{bmatrix}  \\ $$ 
 > $$ I_N - D^{-1/2}AD^{-1/2} = \begin{bmatrix} 1 & -\frac{1}{\sqrt{d_1d_2}} & -\frac{1}{\sqrt{d_1d_3}} & -\frac{1}{\sqrt{d_1d_4}} \\ -\frac{1}{\sqrt{d_1d_2}} & 1 & -\frac{1}{\sqrt{d_2d_3}} & 0 \\ -\frac{1}{\sqrt{d_1d_3}} & -\frac{1}{\sqrt{d_2d_3}} & 1 & 0 \\ -\frac{1}{\sqrt{d_1d_4}} & 0 & 0 & 1 \end{bmatrix}$$
 > > 즉, **자기 자신**($I_N X$)에서 **정규화된 이웃 정보**($D^{-1/2} A D^{-1/2} X$)를 빼는 연산을 수행.
 > - **그래프에서 노드가 주변과 얼마나 다른지를 분석**할 수 있다.
@@ -184,7 +184,7 @@ $$ g_θ∗x≈θ\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2}x $$
 위의 결과는 각 node가 1차원의 feature를 가질 때로 한정되어 있다. 이제 각 node마다 $C$차원의 feature vector를 가지는 상황을 고려해보자!
 
 - 입력 신호 $X \in R^{N\times C}$
-    총 $N$개의 노드(feature)에 대해 각 노드(feature vector)가 $C$-차원을 가질 때, 입력 신호 $X$는 $X \in \R^{N\times C}$가 된다.
+    총 $N$개의 노드(feature)에 대해 각 노드(feature vector)가 $C$-차원을 가질 때, 입력 신호 $X$는 $X \in R^{N\times C}$가 된다.
 - 필터 행렬 $Θ \in R^{C\times F}$
     $F$개의 필터를 가진다고 할 때, **입력 차원 $C$를 출력 차원 $F$로 변환**시켜준다.
 - 출력 신호 $Z \in R^{N \times F}$
