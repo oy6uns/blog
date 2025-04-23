@@ -1,7 +1,7 @@
 > [paper link](https://arxiv.org/pdf/2302.01018)
 # 5. Temporal Graph에서의 Learning Task
-다양한 학습 과제(task)와 학습 설정(setting)을 정리
-어떤 종류의 예측이나 분류 문제를 풀 수 있는지, 그 문제들을 어떤 맥락에서 접근할 수 있는지를 체계적으로 설명
+다양한 학습 과제(task)와 학습 설정(setting)을 정리한다. 
+어떤 종류의 예측이나 분류 문제를 풀 수 있는지, 그 문제들을 어떤 맥락에서 접근할 수 있는지를 체계적으로 설명한다. 
 
 ## 5.1 Learning Settings (학습 설정)
 #### (1) Topological Setting 구조적 설정
@@ -33,14 +33,14 @@
 	노드/그래프를 **저차원 공간에 임베딩**하여 **시계열 변화 및 패턴을 시각화/분석**
 
 # 6. 다양한 TGNN 방법론들
-![](/img/IMG-20250421202904.png)
+![[IMG-20250421202904.png]]
 ## 6.1 Snapshot-based Models
 **“Snapshot”**: <span style="background:rgba(205, 244, 105, 0.55)">일정한 시간 간격</span>으로 전체 그래프(노드/엣지/속성 등)의 스냅샷을 연속적으로 나열한다. 
 - 대표적 예시: 하루/1시간마다 찍힌 전체 네트워크 상태
 ### 6.1.1 Model Evolution
 - **GNN 모델 파라미터 자체**를 시간에 따라 업데이트
 - 대표 모델:
-	- [EvolveGCN](https://arxiv.org/pdf/1902.10191): GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다. ![](/img/IMG-20250421201146.png)
+	- [EvolveGCN](https://arxiv.org/pdf/1902.10191): GCN의 파라미터를 RNN(LSTM, GRU 등)으로 시간에 따라 진화시킨다![[IMG-20250421201146.png]]
 ### 6.1.2 Embedding Evolution
 - 각 시점의 노드 임베딩(h)을 RNN(혹은 attention)으로 시간축 상에서 직접 업데이트
 $$h_{v(t_i)}=REC(h_v(t_{i-j}), \dots)$$
