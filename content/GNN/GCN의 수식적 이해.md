@@ -14,9 +14,12 @@ Node Classification task를 해결하기 위한 graph-based semi-supervised lear
 
 그래프 정규화 항은 <b><font color="#49a01f">인접한 노드들의 특징 벡터 차이를 최소화하는 역할</font></b>을 한다!
 
-$$\begin{align} 
-	\mathcal{L}_{reg} &= ∑_{i,j} A_{ij}(f(X_i)^⊤f(X_i) − 2f(X_i)^⊤f(X_j) + f(X_j)^⊤f(X_j))\\ &= 2\Big(f(X)^\top Df(X) - f(X)^\top Af(X)\Big) \\ &= 2\Big(f(X)^\top(D-A)f(X)\Big)\\ &= 2\Big(f(X)^\top\Delta f(X)\Big)
-\end{align}$$
+$$
+\mathcal{L}_{reg} = \sum_{i,j} A_{ij}(f(X_i)^\top f(X_i) - 2f(X_i)^\top f(X_j) + f(X_j)^\top f(X_j)) \\
+= 2(f(X)^\top Df(X) - f(X)^\top Af(X)) \\
+= 2(f(X)^\top (D - A)f(X)) \\
+= 2(f(X)^\top \Delta f(X))
+$$
 
 여기서,
 
@@ -45,13 +48,13 @@ $$\begin{align}
 ## <span style="background:rgba(208, 235, 166, 0.55)">💡 Contribution #1.</span>
 
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
-$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\; (3) $$
+$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\; \\ (3) $$
 $$g_θ \;⋆ \;x ≈ θ(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x\;\;\cdot\cdot\cdot\;\; (7)$$
 수식 (3)은 filter를 통해 spectral convolution을 정의하는 것이고, 수식 (7)은 결과적으로 convolution 식이 인접 행렬(자기자신) 및 라플라시안 행렬(주변 노드)의 합으로 유도될 수 있다는 것을 보여준다. 이제 하나씩 알아보자.
 
 ## 수식 (3)
 Graph Signal $x \in R^N$와 filter $g_\theta$ 에 대해 spectral convolution은 다음과 같이 정의된다.
-$$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; (3)$$
+$$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; \\(3)$$
 1. $x$ : 각 노드가 가지고 있는 특징(feature) 값
 2. $U$: 정규화된 그래프 라플라시안 $L$의 고유벡터 행렬
 3. $Λ$ : 정규화된 그래프 라플라시안의 고유값을 포함하는 대각행렬(고유값 행렬)
