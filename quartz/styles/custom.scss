@@ -2,15 +2,15 @@
 
 // put your custom CSS here!
 
+/* --- KaTeX 블록 수식 가운데 정렬 --- */
 .katex-display {
-	display: block;
-	text-align: center;
+	display: block !important;      /* span을 블록으로 */
+	text-align: center !important;  /* 부모 p의 left 정렬 덮어쓰기 */
   }
-
-  /* Quartz – 블록 수식 가운데 정렬 */
-mjx-container[jax="CHTML"][display="true"] {
-	display: block !important;
-	text-align: center !important;
-	margin: 1em 0 !important;   /* 위아래 여백은 취향 */
+  
+  /* 내부 .katex 박스를 가운데로 */
+  .katex-display > .katex {
+	margin-left: auto !important;
+	margin-right: auto !important;
   }
   
