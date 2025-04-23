@@ -49,7 +49,7 @@ $$
 
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
 
-$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\; \\ (3) $$
+$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\;(3) $$
 
 $$g_θ \;⋆ \;x ≈ θ(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x\;\;\cdot\cdot\cdot\;\; (7)$$
 
@@ -65,10 +65,11 @@ $$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; \\(3)$$
 3. $Λ$ : 정규화된 그래프 라플라시안의 고유값을 포함하는 대각행렬(고유값 행렬)
     - 이 값들은 <b><font color="#49a01f">그래프의 스펙트럼 정보를 담고 있음.</font></b>
 4. $g_\theta(Λ)$: 고유값 $Λ$를 이용해 그래프의 주파수를 조정하는 필터
+	- 그래프의 <b><font color="#49a01f">특정 주파수 대역을 강조하거나 억제하는 역할</font></b>을 한다.
 
 $$ g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(\lambda_1) & \\& & \ddots & \\& & & g_{\theta}(\lambda_{N-1})\end{bmatrix}$$
 
-	- 그래프의 <b><font color="#49a01f">특정 주파수 대역을 강조하거나 억제하는 역할</font></b>을 한다.
+
 5. $Ug_θU^⊤$: 필터를 적용
 
 > [!success] 전체 과정을 정리하면, **graph convolution** $g_θ \;⋆\;x$ 는
@@ -128,7 +129,13 @@ $$ g_θ \;⋆\;x≈\sum^K_{k=0} \theta'_kT_k(\tilde L)x = y$$
 또한 normalized graph Laplacian$\big(L = I_N − D^{-\frac{1}{2}}AD^{-\frac{1}{2}}\big)$의 eigenvalue들은 $[0, 2]$ 구간에 속하기 때문에,
 
 > [!참고]-
-> ![[Pasted image 20250423163859.png]]
+> | 성질                      | 일반 Laplacian $L$                 | 정규화 Laplacian $L_{\text{sym}}$         |
+|---------------------------|------------------------------------|--------------------------------------------|
+| 대칭성                   | ✅ 대칭                             | ✅ 대칭                                     |
+| 양의 준정부호            | ✅ 항상 0 이상의 고유값            | ✅ 항상 0 이상의 고유값                    |
+| 0 고유값 개수 = 연결 성분 개수 | ✅ 성립                          | ✅ 성립                                     |
+| 고유값 범위              | $[0, n]$                            | $[0, 2]$                                   |
+| 행 합이 0                | ✅ 성립 ($L\mathbf{1} = 0$)         | ❌ 일반적으로 성립하지 않음               |
 
 $\lambda_{max}\approx2$ 로 근사한다. 따라서, $\tilde L = \frac{2}{\lambda_{max}}L-I = L-I = -D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$가 된다.
 
