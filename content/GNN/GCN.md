@@ -25,12 +25,12 @@ $$ \begin{align}
 - $D$ : 그래프의 **차수 행렬 (Degree Matrix)** , 즉 $D_{ii} = ∑_j A_{ij}$
 - $Δ = D−A$ : **그래프 라플라시안 행렬 (Graph Laplacian)**
 
-> [!question] 문제점
+> [!missing] 문제점
 > 기존의 방식은 수식 (1)과 같이 **$\mathcal{L}$(loss)에 추가적인 regularization 항을 추가하는 방식**을 통해 노드 간의 정보가 학습 시에 전달 될 수 있도록 하였다. 그러나, 학습하는 함수 $f(X)$ 자체에 노드 간의 연결성은 고려되지 않는다.
 
 > [!success] 해결 방안
-> <span style="background:rgba(255, 238, 131, 0.55)">이 논문은 학습하는 함수 $f(X, A)$ 를 제시하여</span>
-> 연결된 노드들의 **표현을 유사하게 만들도록 강제하는 정규화 항을 손실함수에 추가하는 대신,** <span style="background:rgba(255, 238, 131, 0.55)">**신경망 자체가 그래프 구조(인접행렬 $A$)를 직접 학습하도록 설계한다.</span>→** 인접행렬을 학습시에 사용하면, <span style="background:rgba(255, 238, 131, 0.55)">⭐️ **레이블이 있는 노드뿐만 아니라 없는 노드의 정보도 학습할 수 있게 된다.** ⭐️</span>
+> <span style="background:rgba(208, 235, 166, 0.55)">이 논문은 학습하는 함수 $f(X, A)$ 를 제시하여</span>
+> 연결된 노드들의 **표현을 유사하게 만들도록 강제하는 정규화 항을 손실함수에 추가하는 대신,** <span style="background:rgba(208, 235, 166, 0.55)">**신경망 자체가 그래프 구조(인접행렬 $A$)를 직접 학습하도록 설계한다.</span>→** 인접행렬을 학습시에 사용하면, <span style="background:rgba(208, 235, 166, 0.55)">⭐️ **레이블이 있는 노드뿐만 아니라 없는 노드의 정보도 학습할 수 있게 된다.** ⭐️</span>
 
 ## 논문의 2가지 Contribution
 1. graph에서 **직접적으로 작동하는 neural networks model**을 설계하기 위한 simple & well behaved **layer-wise propagation rule 을 제시**한다. 
