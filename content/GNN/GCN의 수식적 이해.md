@@ -45,7 +45,7 @@ $$\begin{align}
 ## <span style="background:rgba(208, 235, 166, 0.55)">💡 Contribution #1.</span>
 
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
-$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\; (3)$$
+$$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\; (3) $$
 $$g_θ \;⋆ \;x ≈ θ(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x\;\;\cdot\cdot\cdot\;\; (7)$$
 수식 (3)은 filter를 통해 spectral convolution을 정의하는 것이고, 수식 (7)은 결과적으로 convolution 식이 인접 행렬(자기자신) 및 라플라시안 행렬(주변 노드)의 합으로 유도될 수 있다는 것을 보여준다. 이제 하나씩 알아보자.
 
@@ -57,7 +57,7 @@ $$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; (3)$$
 3. $Λ$ : 정규화된 그래프 라플라시안의 고유값을 포함하는 대각행렬(고유값 행렬)
     - 이 값들은 <b><font color="#49a01f">그래프의 스펙트럼 정보를 담고 있음.</font></b>
 4. $g_\theta(Λ)$: 고유값 $Λ$를 이용해 그래프의 주파수를 조정하는 필터
-   $$ g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(\lambda_1) & \\& & \ddots & \\& & & g_{\theta}(\lambda_{N-1})\end{bmatrix}$$
+$$ g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(\lambda_1) & \\& & \ddots & \\& & & g_{\theta}(\lambda_{N-1})\end{bmatrix}$$
 	- 그래프의 <b><font color="#49a01f">특정 주파수 대역을 강조하거나 억제하는 역할</font></b>을 한다.
 5. $Ug_θU^⊤$: 필터를 적용
 
