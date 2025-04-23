@@ -45,8 +45,8 @@ $$
 
 # 2.1 Spectral Graph Convolutions
 
-## <span style="background:rgba(208, 235, 166, 0.55)">💡 Contribution #1.</span>
-
+## 💡 Contribution #1.
+<span style="background:rgba(208, 235, 166, 0.55)"> --------- </span>
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
 
 $$g_θ \;⋆\;x=Ug_θU^⊤x \;\;\cdot\cdot\cdot\;\;(3) $$
@@ -58,7 +58,7 @@ $$g_θ \;⋆ \;x ≈ θ(I_N + D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x\;\;\cdot\cdot\
 ## 수식 (3)
 Graph Signal $x \in R^N$와 filter $g_\theta$ 에 대해 spectral convolution은 다음과 같이 정의된다.
 
-$$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; \\(3)$$
+$$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; (3)$$
 
 1. $x$ : 각 노드가 가지고 있는 특징(feature) 값
 2. $U$: 정규화된 그래프 라플라시안 $L$의 고유벡터 행렬
@@ -165,14 +165,16 @@ $I_N +D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$의 eigenvalue는 $[0, 2]$ 구간에 속
 
 만약 수식 (7)의 layer를 여러개 쌓아 deep model을 만든다면, eigenvalue가 $[0, 1]$ 범위 안에 들어오지 않기에 exploding / vanishing gradient problem이 생겨 불안정한 학습이 이루어진다!
 
-## <span style="background:rgba(208, 235, 166, 0.55)">💡 Contribution #2.</span>
+## 💡 Contribution #2.
+<span style="background:rgba(208, 235, 166, 0.55)"> --------- </span>
+
 따라서 논문에서는 이를 해결하기 위해 renormalization trick 을 사용한다!!
 
 **Renormalization Trick**을 적용하면 인접 행렬을 다음과 같이 바꾼다.
 
-- 자기 자신 연결(Self-loop) 추가: $$ \tilde{A} = A + I $$
-- 새로운 차수 행렬:$$ \tilde{D}_{ii} = \sum_j \tilde{A}_{ij} $$
-- 새롭게 정규화된 인접 행렬:$$ \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} $$
+- 자기 자신 연결(Self-loop) 추가:  $$ \tilde{A} = A + I $$
+- 새로운 차수 행렬:  $$ \tilde{D}_{ii} = \sum_j \tilde{A}_{ij} $$
+- 새롭게 정규화된 인접 행렬:  $$ \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} $$
 새롭게 정규화된 인접행렬의 eigenvalue는 $[0, 1]$ 범위로 좁혀진다!!!
 
 이렇게 되면 고유값이 더 안정적인 범위에 놓이고, 모델이 여러층을 쌓아도 기울기 폭발/소실 문제가 줄어들게 된다!!
