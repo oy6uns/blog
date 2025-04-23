@@ -77,7 +77,9 @@ $$
 4. $g_\theta(Λ)$: 고유값 $Λ$를 이용해 그래프의 주파수를 조정하는 필터
 	- 그래프의 <b><font color="#49a01f">특정 주파수 대역을 강조하거나 억제하는 역할</font></b>을 한다.
 
-$$ g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(\lambda_1) & \\& & \ddots & \\& & & g_{\theta}(\lambda_{N-1})\end{bmatrix}$$
+$$ 
+g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(\lambda_1) & \\& & \ddots & \\& & & g_{\theta}(\lambda_{N-1})\end{bmatrix}
+$$
 
 
 5. $Ug_θU^⊤$: 필터를 적용
@@ -115,6 +117,8 @@ $$
 Chebyshev 다항식은 $(−1,1)$에서 동작하므로, $L$의 가장 큰 eigenvalue $\lambda_{max}$를 사용해 $Λ$를 scaling$(0, \lambda_{max})\rightarrow (-1, 1)$ 해준 것이다.
 
 수식 (4)의 근사를 수식 (3)에 대입하면, 
+
+
 $\tilde L = \frac{2}{\lambda_{max}}L-I$에 대해,
 ## 수식(5)
 
@@ -124,7 +128,8 @@ $$
 
 위 수식이 특별한 이유는 각 node에 대해 localized 되어 있기 때문이다. 우선 graph Laplacian $L$은 다음과 같이 localization 특성을 가진다.
 
-> $(L^s)_{ij}$_는 그래프의 두 node $i$와_ $j$_를 연결하는 path 들 중 길이가_ $s$_이하인 path 들의 개수와 일치한다._
+> $(L^s)_{ij}$_는 그래프의 두 node $i$와_ $j$_를 연결하는 path 들 중 
+> 길이가_ $s$_이하인 path 들의 개수와 일치한다._
 
 수식 (5)에서 $L$의 $K$th power까지만 존재하기 때문에, $y(i)$는 $i$의 $K$-th order neighborhood signal 들의 합으로 표현할 수 있다!
 
