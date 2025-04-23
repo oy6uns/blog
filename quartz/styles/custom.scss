@@ -2,19 +2,20 @@
 
 // put your custom CSS here!
 
-/* ────────────────────────────────────────────
-   모든 KaTeX 블록 수식(부모 p > span.katex) 가운데 정렬
-─────────────────────────────────────────────*/
-p > span.katex {          /* ① 부모 <p> 바로 아래 있는 kaTeX span */
-	display: block !important;
-	text-align: center !important;   /* 부모 p의 left 덮어쓰기 */
-	margin: 1em 0 !important;
+/* ───────────────────────────────
+   블록 수식( $$ … $$ ) 전용 가운데 정렬
+──────────────────────────────── */
+.katex-display {
+	display: block !important;      /* span → block */
+	text-align: center !important;  /* 가운데 */
+	margin: 1em 0 !important;       /* 위·아래 여백 (취향) */
 }
 
-	/* 실제 수식 박스를 가운데로 */
-p > span.katex .katex-html {        /* ② 내부 실제 렌더링 박스 */
-	margin-left: auto !important;
+.katex-display > .katex {
+	margin-left: auto !important;   /* 실제 수식 상자 가운데 */
 	margin-right: auto !important;
 }
-  
-  
+
+/* 인라인 수식( $ … $ )은 .katex만 있음 → 건드리지 않음 */
+
+

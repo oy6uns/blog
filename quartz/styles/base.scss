@@ -59,18 +59,6 @@ ul,
   /* tr and td removed from list of selectors for overflow-wrap, allowing them to use default 'normal' property value */
 }
 
-// .math {
-//   &.math-display {
-//     text-align: center;
-//   }
-// }
-
-.katex-display {
-  display: block;
-  text-align: center;
-}
-
-
 article {
   > mjx-container.MathJax,
   blockquote > div > mjx-container.MathJax {
