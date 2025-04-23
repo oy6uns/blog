@@ -14,10 +14,9 @@ Node Classification task를 해결하기 위한 graph-based semi-supervised lear
 
 그래프 정규화 항은 <b><font color="#49a01f">인접한 노드들의 특징 벡터 차이를 최소화하는 역할</font></b>을 한다!
 
-$$ \begin{align} 
+$$\begin{align} 
 	\mathcal{L}_{reg} &= ∑_{i,j} A_{ij}(f(X_i)^⊤f(X_i) − 2f(X_i)^⊤f(X_j) + f(X_j)^⊤f(X_j))\\ &= 2\Big(f(X)^\top Df(X) - f(X)^\top Af(X)\Big) \\ &= 2\Big(f(X)^\top(D-A)f(X)\Big)\\ &= 2\Big(f(X)^\top\Delta f(X)\Big)
-\end{align} 
- $$
+\end{align}$$
 
 여기서,
 
@@ -85,8 +84,7 @@ $$g_θ \;⋆\;x=Ug_\theta(Λ)U^⊤x \;\;\cdot\cdot\cdot\;\; (3)$$
 
 이를 해결하기 위해, truncated Chebyshev expansion을 통해 $g_\theta(Λ)$를 다항식으로 근사한다.
 ## 수식 (4)
-$$  
-g_{θ^′}(Λ) ≈ \sum^K_{k=0} \theta'_kT_k(\tildeΛ)$$
+$$g_{θ^′}(Λ) ≈ \sum^K_{k=0} \theta'_kT_k(\tildeΛ)$$
 여기서 $\tildeΛ = \frac{2}{\lambda_{max}}Λ-I$로 정의한다.
 
 Chebyshev 다항식은 $(−1,1)$에서 동작하므로, $L$의 가장 큰 eigenvalue $\lambda_{max}$를 사용해 $Λ$를 scaling$(0, \lambda_{max})\rightarrow (-1, 1)$ 해준 것이다.
