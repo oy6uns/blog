@@ -287,7 +287,7 @@ $$
 $$
 
 마지막 output layer를 거친 후,
-Loss function으로 **label 이 있는 node 들에 대해서만 cross-entropy error 를 계산**합니다.
+Loss function으로 **label 이 있는 node 들에 대해서만 cross-entropy error 를 계산**한다.
 이를 통해 수식 (9)의 weight matrix $W^{(0)}$와 $W^{(1)}$은 gradient descent를 통해 업데이트 한다!
 
 # 5. Experiments
