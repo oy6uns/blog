@@ -1,3 +1,8 @@
+---
+tags:
+  - "#python"
+  - torch
+---
 여러개의 GPU 중 실험에 특정 GPU를 지정하여 실험을 돌리고자 할 때 아래 명령어를 사용하면 된다. 
 
 GPU의 ID는 shell에서 
