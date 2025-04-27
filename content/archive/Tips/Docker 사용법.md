@@ -32,6 +32,8 @@ vscode 새창을 킨 다음 위의 검색 창에서 >Remote-SSH: Connect to Host
 
 를 차례대로 눌러줍니다.
 ![[Pasted image 20250427175453.png]]
+
+<span style="background:#d3f8b6">- - -</span>
 ### ➕ 로컬 RSA 키 SSH 서버 등록 방법
 
 > 암호 없이 SSH 서버 접속하기!
@@ -58,6 +60,7 @@ vscode 새창을 킨 다음 위의 검색 창에서 >Remote-SSH: Connect to Host
 ### Docker Extension 설치
 
 ![[Pasted image 20250427175737.png | 300]]
+
 vscode 창 좌측의 Extension tab에 들어가서
 
 container를 검색하여 나오는
@@ -115,6 +118,7 @@ docker build -t my-env .
 ```
 
 ✅ `-t my-env` → 빌드된 이미지를 `my-env`라는 이름으로 저장
+
 ✅ `.` → 현재 디렉토리에 있는 `Dockerfile`을 사용하여 빌드
 
 ### Build 확인
@@ -156,22 +160,21 @@ docker run --gpus all -d -it --name my-container \\
     my-env
 ```
 
-|옵션|설명|
-|---|---|
-|`docker run`|새로운 컨테이너를 실행하는 명령어|
-|`--gpus all`|컨테이너에서 **모든 GPU를 사용 가능**하도록 설정|
-|`-d`|컨테이너를 **백그라운드(detached mode)에서 실행** (터미널 종료해도 계속 실행됨)|
-|`-it`|**인터랙티브(Interactive) 모드 + 터미널(TTY) 모드**로 실행 (즉, 명령어 입력 가능)|
-|`--name my-container`|컨테이너 이름을 `my-container`로 설정|
-|`-v $(pwd)/workspace:/workspace/Local`|**현재 로컬 디렉토리** 내 `workspace` 폴더를|
-|컨테이너 내 `/workspace/Local`로 마운트 (데이터 공유)||
-|`-v /nas/home/honggildong:/workspace/NAS`|**NAS(Network Attached Storage) 경로** `/nas/home/shbae`를|
-|컨테이너 내 `/workspace/NAS`로 마운트 (데이터 공유)||
-|`my-env`|실행할 **Docker 이미지 이름**|
-|(이전에 빌드한 `my-env` 이미지 기반으로 컨테이너 생성)||
+| 옵션                                        | 설명                                                                                            |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `docker run`                              | 새로운 컨테이너를 실행하는 명령어                                                                            |
+| `--gpus all`                              | 컨테이너에서 **모든 GPU를 사용 가능**하도록 설정                                                                |
+| `-d`                                      | 컨테이너를 **백그라운드(detached mode)에서 실행** (터미널 종료해도 계속 실행됨)                                         |
+| `-it`                                     | **인터랙티브(Interactive) 모드 + 터미널(TTY) 모드**로 실행 (즉, 명령어 입력 가능)                                    |
+| `--name my-container`                     | 컨테이너 이름을 `my-container`로 설정                                                                   |
+| `-v $(pwd)/workspace:/workspace/Local`    | **현재 로컬 디렉토리** 내 `workspace` 폴더를 컨테이너 내 `/workspace/Local`로 마운트 (데이터 공유)                      |
+| `-v /nas/home/honggildong:/workspace/NAS` | **NAS(Network Attached Storage) 경로** `/nas/home/shbae`를 컨테이너 내 `/workspace/NAS`로 마운트 (데이터 공유) |
+| `my-env`                                  | 실행할 **Docker 이미지 이름** (이전에 빌드한 `my-env` 이미지 기반으로 컨테이너 생성)                                     |
+
 ![[스크린샷 2025-04-27 오후 6.01.08.png]]
 ⬆️ 이런식으로 떴다면 성공입니다!
 
+<span style="background:#d3f8b6">- - -</span>
 ### ➕ 생성된 container 삭제
 
 만약, 추가적인 옵션을 넣고 싶거나, 오타를 내서 다시 `docker run`을 해야하는 상황이라면,
