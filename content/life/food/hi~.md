@@ -8,9 +8,6 @@ tags:
 ---
 
 
-국밥 마시따
-
-
 > [!example] Title 
 > Contents
 
