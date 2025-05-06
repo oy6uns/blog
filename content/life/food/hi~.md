@@ -2,9 +2,7 @@
 title: Example
 description: 
 Titledraft: false
-tags:
-  - "#gukbab"
-  - "#hello"
+tags: []
 ---
 
 

@@ -1,7 +1,6 @@
 ---
 title: Private Pages
-tags:
-  - feature/filter
+tags: []
 ---
 
 There may be some notes you want to avoid publishing as a website. Quartz supports this through two mechanisms which can be used in conjunction:

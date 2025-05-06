@@ -1,7 +1,6 @@
 ---
 title: Syntax Highlighting
-tags:
-  - feature/transformer
+tags: []
 ---
 
 Syntax highlighting in Quartz is completely done at build-time. This means that Quartz only ships pre-calculated CSS to highlight the right words so there is no heavy client-side bundle that does the syntax highlighting.

@@ -1,7 +1,6 @@
 ---
 title: ObsidianFlavoredMarkdown
-tags:
-  - plugin/transformer
+tags: []
 ---
 
 This plugin provides support for [[Obsidian compatibility]].

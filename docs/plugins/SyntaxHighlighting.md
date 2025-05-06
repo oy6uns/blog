@@ -1,7 +1,6 @@
 ---
-title: "SyntaxHighlighting"
-tags:
-  - plugin/transformer
+title: SyntaxHighlighting
+tags: []
 ---
 
 This plugin is used to add syntax highlighting to code blocks in Quartz. See [[syntax highlighting]] for more information.
