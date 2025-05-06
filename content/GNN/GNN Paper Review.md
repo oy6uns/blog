@@ -7,6 +7,7 @@
 
 
 ## Basic GNN
-1. GCN[[GCN의 수식적 이해]]
+1. GCN 
+	[[GCN의 수식적 이해]]
 2. 
    
