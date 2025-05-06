@@ -1,10 +1,10 @@
 ---
 title: Example
-description: 
+description: 낙성대 맛집 기록소
 Titledraft: false
-tags: []
+tags:
 ---
-
+## df
 
 > [!example] Title 
 > Contents
@@ -13,8 +13,6 @@ tags: []
 print(1)
 print("hello everyone")
 ```
-
-[[dohun's 어록]]
 
 > [!Warning] Title
 > Contents
