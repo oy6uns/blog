@@ -204,7 +204,6 @@ MRR(Mean Reciprocal Rank)
     - discrete(불연속) 시간 세팅을 지원하면 다양한 방법 비교가 더 잘 이루어질 수 있을 것.
 	- 아직 데이터 도메인은 5개로 제한(생명과학, 논문 인용 등 미포함)
 
-<br>
 # Appendix
 ## Dataset Details
 ### 파일 구조 및 구성
