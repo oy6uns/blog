@@ -22,6 +22,7 @@ tags:
 3. 대부분의 기존 방법들이 가장 큰 데이터셋에서는 아예 동작하지 못하거나 아예 느리다. 
 	→ **확장 가능한(Scalability) 새로운 방법 연구**가 필요
 
+<br>
 # 2. Preliminaries
 ## Temporal ‘Knowledge’ Graph(TKG) 
 - 정의: 시간의 흐름에 따라 변화하는 지식(관계)을 나타내는 그래프
@@ -64,6 +65,7 @@ Obama  --[president_of, 2009]-->  USA
 > - THG는 노드 타입이 추가되는 점이 다르고,
 > - 최종 목표는 둘 다 **future relation(link) 예측** 이다. 
 
+<br>
 # 3. Related Work
 ## 1. Temporal Knowledge Graph (TKG) Methods
 TKG 예측 방법들은 주로 두 가지 방식으로 발전하였다. 
@@ -96,7 +98,7 @@ THG 예측 방법들은 시간 표현 방식에 따라 분류된다.
 → **TGB 2.0의 차별점:**  
     → “진짜 현실에서처럼 <span style="background:#d3f8b6">다중 관계</span>+시간+대규모 데이터”를 한 번에 다룬다!
 
-
+<br>
 # 4. Datasets
 ![[스크린샷 2025-05-07 오후 1.41.48.png]]
 - **Inductive Test Nodes**: 테스트셋에만 나오는(학습셋에 없는) 노드 비율
@@ -190,6 +192,7 @@ MRR(Mean Reciprocal Rank)
 ![[스크린샷 2025-05-07 오후 3.30.01.png]]
 ### Temporal Knowledge Graph Link Prediction Results
 ![[스크린샷 2025-05-07 오후 3.30.51.png]]
+<br>
 # 6. Conclusion
 1. **TGB 2.0**은 **다중 관계와 시간 정보를 가진 그래프(Temporal Knowledge Graph, TKG & Temporal Heterogeneous Graph, THG)** 학습용으로 
 	- **대규모, 다양한 도메인의 8개 새 데이터셋**을 제시했고, 
@@ -201,3 +204,27 @@ MRR(Mean Reciprocal Rank)
     - discrete(불연속) 시간 세팅을 지원하면 다양한 방법 비교가 더 잘 이루어질 수 있을 것.
 	- 아직 데이터 도메인은 5개로 제한(생명과학, 논문 인용 등 미포함)
 
+<br>
+# Appendix
+## Dataset Details
+### 파일 구조 및 구성
+#### (1) **TKG (Temporal Knowledge Graph) 데이터셋**
+- **edgelist.csv** :  
+    시간 정보가 포함된 링크(관계)를 (subject, relation, object, timestamp) 형태로 저장
+- **val_ns.pkl / test_ns.pkl** :  
+    검증·테스트용 네거티브 샘플(음성 샘플) 사전 생성 파일
+- **static_edgelist.csv** :  
+    (tkgl-smallpedia, tkgl-wikidata 전용) 시간정보 없는 정적 관계 정보도 함께 제공
+
+#### (2) **THG (Temporal Heterogeneous Graph) 데이터셋**
+- **edgelist.csv** :  
+    시간정보, 관계타입·노드타입 포함된 엣지 정보
+- **val_ns.pkl / test_ns.pkl** :  
+    검증 및 테스트 음성 샘플 파일
+- **nodemapping.csv / edgemapping.csv** :  
+    노드·엣지 이름, 타입 정리
+- **nodetype.csv** :  
+    각 노드의 타입(역할 등) 설명
+
+## 실험 Hyperparameter 설정
+![[스크린샷 2025-05-07 오후 4.23.05.png]]
