@@ -133,7 +133,7 @@ THG 예측 방법들은 시간 표현 방식에 따라 분류된다.
 - THG(이종 그래프): 초 단위로 매우 세분화, 한 시점당 이벤트 수가 적고, <span style="background:#d3f8b6">특정 시간대에만 급증(피크) 등 고유한 패턴</span>
 
 # 5. Experiments 
-## Evaluation Protocol
+## 1) Evaluation Protocol
 미래에 어떤 관계(Link)가 나타날지 예측, <span style="background:#d3f8b6">'정답이 위쪽에 오도록'</span> 랭킹을 매김
 ### 평가 지표(Metric)
 MRR(Mean Reciprocal Rank)
@@ -153,5 +153,51 @@ MRR(Mean Reciprocal Rank)
 > - **작은 그래프** = 후보 전원 검사 (완벽하지만 데이터 작을 때만 가능).
 > - **큰 그래프** = 비슷한 애들만 골라서 비교 (현실적이고 어려운 상황 반영).
 
+## 2) 실험 세팅 및 비교 
+#### **(1) TKG 실험**
+- 비교 모델:
+    - RE-GCN, CEN, TLogic (대표 딥러닝/논리 기반 최신 TKG 예측모델)
+    - 휴리스틱 베이스라인: Recurrency Baseline, EdgeBank(과거에 나왔던 관계를 점수화, 단순반복/윈도우 방식)
+- 실험 결과:
+    - **특정 환경(특히 반복 많은 데이터)** 에서는 복잡한 모델도 단순 휴리스틱보다 크게 나아지지 않거나 거의 비슷함
+    - EdgeBank는 멀티-관계 정보 안 쓸 때 성능이 낮아지고
+    - 대형 데이터셋(tkgl-wikidata 등)은 **EdgeBank**만 동작, 나머지는 메모리·시간 초과 → 확장성 문제 심각!
+    - Recurrency Degree(관계의 반복이 많을수록) 성능이 좋고, <span style="background:#d3f8b6">반복이 적은 관계에서는 개선 여지가 많음</span>
 
+#### **(2) THG 실험**
+- 비교 모델:
+    - TGN (오리지널/엣지타입 추가 버전): 단일 관계 기반 딥러닝 모델을 멀티-관계에 맞게 개조
+    - **STHN**: 연속 시간·관계 정보를 잘 활용하는 최근 방법
+    - Recurrency Baseline, EdgeBank
+- 실험 결과:
+    - STHN 등 최신 딥러닝, 엣지 타입을 활용한 모델이 확실하게 우수
+    - 하지만 **STHN(복잡한 그래프 딥러닝)은 대형 데이터에서는 메모리만 185GB 넘게 필요, 스케일 불가**
+    - TGN 기본 버전도 확장성 한계, 엣지 타입 추가 시 성능 개선 뚜렷
+    - **EdgeBank(단순 규칙 기반)** 는 계속 확장 가능하지만 예측력은 제한적
+
+> [!summary] 읽어볼 논문
+> - **EdgeBank** (Both)
+> - **RE-GCN, TLogic** (TKG)
+> - **TGN, STHN** (THG)
+
+> [!check] 실험 결과 요약/분석
+> - **엣지(관계) 타입 정보를 잘 활용**하면 성능이 확 좋아짐
+> - **단순 휴리스틱(반복 기반 등)도 의외로 성능이 좋다**
+> - **대형 데이터셋에서는 최신/복잡한 모델들은 실제로 돌리기 힘들 만큼 느리거나 메모리 초과되는 경우가 많다**
+
+## 3) 실험 결과
+### Temporal Knowledge Graph Link Prediction Results
+![[스크린샷 2025-05-07 오후 3.30.01.png]]
+### Temporal Knowledge Graph Link Prediction Results
+![[스크린샷 2025-05-07 오후 3.30.51.png]]
+# 6. Conclusion
+1. **TGB 2.0**은 **다중 관계와 시간 정보를 가진 그래프(Temporal Knowledge Graph, TKG & Temporal Heterogeneous Graph, THG)** 학습용으로 
+	- **대규모, 다양한 도메인의 8개 새 데이터셋**을 제시했고, 
+	- **공정·현실적·재현 가능한 평가환경**(다운로드/처리/자동평가 및 리더보드)까지 제공한다. 
+2. **기존 알고리즘들은** 대규모 데이터셋에서는 **매우 느리거나, 메모리 제한 때문에 아예 실행조차 못하는 한계**가 있다. 
+    - 미래 연구 방향은 **정말 '확장 가능한(scalable)' 방법 개발이 필수**라는 것!
+3. 한계
+	- 이번 벤치마크는 **THG 데이터에 한해 연속 시간(continuous-time) 세팅만 지원**한다. 
+    - discrete(불연속) 시간 세팅을 지원하면 다양한 방법 비교가 더 잘 이루어질 수 있을 것.
+	- 아직 데이터 도메인은 5개로 제한(생명과학, 논문 인용 등 미포함)
 
