@@ -59,6 +59,7 @@ WL test는 **그래프 동형성(isomorphism, 구조가 같은지) 판단을 위
 - 각 레이어의 가중치 $W_k$를 항등 행렬로 고정
 - Activation 없이
 - Aggreagate 함수를 **“set의 모든 아이템을 받아, 합친 뒤 해시(hash)로 고유값을 내는 함수”** 로 두면
+
 → 이 업데이트는 WL 알고리즘에서의 **“새로운 레이블 만들기”** 와 동일해진다. 
 
 > [!check] **즉,** GraphSAGE**는** WL-Test의 연속적(continuous), 미분가능, 신경망적 근사판**이다!**
