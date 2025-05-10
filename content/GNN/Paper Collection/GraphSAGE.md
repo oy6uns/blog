@@ -1,7 +1,7 @@
 > Inductive Representation Learning on Large Graphs (NeurIPS ‘17)
 > https://arxiv.org/pdf/1706.02216
 
-> [!important] 
+> [!Abstract] 
 > **GraphSAGE**는 그래프에서 본 적 없는 새로운 노드도 주어진 <span style="background:#d3f8b6">이웃 노드들의 정보를 활용해 임베딩을 즉석에서 만들 수 있게 해주는</span>(즉, inductive하게 해주는) 방법을 제안한다. 
 
 # 1. Introduction
@@ -20,7 +20,7 @@
 
 - 특히, 이웃 노드 구조/특성을 이용해서 새로운 노드의 카테고리를 잘 예측하고, 완전히 새로운 그래프(단백질-단백질 네트워크)에서도 잘 동작함을 보인다. 
 
-### 3.1 Embedding generation algorithm 
+## 3.1 Embedding generation algorithm 
 > [!Information] GraphSAGE embedding generation
 > 1. **초기화**
 > 	각 노드의 0단계 Embedding($h^0_v$)는 해당 노드의 Feature($x_v$)로 설정
@@ -48,4 +48,24 @@
 > 
 > ✅ 최종적으로 K만큼의 집합이 생긴다. → mini-batch 처리가 가능해짐
 
-### 3.2 
+### Weisfeiler-Lehman (WL) Isomorphism Test와의 비교
+WL test는 **그래프 동형성(isomorphism, 구조가 같은지) 판단을 위한 오래된 알고리즘**이다. 
+- <u>핵심 아이디어</u>
+	- 각 노드의 “레이블”을 이웃 노드들의 레이블 정보를 집계하여 반복적으로 업데이트한다. 
+	- 매 step마다 이웃들의 정보를 합쳐 “새로운 레이블(혹은 색깔)”을 부여, 이 과정을 여러 번 반복한다. 
+
+만약, 
+- $K=|V|$
+- 각 레이어의 가중치 $W_k$를 항등 행렬로 고정
+- Activation 없이
+- Aggreagate 함수를 **“set의 모든 아이템을 받아, 합친 뒤 해시(hash)로 고유값을 내는 함수”** 로 두면
+→ 이 업데이트는 WL 알고리즘에서의 **“새로운 레이블 만들기”** 와 동일해진다. 
+
+> [!check] 즉, **GraphSAGE**는 **WL-Test의 연속적(continuous), 미분가능, 신경망적 근사판**이다!
+> 미분 불가능한 **WL-Test의 해시(hash, discrete) 대신**에 **신경망 기반 합성함수와 non-linearity**를 사용해서 연속적인 벡터표현을 만들고, 학습도 가능하게 확장한 것!
+
+
+GNN의 구별할 수 있는 그래프(pairwise) **WL Test 이하임은 후속 연구에서 증명**되었다. 
+> (자세한 내용: [Xu et al., "How Powerful are Graph Neural Networks?", ICLR 2019][[https://arxiv.org/abs/1810.00826](https://alphaxiv.org/abs/1810.00826)])
+
+## 3.2 
