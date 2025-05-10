@@ -22,11 +22,36 @@
 - 특히, 이웃 노드 구조/특성을 이용해서 새로운 노드의 카테고리를 잘 예측하고, 완전히 새로운 그래프(단백질-단백질 네트워크)에서도 잘 동작함을 보인다. 
 
 ### 3.1 Embedding generation algorithm 
-1. 초기화
-	각 노드의 0단계 Embedding($h^0_v$)는 해당 노드의 Feature($x_v$)로 설정
-2. 집계 및 임베딩 생성의 반복
-	- for $k=1$ to $K$:
-		a. 각 노드 $v$에 대해 이웃 $N(v)$의 $k-1$번째 $h^{k-1}_u$ 들을 집계(aggregate) →  $h^k_{N(v)}$   
-	    b. 자신의 $k-1$ 번째 임베딩 $h^{k-1}_v$ 와 $h^k_{N(v)}$를 **concat**  
-	    c. 이 벡터에 가중치 $W_k$, 비선형 $\sigma$을 적용해 $h^k_v$ 생성
-- ( h^k_v )를 L2 정규화(벡터 길이 1로 만듦)
+> [!Information] GraphSAGE embedding generation
+> 1. **초기화**
+> 	각 노드의 0단계 Embedding($h^0_v$)는 해당 노드의 Feature($x_v$)로 설정
+> 2. **집계 및 임베딩 생성의 반복**
+> 	- for $k=1$ to $K$:
+> 		- a. 각 노드 $v$에 대해 이웃 $N(v)$의 $k-1$번째 $h^{k-1}_u$ 들을 집계(aggregate) →  $h^k_{N(v)}$   
+> 		- b. 자신의 $k-1$ 번째 임베딩 $h^{k-1}_v$ 와 $h^k_{N(v)}$를 **concat**  
+> 		- c. 이 벡터에 가중치 $W_k$, 비선형 $\sigma$을 적용해 $h^k_v$ 생성
+> 	- $h^k_v$ 를 L2 정규화(벡터 길이 1로 만듦)
+> 3. **최종 임베딩**
+> 	$h^K_v$를 $z_v$로 반환
+
+- **이웃 정보와 자체 정보를 반복적으로 K번 혼합**하여 K가 커질수록 멀리 있는 이웃의 정보까지 반영한다. 
+- 모델이 학습된 후, 임의의(새로운) 노드 feature만 주면 이 <span style="background:rgba(255, 238, 131, 0.55)">"집계함수(Aggregation Function)"</span>와 <span style="background:rgba(255, 238, 131, 0.55)">"가중치(Weight)"</span>를 통해 임베딩을 빠르게 만들 수 있어 <span style="background:rgba(255, 238, 131, 0.55)">inductive (새 노드를 처리) 능력</span>이 생긴다. 
+
+> [!important] Mini-Batch 학습
+> **대형 그래프 전체를 한 번에 메모리에 올리거나, 모든 노드의 임베딩을 계산**한다면 메모리 부담이 커진다. 
+> 따라서, GraphSAGE는 학습할 때 타겟 노드 중심으로 역순으로 이웃으로 샘플링하고, 샘플링된 이웃들의 정보를 **hop을 기준으로 Batch를 묶는다.** 
+> 
+> **K=2**기준,
+> - $B_0$: **target node**(embedding을 알고 싶은 노드들)
+> - $B_1$: target node들의 **1-hop 이웃 node들**
+> - $B_2$: target node들의 **2-hop 이웃 node들** 
+> 
+> ✅ 최종적으로 K만큼의 집합이 생긴다. → mini-batch 처리가 가능해짐
+
+
+
+
+
+
+이웃 정보와 자체 정보를 반복적으로 혼합 
+### 3.2 
