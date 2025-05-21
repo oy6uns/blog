@@ -15,7 +15,7 @@
 - **다음 아이템 예측**은 '동적 그래프 내에서 사용자 노드와 아이템 노드가 새로 연결될 확률'을 구하는 **링크 예측 문제**로 변환.
 
 # 2. Related Work
-## 기존 방법론
+## 2.1 Sequential Recommendation
 #### Markov chain
 - [Factorizing Personalized Markov Chains for Next-Basket Recommendation](https://cseweb.ucsd.edu/classes/fa17/cse291-b/reading/p811.pdf)
 - [Fusing Similarity Models with Markov Chains for Sparse Sequential Recommendation](https://arxiv.org/pdf/1609.09152) ✅
@@ -38,6 +38,22 @@
 > [!warning] GNN 기반 sequential recommendation의 한계
 > - 최근의 GNN(그래프 신경망) 기반 순차 추천 모델들은 **사용자 자신 시퀀스 내부(내부 시퀀스, intra-sequence)** 정보만을 바탕으로 사용자의 선호를 학습한다. 
 > - 즉, **여러 사용자 시퀀스(다른 사용자들의 행동 흐름) 사이에서 아이템이 어떻게 연결·공유되고 있는가** 하는 **시퀀스 간(item relationship across sequences)** 연관성은 제대로 반영하지 못한다. 
+
+이러한 한계를 보완하기 위해 여러 모델들이 제안되었다. 
+- [HyperRec](https://people.engr.tamu.edu/caverlee/pubs/wang20next.pdf) - Hypergraph라는 구조를 활용하여 둘 이상의 아이템을 한 번에 엣지로 묶는다. → 이를 이용해 sequence 안팎의 아이템 간 high-order 상관관계를 모델링한다. 
+	- 실제 상호작용의 세밀한 시간, 순서 정보는 활용하기 어렵다. 
+- [CSRM](https://dl.acm.org/doi/pdf/10.1145/3331184.3331210) - neighborhood session similarity를 계산해 단순히 자기 세션만 보는 것이 아니라 주변 세션 정보도 활용한다. 
+	- 세션 간 단순 유사도로 이웃 세션 정보를 연계하기 때문에 상호작용 구조나 시계열성은 놓칠 수 있다. 
+- [DGRec](https://arxiv.org/pdf/1902.09362) - 소셜 관계가 있는 경우, 사용자 시퀀스끼리 직접적으로 연결하여 정보를 교환한다. 
+	- 데이터에 소셜정보가 반드시 있어야만 추가 연결정보를 이용할 수 있다. 
+
+
+> [!Important] DGSR: 모든 상호작용을 ‘동적 그래프’로 통합
+> 사용자의 모든 행동 이력을 시간/순서 정보까지 포함하여, **"유저-아이템" bipartite graph**의 형태에 **동적 변화**(타임스탬프, 인터랙션 순서 등)까지 같이 녹여내었다. 
+> → 아무 추가 정보 없이도 동적 그래프 프레임워크 하나로 통합되어 **보조정보에 의존하지 않아도 된다는 장점**이 있다. 
+
+## 2.2 Dynamic Graph Neural Networks
+real-world 그래프(such as academic network, social network, and recommender system)는 **시간에 따라 node와 edge가 변화함**에 따라 동적으로 이를 처리해주어야 한다. 
 
 
 
