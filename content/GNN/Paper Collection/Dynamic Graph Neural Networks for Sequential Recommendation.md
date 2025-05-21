@@ -93,3 +93,18 @@ real-world 그래프(such as academic network, social network, and recommender s
 #### 임베딩
 각 노드를 $\mathbb{R}^d$ 벡터로 매핑하는 함수 $f: \mathcal{V} \to \mathbb{R}^d$
 
+# 4. Methodology
+## DGSR model
+> four components in the architecture
+
+![[스크린샷 2025-05-21 오후 4.36.24.png]]
+1. Dynamic Graph Construction 
+2. Sub-graph Sampling 
+	- 전체 그래프를 매번 처리하는 건 비효율적이므로, **관심 있는 사용자 중심의 로컬 서브그래프를 구성**하여 효율적이고 집중적인 학습이 가능케 한다. 
+3. Dynamic Graph Recommendation Networks
+	- 서브 그래프 안에서의 노드들 간 Message Passing과 Node Embedding 업데이트를 수행한다. 
+4. Prediction Layer
+	- User Node와 모든 Item Node 간의 연결 가능성(link prediction)을 계산하여, 가장 높은 점수를 가진 아이템을 추천한다. 
+## 4.1 Dynamic Graph Construction
+
+
