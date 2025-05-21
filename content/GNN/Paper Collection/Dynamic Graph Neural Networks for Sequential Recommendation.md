@@ -62,12 +62,33 @@ real-world 그래프(such as academic network, social network, and recommender s
 # 3. Prerequisite
 ## 3.1 Sequential Recommendation
 사용자의 행동 기록을 기반으로 다음에 어떤 아이템을 선택할지를 에측하는 문제
-<u><b>기호 설명</b></u>
+#### 기호 설명
 - $\mathcal{U}$: 사용자 집합
 - $\mathcal{I}$: 아이템 집합
 - 사용자 $u \in \mathcal{U}$의 행동 시퀀스 $S^u = (i_1, i_2, \dots, i_k)$): 시간 순서대로 본 아이템들
 - $T^u = (t_1, t_2, \dots, t_k)$: 각 아이템을 본 시간
 - 전체 시퀀스 집합: $\mathcal{S}$
+#### 목적
+주어진 시점 $t_k$까지의 행동을 바탕으로 다음에 사용자 $u$가 볼 아이템 $i_{k+1}$를 예측한다. 
+#### 길이 제한
+실용성을 위해 시퀀스의 최대 길이 $n$을 정하고, 가장 최근 $n$개의 아이템만 사용합니다.
+#### 임베딩
+- 사용자와 아이템은 각각 $\mathbb{R}^d$의 벡터로 임베딩됨
+- 사용자 임베딩 행렬: $\mathbf{E}_U \in \mathbb{R}^{|\mathcal{U}| \times d}$
+- 아이템 임베딩 행렬: $\mathbf{E}_I \in \mathbb{R}^{|\mathcal{I}| \times d}$
 
-
-
+## 3.2 Dynamic Graph
+시간에 따라 변화하는 그래프로, 두 가지 유형이 있다. 
+- 이산 시간(dynamic discrete-time)
+- 연속 시간(dynamic continuous-time) → 이 논문에서는 이쪽에 초점
+#### 정의
+그래프 $\mathcal{G} = (\mathcal{V}, \mathcal{E}, \mathcal{T})$
+- $\mathcal{V}$: 노드 집합 ($v_1, v_2, \dots, v_n$​) 
+- $\mathcal{E}$: 시간에 따른 엣지 집합
+- $\mathcal{T}$: 시간 집합
+#### 엣지 
+시간 $t$에 노드 $v_i$와 $v_j$​ 간의 상호작용을 의미하는 삼중항 $(v_i, v_j, t)$
+#### 기능
+엣지의 시간 순서를 기록하여 노드 간 관계의 변화를 추적
+#### 임베딩
+각 노드를 $\mathbb{R}^d$ 벡터로 매핑하는 함수 $f: \mathcal{V} \to \mathbb{R}^d$
