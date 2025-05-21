@@ -53,7 +53,21 @@
 > → 아무 추가 정보 없이도 동적 그래프 프레임워크 하나로 통합되어 **보조정보에 의존하지 않아도 된다는 장점**이 있다. 
 
 ## 2.2 Dynamic Graph Neural Networks
-real-world 그래프(such as academic network, social network, and recommender system)는 **시간에 따라 node와 edge가 변화함**에 따라 동적으로 이를 처리해주어야 한다. 
+real-world 그래프(such as academic network, social network, and recommender system)는 **시간에 따라 node와 edge가 변화함**에 따라 동적으로 이를 처리해주어야 한다.
+
+여러 Dynamic Graph 방법론들은 e-commerse dataset에서 테스트 되었지만, sequential recommendation 시나리오에서는 아직 적용되지 않았다. 
+
+이 논문에서는 <span style="background:rgba(208, 235, 166, 0.55)">dynamic graph의 관점에서 sequential recommendation 문제를 해결</span>하고자 한다. 
+
+# 3. Prerequisite
+## 3.1 Sequential Recommendation
+사용자의 행동 기록을 기반으로 다음에 어떤 아이템을 선택할지를 에측하는 문제
+<u><b>기호 설명</b></u>
+- $\mathcal{U}$: 사용자 집합
+- $\mathcal{I}$: 아이템 집합
+- 사용자 $u \in \mathcal{U}$의 행동 시퀀스 $S^u = (i_1, i_2, \dots, i_k)$): 시간 순서대로 본 아이템들
+- $T^u = (t_1, t_2, \dots, t_k)$: 각 아이템을 본 시간
+- 전체 시퀀스 집합: $\mathcal{S}$
 
 
 
