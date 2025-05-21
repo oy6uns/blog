@@ -92,3 +92,4 @@ real-world 그래프(such as academic network, social network, and recommender s
 엣지의 시간 순서를 기록하여 노드 간 관계의 변화를 추적
 #### 임베딩
 각 노드를 $\mathbb{R}^d$ 벡터로 매핑하는 함수 $f: \mathcal{V} \to \mathbb{R}^d$
+
