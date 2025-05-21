@@ -106,5 +106,19 @@ real-world 그래프(such as academic network, social network, and recommender s
 4. Prediction Layer
 	- User Node와 모든 Item Node 간의 연결 가능성(link prediction)을 계산하여, 가장 높은 점수를 가진 아이템을 추천한다. 
 ## 4.1 Dynamic Graph Construction
+- **user $u$ - item $i$ bipartite graph**(이중 그래프)
+- **사용자가 아이템과 상호작용**(예: 상품 클릭/구매/평가)하는 순간 
+  → 해당 시점의 **유저-아이템 노드 사이에 edge가 생성**된다. 
+- 각 edge는 $(u, i, t, o_{ui}, o_{iu})$의 형태의 정보를 가진다. 
+	- 사용자 $u$
+	- 아이템 $i$
+	- 타임스탬프(t): 상호작용 발생 시간
+	- $o_{ui}$: **사용자가 해당 아이템을 몇 번째로 상호작용**했는지(순서)
+	- $o_{iu}$: **그 아이템의 입장에서, 전체 상호작용 사용자 중 몇 번째 사용자**인지(순서)
 
 
+> [!check] 목적
+> - 이렇게 구성한 동적 그래프는 순서, 시간 정보뿐 아니라 **다른 사용자와 같은 아이템을 매개로 한 간접 연결, High-Order 연관성**까지 한 번에 포착 가능하다. 
+> - 기존의 정적 그래프(혹은 단순 sequence)에 비해:
+> 	- “**누가–언제–어떤 순서로–어떤 아이템과” 상호작용**했는지
+> 	- **시퀀스 간 연결망의 순간순간 변화를 모두 반영**
