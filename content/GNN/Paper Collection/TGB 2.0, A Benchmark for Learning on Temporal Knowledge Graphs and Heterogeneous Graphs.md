@@ -187,9 +187,9 @@ MRR(Mean Reciprocal Rank)
 ## 3) 실험 결과
 ### Temporal Knowledge Graph Link Prediction Results
 ![[스크린샷 2025-05-07 오후 3.30.01.png]]
-### Temporal Knowledge Graph Link Prediction Results
+### Temporal Heterogeneous Graph Link Prediction Results
 ![[스크린샷 2025-05-07 오후 3.30.51.png]]
-<br>
+
 # 6. Conclusion
 1. **TGB 2.0**은 **다중 관계와 시간 정보를 가진 그래프(Temporal Knowledge Graph, TKG & Temporal Heterogeneous Graph, THG)** 학습용으로 
 	- **대규모, 다양한 도메인의 8개 새 데이터셋**을 제시했고, 
