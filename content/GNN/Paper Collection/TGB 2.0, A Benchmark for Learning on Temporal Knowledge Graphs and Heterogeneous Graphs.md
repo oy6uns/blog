@@ -22,7 +22,6 @@ tags:
 3. 대부분의 기존 방법들이 가장 큰 데이터셋에서는 아예 동작하지 못하거나 아예 느리다. 
 	→ **확장 가능한(Scalability) 새로운 방법 연구**가 필요
 
-<br>
 # 2. Preliminaries
 ## Temporal ‘Knowledge’ Graph(TKG) 
 - 정의: 시간의 흐름에 따라 변화하는 지식(관계)을 나타내는 그래프
@@ -65,7 +64,6 @@ Obama  --[president_of, 2009]-->  USA
 > - THG는 노드 타입이 추가되는 점이 다르고,
 > - 최종 목표는 둘 다 **future relation(link) 예측** 이다. 
 
-<br>
 # 3. Related Work
 ## 1. Temporal Knowledge Graph (TKG) Methods
 TKG 예측 방법들은 주로 두 가지 방식으로 발전하였다. 
