@@ -85,5 +85,24 @@ article p:empty {
 	line-height: 0.5em !important;
 }
 
+/* ───────────────────────────────
+   Base.scss 기본 설정 덮어쓰기 (Obsidian 스타일)
+──────────────────────────────── */
+
+/* base.scss의 tbody, li, p 설정 덮어쓰기 */
+article tbody,
+article p {
+	line-height: 1.8 !important;
+}
+
+/* 전체 article 내용의 기본 줄 간격 */
+article {
+	line-height: 1.8 !important;
+}
+
+/* 수식 블록 주변 여백 증가 */
+.katex-display {
+	margin: 1.5em 0 !important;
+}
 
 
