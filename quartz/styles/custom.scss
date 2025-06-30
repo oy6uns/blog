@@ -66,9 +66,9 @@ article h6 + p {
 
 /* 블록쿼트 간격 */
 article blockquote {
-	margin: 1.2em 0 !important;
+	margin: 0.5em 0 !important;
 	line-height: 1.8 !important;
-	padding: 1em 1.5em !important;
+	padding: 0.8em 1.2em !important;
 }
 
 /* 코드 블록 간격 */
@@ -112,5 +112,120 @@ article {
 	word-spacing: 0.05em;  단어 간격 조정
 	letter-spacing: 0.01em; 글자 간격 조정
 } */
+
+/* ───────────────────────────────
+   Obsidian 빈 줄 처리
+──────────────────────────────── */
+
+/* <br> 태그로 만든 줄바꿈 처리 */
+article br {
+	display: block !important;
+	margin: 0.5em 0 !important;
+	line-height: 1.5em !important;
+}
+
+/* 연속된 <br> 태그 처리 */
+article br + br {
+	margin-top: 1em !important;
+}
+
+/* &nbsp; 처리 */
+article p:has(br:only-child),
+article p:empty,
+article p:blank {
+	min-height: 1em !important;
+	margin: 0.5em 0 !important;
+}
+
+/* 빈 문단이나 공백만 있는 문단 처리 */
+article p:only-child:empty,
+article p:only-child:blank {
+	display: block !important;
+	height: 1em !important;
+	margin: 0.5em 0 !important;
+}
+
+/* white-space 설정으로 개행 문자 보존 */
+article {
+	white-space: pre-line !important;
+}
+
+/* ───────────────────────────────
+   콜아웃 간격 조정
+──────────────────────────────── */
+
+/* 콜아웃 상하 여백 줄이기 */
+.callout {
+	margin: 0.5em 0 !important;
+}
+
+/* 콜아웃과 이전 요소 사이의 간격 줄이기 */
+article p + .callout,
+article h1 + .callout,
+article h2 + .callout,
+article h3 + .callout,
+article h4 + .callout,
+article h5 + .callout,
+article h6 + .callout {
+	margin-top: 0.3em !important;
+}
+
+/* 콜아웃과 다음 요소 사이의 간격 줄이기 */
+.callout + p,
+.callout + h1,
+.callout + h2,
+.callout + h3,
+.callout + h4,
+.callout + h5,
+.callout + h6 {
+	margin-top: 0.3em !important;
+}
+
+/* 콜아웃 내부 여백 조정 */
+.callout-content {
+	padding: 0.5em 0 !important;
+}
+
+/* 콜아웃 내부의 첫 번째와 마지막 요소 여백 제거 */
+.callout-content > :first-child {
+	margin-top: 0 !important;
+}
+
+.callout-content > :last-child {
+	margin-bottom: 0 !important;
+}
+
+/* ───────────────────────────────
+   인용구와 다른 요소 사이의 간격 조정
+──────────────────────────────── */
+
+/* 문단과 인용구 사이의 간격 줄이기 */
+article p + blockquote {
+	margin-top: 0.3em !important;
+}
+
+/* 인용구 다음에 오는 문단의 간격 줄이기 */
+article blockquote + p {
+	margin-top: 0.3em !important;
+}
+
+/* 제목 다음에 오는 인용구의 간격 줄이기 */
+article h1 + blockquote,
+article h2 + blockquote,
+article h3 + blockquote,
+article h4 + blockquote,
+article h5 + blockquote,
+article h6 + blockquote {
+	margin-top: 0.3em !important;
+}
+
+/* 인용구 내부의 첫 번째와 마지막 요소 여백 조정 */
+article blockquote > :first-child {
+	margin-top: 0 !important;
+}
+
+article blockquote > :last-child {
+	margin-bottom: 0 !important;
+}
 
 
