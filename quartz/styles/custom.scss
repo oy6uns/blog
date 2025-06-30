@@ -25,19 +25,20 @@
 /* 문단과 리스트 아이템의 줄 간격을 Obsidian과 유사하게 조정 */
 article p, 
 article li {
-	line-height: 1.5 !important;  /* Obsidian 기본 줄 간격 */
-	margin-bottom: 1em !important; /* 문단 간격 */
+	line-height: 1.8 !important;  /* Obsidian과 유사한 넓은 줄 간격 */
+	margin-bottom: 1.2em !important; /* 더 넓은 문단 간격 */
 }
 
 /* 연속된 문단 사이의 간격 조정 */
 article p + p {
-	margin-top: 0.5em !important;
+	margin-top: 0.8em !important;
 }
 
 /* 리스트 아이템 간격 조정 */
 article ul li, 
 article ol li {
-	margin-bottom: 0.25em !important;
+	margin-bottom: 0.4em !important;
+	line-height: 1.8 !important;
 }
 
 /* 중첩된 리스트 간격 조정 */
@@ -45,8 +46,8 @@ article ul ul,
 article ol ol, 
 article ul ol, 
 article ol ul {
-	margin-top: 0.25em !important;
-	margin-bottom: 0.25em !important;
+	margin-top: 0.4em !important;
+	margin-bottom: 0.4em !important;
 }
 
 /* 제목 다음에 오는 문단의 간격 조정 */
@@ -56,7 +57,7 @@ article h3 + p,
 article h4 + p,
 article h5 + p,
 article h6 + p {
-	margin-top: 0.5em !important;
+	margin-top: 0.8em !important;
 }
 
 /* ───────────────────────────────
@@ -65,24 +66,45 @@ article h6 + p {
 
 /* 블록쿼트 간격 */
 article blockquote {
-	margin: 1em 0 !important;
-	line-height: 1.5 !important;
+	margin: 1.2em 0 !important;
+	line-height: 1.8 !important;
+	padding: 1em 1.5em !important;
 }
 
 /* 코드 블록 간격 */
 article pre {
-	margin: 1em 0 !important;
+	margin: 1.2em 0 !important;
 }
 
 /* 테이블 간격 */
 article table {
-	margin: 1em 0 !important;
+	margin: 1.2em 0 !important;
 }
 
 /* 빈 줄로 구분된 문단들의 간격을 더 자연스럽게 */
 article p:empty {
-	margin: 0.5em 0 !important;
-	line-height: 0.5em !important;
+	margin: 0.8em 0 !important;
+	line-height: 0.8em !important;
+}
+
+/* ───────────────────────────────
+   Base.scss 기본 설정 덮어쓰기 (Obsidian 스타일)
+──────────────────────────────── */
+
+/* base.scss의 tbody, li, p 설정 덮어쓰기 */
+article tbody,
+article p {
+	line-height: 1.8 !important;
+}
+
+/* 전체 article 내용의 기본 줄 간격 */
+article {
+	line-height: 1.8 !important;
+}
+
+/* 수식 블록 주변 여백 증가 */
+.katex-display {
+	margin: 1.5em 0 !important;
 }
 
 /* 텍스트 밀도 조정 (선택사항) */
