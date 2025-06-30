@@ -59,4 +59,31 @@ article h6 + p {
 	margin-top: 0.5em !important;
 }
 
+/* ───────────────────────────────
+   블록 요소들 간의 간격 세밀 조정
+──────────────────────────────── */
+
+/* 블록쿼트 간격 */
+article blockquote {
+	margin: 1em 0 !important;
+	line-height: 1.5 !important;
+}
+
+/* 코드 블록 간격 */
+article pre {
+	margin: 1em 0 !important;
+}
+
+/* 테이블 간격 */
+article table {
+	margin: 1em 0 !important;
+}
+
+/* 빈 줄로 구분된 문단들의 간격을 더 자연스럽게 */
+article p:empty {
+	margin: 0.8em 0 !important;
+	line-height: 0.5em !important;
+}
+
+
 
