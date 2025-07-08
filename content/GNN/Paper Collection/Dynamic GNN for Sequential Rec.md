@@ -1,3 +1,10 @@
+---
+tags:
+  - GNN
+  - Dynamic_GNN
+  - Recsys
+  - Sequential
+---
 > Dynamic Graph Neural Networks for Sequential Recommendation (TKDE ‘22)
 > https://arxiv.org/pdf/1609.02907
 

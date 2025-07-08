@@ -1,3 +1,11 @@
+---
+tags:
+  - GNN
+  - GraphSAGE
+---
+
+
+
 > Inductive Representation Learning on Large Graphs (NeurIPS ‘17) <br>
 > https://arxiv.org/pdf/1706.02216
 
