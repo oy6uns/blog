@@ -50,7 +50,7 @@ q(x_t|x_{t-1}) = \mathcal{N}(x_t;\;\sqrt{1-\beta_t}x_{t-1}, \beta_tI)
 $$
 
 ### single-step
-초기값을 $x_0=0.8$ 이라고 하자. <br>
+초기값을 $x_0=0.8$ 이라고 하자. <br><br>
 **첫번째 노이징(t=1)**
 - 스케줄에서 $\beta_1=0.1$이라 하면, $\alpha_1=1-\beta_1=0.9$
 - 평균(mean)  
@@ -85,12 +85,12 @@ q(x_2|x_0)=\mathcal{N}(0.6788, 0.28)
 $$
 
 ### 정리하자면, 
-$q(x_t\mid x_{t-1})$: 한 스텝마다 $u_t=\sqrt{1-\beta_t}x_{t-1}, \sigma_t^2=\beta_t$인 가우시안.
+$q(x_t\mid x_{t-1})$: 한 스텝마다 $u_t=\sqrt{1-\beta_t}x_{t-1}, \sigma_t^2=\beta_t$인 가우시안.<br><br>
 **샘플링**:
 $$
 x_t = \mu_t + \sqrt{\beta_t}\,\epsilon,\quad \epsilon\sim\mathcal{N}(0,1)
 $$
 이를 $T$번 반복하면 $q(x_{1:T}\mid x_0)$가 정의된다. <br>
-이렇게 “한 스텝당 평균과 분산을 고정된 스케줄대로 정하고, 거기에 픽셀 단위 가우시안 노이즈를 더하는” 것이 바로 DDPM forward process이다. 
+이렇게 <b><font color="#e36c09">“한 스텝당 평균과 분산을 고정된 스케줄대로 정하고, 거기에 픽셀 단위 가우시안 노이즈를 더하는 것”</font></b>이 바로 **DDPM forward process**이다. 
 ![[스크린샷 2025-07-08 오후 12.57.18.png]]
-계속해서 노이즈를 더해나가서, 최종적으로 $q(x_T)$ 라는 가우시안 노이즈가 나오게 된다. 
+계속해서 노이즈를 더해나가서, 최종적으로 $q(x_T)$ 라는 [[Gaussian Noise]]가 나오게 된다. 
