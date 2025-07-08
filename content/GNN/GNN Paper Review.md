@@ -11,7 +11,7 @@
 2. [[TGB 2.0]]
 
 ## Graph Recommendation
-- [[Dynamic GNN for Sequential Rec]]
+- [[DGNN for SeqRec]]
 
 ## Knowledge Graph 
 
