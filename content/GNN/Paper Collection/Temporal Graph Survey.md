@@ -5,6 +5,7 @@ tags:
   - Temporal_Graphs
   - Surver_Paper
 ---
+> Graph Neural Networks for temporal graphs, State of the art, open challenges, and opportunities<br>
 > [paper link](https://arxiv.org/pdf/2302.01018)
 # 5. Temporal Graph에서의 Learning Task
 다양한 학습 과제(task)와 학습 설정(setting)을 정리한다. 

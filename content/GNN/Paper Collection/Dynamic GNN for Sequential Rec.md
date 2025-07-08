@@ -1,3 +1,6 @@
+> Dynamic Graph Neural Networks for Sequential Recommendation (TKDE ‘22)
+> https://arxiv.org/pdf/1609.02907
+
 # 1. Introduction
 ## 기존 추천시스템
 - 예전 추천시스템(Collaborate Filtering)은 주로 **정적인 사용자-아이템 관계**만 본다. 

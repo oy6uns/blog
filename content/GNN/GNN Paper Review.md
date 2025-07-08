@@ -7,11 +7,11 @@
 	[[GraphSAGE]]
 
 ## Temporal GNN
-1. [[Graph Neural Networks for temporal graphs, State of the art, open challenges, and opportunities]]
-2. [[TGB(Temporal Graph Benchmark) 2.0]]
+1. [[Temporal Graph Survey]]
+2. [[TGB 2.0]]
 
 ## Graph Recommendation
-- [[Dynamic Graph Neural Networks for Sequential Recommendation]]
+- [[Dynamic GNN for Sequential Rec]]
 
 ## Knowledge Graph 
 
