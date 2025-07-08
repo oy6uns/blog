@@ -1,3 +1,8 @@
+---
+tags:
+  - Diffusion
+---
+
 >https://www.youtube.com/watch?v=uFoGaIVHfoE <br>
 >위의 영상을 참고하여 작성한 게시글입니다
 
