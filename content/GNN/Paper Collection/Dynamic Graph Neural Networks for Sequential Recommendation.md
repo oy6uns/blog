@@ -3,7 +3,7 @@
 - 예전 추천시스템(Collaborate Filtering)은 주로 **정적인 사용자-아이템 관계**만 본다. 
 	- 즉, “A가 B를 샀으니 비슷한 C도 살 거다” 처럼 한 시점의 “취향”만 반영
 - 현실에서는 사용자의 **취향이 시계열적으로(순차적으로) 변함**. 예를 들어, 영화/음악/상품 취향이 최근에 본 것(들은 것, 산 것)에 영향을 받음.
-- 그래서 최근에는 사용자의 <font color="#49a01f">Sequential Information</font>을 반영하는 연구가 많아졌다. 
+- 그래서 최근에는 사용자의 **Sequential Information을 반영하는 연구가 많아졌다**. 
 	- Markov chain, RNN/LSTM/GRU, CNN 및 Attention 기반 연구
 
 ## 기존 접근법의 공통적인 한계점
@@ -57,7 +57,7 @@ real-world 그래프(such as academic network, social network, and recommender s
 
 여러 Dynamic Graph 방법론들은 e-commerse dataset에서 테스트 되었지만, sequential recommendation 시나리오에서는 아직 적용되지 않았다. 
 
-이 논문에서는 <b><font color="#49a01f">dynamic graph의 관점에서 sequential recommendation 문제를 해결</font></b>하고자 한다. 
+이 논문에서는 <b><font color="#00b050">dynamic graph의 관점에서 sequential recommendation 문제를 해결</font></b>하고자 한다. 
 
 # 3. Prerequisite
 ## 3.1 Sequential Recommendation
