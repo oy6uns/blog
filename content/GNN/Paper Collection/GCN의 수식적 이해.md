@@ -13,13 +13,13 @@ $$
 
 Node Classification task를 해결하기 위한 graph-based semi-supervised learning에서
 
-<b><font color="#49a01f">graph Laplacian regularization term을 loss함수에 추가함</font></b>으로써 정보가 그래프를 통해 smoothing될 수 있게 해준다.
+<b><font color="#00b050">graph Laplacian regularization term을 loss함수에 추가함</font></b>으로써 정보가 그래프를 통해 smoothing될 수 있게 해준다.
 
 기존의 $\mathcal{L}_0$는 labeled part에 대한 supervised loss를 나타낸다.
 
 ### 그럼 $\mathcal{L}_{reg}$는 어떻게 유도될까?
 
-그래프 정규화 항은 <b><font color="#49a01f">인접한 노드들의 특징 벡터 차이를 최소화하는 역할</font></b>을 한다!
+그래프 정규화 항은 <b><font color="#00b050">인접한 노드들의 특징 벡터 차이를 최소화하는 역할</font></b>을 한다!
 
 $$
 \begin{array}{rl}
@@ -40,15 +40,15 @@ $$
 > 기존의 방식은 수식 (1)과 같이 **$\mathcal{L}$(loss)에 추가적인 regularization 항을 추가하는 방식**을 통해 노드 간의 정보가 학습 시에 전달 될 수 있도록 하였다. 그러나, 학습하는 함수 $f(X)$ 자체에 노드 간의 연결성은 고려되지 않는다.
 
 > [!success] 해결 방안
-> <span style="background:rgba(208, 235, 166, 0.55)">이 논문은 학습하는 함수 $f(X, A)$ 를 제시하여</span>
-> 연결된 노드들의 표현을 유사하게 만들도록 강제하는 정규화 항을 손실함수에 추가하는 대신, <span style="background:rgba(208, 235, 166, 0.55)">신경망 자체가 그래프 구조(인접행렬 $A$)를 직접 학습하도록 설계한다.</span>
+> <font color="#00b050">이 논문은 학습하는 함수 $f(X, A)$ 를 제시하여</font>
+> 연결된 노드들의 표현을 유사하게 만들도록 강제하는 정규화 항을 손실함수에 추가하는 대신, <font color="#00b050">신경망 자체가 그래프 구조(인접행렬 $A$)를 직접 학습하도록 설계한다.</font>
 > 
-> → 인접행렬을 학습시에 사용하면, <span style="background:rgba(208, 235, 166, 0.55)">⭐️ 레이블이 있는 노드뿐만 아니라 없는 노드의 정보도 학습할 수 있게 된다.⭐️</span>
+> → 인접행렬을 학습시에 사용하면, <font color="#00b050">⭐️ 레이블이 있는 노드뿐만 아니라 없는 노드의 정보도 학습할 수 있게 된다.⭐️</font>
 
 ## 논문의 2가지 Contribution
 1. graph에서 **직접적으로 작동하는 neural networks model**을 설계하기 위한 simple & well behaved **layer-wise propagation rule 을 제시**한다. 
-   그리고 위 rule이 어떻게 <b><span style="background:rgba(208, 235, 166, 0.55)">spectral graph convolution의 1차 근사치로부터 유도될 수 있는지</span></b>를 보인다.
-2. 위의 모델이 <b><span style="background:rgba(208, 235, 166, 0.55)">fast & scalable semi-supervised classification of nodes in a graph</span></b>를 잘 달성한다는 것을 보인다.
+   그리고 위 rule이 <b><font color="#f79646">어떻게 spectral graph convolution의 1차 근사치로부터 유도될 수 있는지</font></b>를 보인다.
+2. 위의 모델이 <b><font color="#f79646">fast & scalable semi-supervised classification of nodes in a graph</font></b>를 잘 달성한다는 것을 보인다.
 
 ## 수식 (2)
 는 최종식이라, 나중에 모든 정리가 끝나고 다시 다루기로 하자.
@@ -57,7 +57,7 @@ $$
 # 2.1 Spectral Graph Convolutions
 
 ## 💡 Contribution #1.
-<b><font color="#00b050">------------</font></b>
+<b><font color="#f79646">------------</font></b>
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
 
 $$
@@ -80,9 +80,9 @@ $$
 1. $x$ : 각 노드가 가지고 있는 특징(feature) 값
 2. $U$: 정규화된 그래프 라플라시안 $L$의 고유벡터 행렬
 3. $Λ$ : 정규화된 그래프 라플라시안의 고유값을 포함하는 대각행렬(고유값 행렬)
-    - 이 값들은 <b><font color="#49a01f">그래프의 스펙트럼 정보를 담고 있음.</font></b>
+    - 이 값들은 <b><font color="#f79646">그래프의 스펙트럼 정보를 담고 있음.</font></b>
 4. $g_\theta(Λ)$: 고유값 $Λ$를 이용해 그래프의 주파수를 조정하는 필터
-	- 그래프의 <b><font color="#49a01f">특정 주파수 대역을 강조하거나 억제하는 역할</font></b>을 한다.
+	- 그래프의 <b><font color="#f79646">특정 주파수 대역을 강조하거나 억제하는 역할</font></b>을 한다.
 
 $$ 
 g_{\theta}(\Lambda) =\begin{bmatrix}g_{\theta}(\lambda_0) & & \\& g_{\theta}(\lambda_1) & \\& & \ddots & \\& & & g_{\theta}(\lambda_{N-1})\end{bmatrix}
@@ -122,8 +122,7 @@ $$
 
 Chebyshev 다항식은 $(−1,1)$에서 동작하므로, $L$의 가장 큰 eigenvalue $\lambda_{max}$를 사용해 $Λ$를 scaling$(0, \lambda_{max})\rightarrow (-1, 1)$ 해준 것이다.
 
-수식 (4)의 근사를 수식 (3)에 대입하면, 
-
+수식 (4)의 근사를 수식 (3)에 대입하면, <br>
 
 $\tilde L = \frac{2}{\lambda_{max}}L-I$에 대해,
 ## 수식(5)
@@ -199,7 +198,7 @@ $I_N +D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$의 eigenvalue는 $[0, 2]$ 구간에 속
 만약 수식 (7)의 layer를 여러개 쌓아 deep model을 만든다면, eigenvalue가 $[0, 1]$ 범위 안에 들어오지 않기에 exploding / vanishing gradient problem이 생겨 불안정한 학습이 이루어진다!
 
 ## 💡 Contribution #2.
-<b><font color="#00b050">------------</font></b>
+<b><font color="#f79646">------------</font></b>
 
 따라서 논문에서는 이를 해결하기 위해 renormalization trick 을 사용한다!!
 
@@ -293,7 +292,7 @@ Loss function으로 **label 이 있는 node 들에 대해서만 cross-entropy er
 각 데이터셋에 대한 **baseline method** 들과 **two-layer GCN 의 classification accuracy** 는 다음과 같다.
 ![[Pasted image 20250423164504.png]]
 GCN 의 정확도가 다른 baseline method 들에 비해 월등히 높은 것을 볼 수 있다. 
-특히 baseline method 들 중 <span style="background:rgba(208, 235, 166, 0.55)">정확도가 가장 높은 Planetoid 와 비교해, GCN 의 수렴 속도가 훨씬 빠르다</span>는 것을 알 수 있다.
+특히 baseline method 들 중 <font color="#00b050">정확도가 가장 높은 Planetoid 와 비교해, GCN 의 수렴 속도가 훨씬 빠르다</font>는 것을 알 수 있다.
 
 ![[Pasted image 20250423164527.png]]
-✅ 수식 (8)에서 사용한 <span style="background:rgba(208, 235, 166, 0.55)">renormalization trick이 가장 높은 정확도</span>를 보여주는 것을 확인할 수 있다!
+✅ 수식 (8)에서 사용한 <font color="#00b050">renormalization trick이 가장 높은 정확도</font>를 보여주는 것을 확인할 수 있다!
