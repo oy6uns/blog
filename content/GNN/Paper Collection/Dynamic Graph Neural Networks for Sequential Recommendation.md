@@ -3,7 +3,7 @@
 - 예전 추천시스템(Collaborate Filtering)은 주로 **정적인 사용자-아이템 관계**만 본다. 
 	- 즉, “A가 B를 샀으니 비슷한 C도 살 거다” 처럼 한 시점의 “취향”만 반영
 - 현실에서는 사용자의 **취향이 시계열적으로(순차적으로) 변함**. 예를 들어, 영화/음악/상품 취향이 최근에 본 것(들은 것, 산 것)에 영향을 받음.
-- 그래서 최근에는 사용자의 <span style="background:rgba(208, 235, 166, 0.55)">Sequential Information</span>을 반영하는 연구가 많아졌다. 
+- 그래서 최근에는 사용자의 <font color="#49a01f">Sequential Information</font>을 반영하는 연구가 많아졌다. 
 	- Markov chain, RNN/LSTM/GRU, CNN 및 Attention 기반 연구
 
 ## 기존 접근법의 공통적인 한계점
@@ -49,7 +49,7 @@
 
 
 > [!Important] DGSR: 모든 상호작용을 ‘동적 그래프’로 통합
-> 사용자의 모든 행동 이력을 시간/순서 정보까지 포함하여, **"유저-아이템" bipartite graph**의 형태에 **동적 변화**(타임스탬프, 인터랙션 순서 등)까지 같이 녹여내었다. 
+> 사용자의 모든 행동 이력을 시간/순서 정보까지 포함하여, **"유저-아이템" bipartite graph**의 형태에 **동적 변화**(타임스탬프, 인터랙션 순서 등)까지 같이 녹여내었다.<br> 
 > → 아무 추가 정보 없이도 동적 그래프 프레임워크 하나로 통합되어 **보조정보에 의존하지 않아도 된다는 장점**이 있다. 
 
 ## 2.2 Dynamic Graph Neural Networks
@@ -57,7 +57,7 @@ real-world 그래프(such as academic network, social network, and recommender s
 
 여러 Dynamic Graph 방법론들은 e-commerse dataset에서 테스트 되었지만, sequential recommendation 시나리오에서는 아직 적용되지 않았다. 
 
-이 논문에서는 <span style="background:rgba(208, 235, 166, 0.55)">dynamic graph의 관점에서 sequential recommendation 문제를 해결</span>하고자 한다. 
+이 논문에서는 <b><font color="#49a01f">dynamic graph의 관점에서 sequential recommendation 문제를 해결</font></b>하고자 한다. 
 
 # 3. Prerequisite
 ## 3.1 Sequential Recommendation
@@ -124,7 +124,7 @@ real-world 그래프(such as academic network, social network, and recommender s
 
 ## 4.2 Sub-graph Sampling 
 ### 핵심 목표
-- 동적 그래프는 매우 크고 복잡할 수 있으므로, 각 <span style="background:rgba(208, 235, 166, 0.55)">사용자의 추천(예측) 시점</span>마다 필요한 부분만 뽑아서 작은 그래프(subgraph)를 구성한다. 
+- 동적 그래프는 매우 크고 복잡할 수 있으므로, <font color="#00b050"><b><font color="#00b050">각 사용자의 추천(예측) 시점마다 필요한 부분만 뽑아서</font></b></font> 작은 그래프(subgraph)를 구성한다. 
 - 이렇게 해야 
 	- 계산 효율성을 높이고, 
 	- 불필요한 정보를 줄이며, 각 target user node에 의미 있는 동적 맥락을 전달할 수 있다. 
@@ -132,12 +132,13 @@ real-world 그래프(such as academic network, social network, and recommender s
 ### 구체적인 샘플링 절차
 1. **Anchor Node(기준 노드) 선택**
 2. **1차 이웃(First-Order Neighbors) 샘플**
-	- <span style="background:rgba(208, 235, 166, 0.55)">사용자가 최근 상호작용한 n개의 아이템</span>들을 먼저 뽑음
+	- <b><font color="#00b050">사용자가 최근 상호작용한 n개의 아이템</font></b>들을 먼저 뽑음
 		(n은 sequence 최대 길이, 예: 최근 구매 10개 등)
 3. **2차 이웃 이후 확장**
 	- 각 아이템에 대해, **해당 아이템을 상호작용한 다른 사용자들(1-hop neighborhood)도 추가로 탐색**
-	- multi-hop(다단계) 탐색을 통해 그래프를 확장해나간다. 
-→ 중복을 방지하기 위해 **이미 anchor node로 사용한 사용자, 아이템들은 샘플링에서 제외**시킨다. 
+	- multi-hop(다단계) 탐색을 통해 그래프를 확장해나간다.
+
+<br>→ 중복을 방지하기 위해 **이미 anchor node로 사용한 사용자, 아이템들은 샘플링에서 제외**시킨다. 
 
 > [!note] sub-graph generation
 > - 중복을 방지하기 위해 **이미 anchor node로 사용한 사용자, 아이템들은 샘플링에서 제외**시킨다. 
@@ -151,7 +152,7 @@ real-world 그래프(such as academic network, social network, and recommender s
 2. Node Updating
 
 ## #1. Message Propagation
-메시지 전파 메커니즘은 다음 <span style="background:rgba(208, 235, 166, 0.55)">두 가지 방향으로 정보를 전달</span>한다. 
+메시지 전파 메커니즘은 <font color="#00b050">다음 두 가지 방향으로 정보를 전달</font>한다. 
 #### 1) 항목에서 사용자로의 전파 
 - 사용자의 이웃은 사용자가 상호작용한 항목들이다. 
 - 각 사용자 노드에서 두 가지 정보를 추출한다:
@@ -179,8 +180,8 @@ real-world 그래프(such as academic network, social network, and recommender s
 
 ## #2. Node Updating
 각 노드의 새로운 표현을 만들기 위해 
-1. 방금 계산한 <span style="background:rgba(208, 235, 166, 0.55)">장기 임베딩</span> $h_u^L$,
-2. <span style="background:rgba(208, 235, 166, 0.55)">단기 임베딩</span> $h_u^S$,
+1. 방금 계산한 <font color="#00b050">장기 임베딩</font> $h_u^L$,
+2. <font color="#00b050">단기 임베딩</font> $h_u^S$,
 3. 그리고 **이전 레이어에서의 임베딩** h_u^{(l-1)}
 이 세 가지를 **쭉 이어붙인(concatenate)** 뒤에, **선형 변환 + 활성화 함수(tanh)** 를 적용한다. 
 
