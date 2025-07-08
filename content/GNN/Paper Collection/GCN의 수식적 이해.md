@@ -58,7 +58,7 @@ $$
 # 2.1 Spectral Graph Convolutions
 
 ## 💡 Contribution #1.
-<span style="background:rgba(208, 235, 166, 0.55)"> --------- </span>
+<b><font color="#00b050">------------</font></b>
 ## 수식 (3) = 수식 (7) 을 유도하는 것이 핵심이다.
 
 $$
@@ -200,7 +200,7 @@ $I_N +D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$의 eigenvalue는 $[0, 2]$ 구간에 속
 만약 수식 (7)의 layer를 여러개 쌓아 deep model을 만든다면, eigenvalue가 $[0, 1]$ 범위 안에 들어오지 않기에 exploding / vanishing gradient problem이 생겨 불안정한 학습이 이루어진다!
 
 ## 💡 Contribution #2.
-<span style="background:rgba(208, 235, 166, 0.55)"> --------- </span>
+<b><font color="#00b050">------------</font></b>
 
 따라서 논문에서는 이를 해결하기 위해 renormalization trick 을 사용한다!!
 

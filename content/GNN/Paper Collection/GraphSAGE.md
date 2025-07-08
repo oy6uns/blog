@@ -1,17 +1,17 @@
-> Inductive Representation Learning on Large Graphs (NeurIPS ‘17)
+> Inductive Representation Learning on Large Graphs (NeurIPS ‘17) <br>
 > https://arxiv.org/pdf/1706.02216
 
 > [!Abstract] 
-> **GraphSAGE**는 그래프에서 본 적 없는 새로운 노드도 주어진 <span style="background:#d3f8b6">이웃 노드들의 정보를 활용해 임베딩을 즉석에서 만들 수 있게 해주는</span>(즉, inductive하게 해주는) 방법을 제안한다. 
+> **GraphSAGE**는 그래프에서 본 적 없는 **새로운 노드도 주어진 이웃 노드들의 정보를 활용해 임베딩을 즉석에서 만들 수 있게 해주는(즉, inductive하게 해주는)** 방법을 제안한다. 
 
 # 1. Introduction
 - **기존 임베딩 방법**들은 거의 모두 **정해진(고정된) 하나의 그래프**에서 **훈련에 쓰인 노드만** 벡터로 바꿔준다(=transductive).
 - 현실에서는 **새로운 노드, 새로운 그래프(새로운 논문, 유저, 게시글 등)** 들이 계속 등장하는데, 이런 경우 **무조건 전체를 다시 훈련하거나 추가 학습을 해야 하므로 비효율적**이다. 
-- <span style="background:rgba(255, 238, 131, 0.55)">새로운 노드(예: Reddit의 새 포스트, YouTube의 새 영상)에 대해서 <b>빠르게 임베딩을 만들어내는 inductive 방식</b>이 꼭 필요하다.</span>
+- <font color="#e36c09">새로운 노드(예: Reddit의 새 포스트, YouTube의 새 영상)에 대해서 <b>빠르게 임베딩을 만들어내는 inductive 방식</b>이 꼭 필요하다.</font>
 
 ## Inductive Node Embedding의 어려움
 - **Inductive(귀납적) 노드 임베딩**이란, 훈련 때 보지 않은 노드(또는 완전히 새로운 그래프)라도 임베딩을 만들어내는 것을 의미한다. 
-- 이게 어려운 이유는, <span style="background:rgba(255, 238, 131, 0.55)">새로운 노드가 기존 임베딩 공간에 "정확히" 들어맞아야 하기 때문</span>이다. 즉, 네트워크 구조/이웃 정보를 잘 활용해서 그래프 내에서의 역할과 위치를 파악해야한다. 
+- 이게 어려운 이유는, <font color="#e36c09">새로운 노드가 기존 임베딩 공간에 <b>"정확히"</b> 들어맞아야 하기 때문</font>이다. 즉, 네트워크 구조/이웃 정보를 잘 활용해서 그래프 내에서의 역할과 위치를 파악해야한다. 
 
 # 3. Proposed method: GraphSAGE
 > [!check] **new framework**
@@ -72,7 +72,8 @@ GNN의 구별할 수 있는 그래프(pairwise) **WL Test 이하임은 후속 �
 ## 3.2 Learning the parameters of GraphSAGE
 $$
 J_G​(z_u​)=−log(σ(z_u^⊤​z_v​))−Q⋅E_{{v_n​}∼{P_n​(v)}}​[log(σ(−z_u^⊤​z_{v_n}​​))]
-$$ negative sampling 기반의 contrastive loss 식이다. 
+$$
+negative sampling 기반의 contrastive loss 식이다. 
 ![[스크린샷 2025-05-15 오후 8.56.00.png]]
 즉, 이 손실 함수는 다음을 유도한다. 
 - **양성 쌍(positive pair)** 인 ($z_u$, $z_v$)는 내적값이 크게 → 시그모이드 값이 1에 가깝게 학습
