@@ -5,7 +5,14 @@ tags:
 
 > [!idea] Idea
 >작은 sequence에서의 확산은 forward와 reverse **모두 가우시안**일 수 있다. <br>
-  작은 공기 입자의 다음 위치는 가우시안 분포 안에서 결정될 수 있다.
+  작은 공기 입자의 이동을 상상해보면 작은 공기 입자의 **다음 위치는 가우시안 분포 안에서 결정**될 수 있다.
+
+![[스크린샷 2025-07-08 오후 6.09.03.png]]
+![[스크린샷 2025-07-08 오후 6.07.40.png]]
+Diffusion은 크게 2가지(**forward process, backward process**)로 구성된다. <br> 
+**forward process**는 노이즈를 점진적으로 추가해나가는 과정이고, <br>
+**backward process**는 노이즈를 지워나가며 input으로 넣어준 이미지를 다시 복원해나가는 과정이다. <br>
+위의 2번째 그림에 나와있듯이 노이즈를 추가하는 forward process는 단순히 노이즈를 이미지에 추가만 하면 되기에 따로 학습할 필요가 없고, 우리가 <b><font color="#e36c09">초점을 맞출 부분은 노이즈를 없애는 backward process(denoising)</font></b>이다. 
 
 # forward process
 
@@ -81,15 +88,15 @@ q(x_2|x_0)=\mathcal{N}(0.6788, 0.28)
 $$
 
 ### 정리하자면, 
-$q(x_t\mid x_{t-1})$: 한 스텝마다 $u_t=\sqrt{1-\beta_t}x_{t-1}, \sigma_t^2=\beta_t$인 가우시안.<br><br>
-**샘플링**:
+$q(x_t\mid x_{t-1})$: 한 스텝마다 $u_t=\sqrt{1-\beta_t}x_{t-1}, \sigma_t^2=\beta_t$인 가우시안이고, <br><br>
+**샘플링**
 $$
 x_t = \mu_t + \sqrt{\beta_t}\,\epsilon,\quad \epsilon\sim\mathcal{N}(0,1)
 $$
 이를 $T$번 반복하면 $q(x_{1:T}\mid x_0)$가 정의된다. <br>
-이렇게 <b><font color="#e36c09">“한 스텝당 평균과 분산을 고정된 스케줄대로 정하고, 거기에 픽셀 단위 가우시안 노이즈를 더하는 것”</font></b>이 바로 **DDPM forward process**이다. 
+이렇게 <b><font color="#e36c09">“한 스텝당 평균과 분산을 고정된 스케줄대로 정하고, 거기에 픽셀 단위 가우시안 노이즈를 더하는 것”</font></b><br>이 바로 **DDPM forward process**이다. 
 ![[스크린샷 2025-07-08 오후 12.57.18.png]]
-계속해서 노이즈를 더해나가서, 최종적으로 $q(x_T)$ 라는 [[Gaussian Noise]]가 나오게 된다. 
+계속해서 노이즈를 더해나가면, 최종적으로 $q(x_T)$ 라는 [[Gaussian Noise]]가 나오게 된다. 
 
 # Backward Process
 이젠 노이즈를 걷어낼 차례이다. <br>
@@ -105,13 +112,11 @@ $$
 - 그러면
 $$
 q(x_t\mid x_{t-1})=\mathcal N\bigl(\sqrt{1-\beta_t}\,x_{t-1},\;\beta_tI\bigr)
-$$
-	의 분산 $\beta_t$가 작아져서, 왼쪽 초록 그래프처럼 **매우 좁고 뾰족한 분포**가 된다. 
+$$    의 분산 $\beta_t$가 작아져서, 왼쪽 초록 그래프처럼 **매우 좁고 뾰족한 분포**가 된다. 
 - 이렇게 분포가 좁으면
     - “$x_t$가 이 흰 점에 관측됐을 때,  
         이전 값 $x_{t-1}$는 어디였을까?”를 구하는  
-        **posterior** $q(x_{t-1}\mid x_t)$가  
-        **더 뾰족하고 단일한 피크**를 가지게 돼서
+        **posterior** $q(x_{t-1}\mid x_t)$가 **더 뾰족하고 단일한 피크**를 가지게 돼서
     - <font color="#e36c09">역방향으로 “되돌리기”가 훨씬 <b>정확하고 안정적</b>이 되는 것이다!</font>
 
 즉, **짧게, 세세하게** 여러 스텝을 거칠수록  
