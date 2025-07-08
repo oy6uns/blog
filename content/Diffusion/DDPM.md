@@ -7,7 +7,7 @@ tags:
 >작은 sequence에서의 확산은 forward와 reverse **모두 가우시안**일 수 있다. <br>
   작은 공기 입자의 다음 위치는 가우시안 분포 안에서 결정될 수 있다.
 
-## forward process
+# forward process
 
 $$
 \mathcal{N}(x_t;\;\sqrt{1-\beta_t}x_{t-1}, \beta_tI) 
@@ -91,7 +91,7 @@ $$
 ![[스크린샷 2025-07-08 오후 12.57.18.png]]
 계속해서 노이즈를 더해나가서, 최종적으로 $q(x_T)$ 라는 [[Gaussian Noise]]가 나오게 된다. 
 
-## Backward Process
+# Backward Process
 이젠 노이즈를 걷어낼 차례이다. <br>
 ![[스크린샷 2025-07-08 오후 5.05.47.png]]
 - 흰점 $x_t$는 **“지금 우리가 보고 있는 $t$단계 샘플”** 이다. 
@@ -117,6 +117,18 @@ $$
 즉, **짧게, 세세하게** 여러 스텝을 거칠수록  
 각 스텝의 노이즈 주입량이 작아져 분포가 좁아지고,  
 결국 **“한 단계씩 복원” 하기가 쉬워진다**는 의미가 된다. 
+
+
+# Overall Step
+결과적으로, 
+![[스크린샷 2025-07-08 오후 5.53.44.png]]
+input 확률 분포 $q(x_0)$ (그림의 파란색 영역) 로 부터 
+> 확률 분포에 관한 내용은 [[Gaussian Noise]] 참고
+
+<font color="#e36c09">noise를 추가해가고(forward), noise를 다시 제거(backward)하는 과정을 통해 </font><br>
+기존의 확률 분포 $q(x_0)$로 돌아오는 것이 최종 목표이다. 
+
+
 
 
 
