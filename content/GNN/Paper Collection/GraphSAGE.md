@@ -107,7 +107,7 @@ GraphSAGE가 노드 임베딩을 생성할 때 "이웃 노드의 feature를 어�
 기존의 DeepWalk 방법은
 각 그래프마다 랜덤한 축에 단어 위치를 고정시켰다. 
 
-GraphSAGE는 이 대신에 <span style="background:rgba(208, 235, 166, 0.55)">임베딩 생성 함수 자체를 학습</span>한다. 
+GraphSAGE는 이 대신에 ==임베딩 생성 함수 자체를 학습==한다. 
 따라서, 새로운 그래프에 적용하는 것이 가능하다. **Aggregate하는 함수만 재사용**하기 때문에 **모든 그래프/노드에 대해 feature + neighborhood → 임베딩**을 “동일한 방식”으로 생성할 수 있다. 
 $$
 h_v^{(k)}​=σ(W^{(k)}⋅CONCAT(h_v{(k−1)}​,AGGREGATE({h_u^{(k−1)}​∣u∈N(v)})))

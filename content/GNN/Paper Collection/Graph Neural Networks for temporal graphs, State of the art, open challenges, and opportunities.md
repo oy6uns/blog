@@ -42,7 +42,7 @@ tags:
 # 6. 다양한 TGNN 방법론들
 ![[IMG-20250421202904.png]]
 ## 6.1 Snapshot-based Models
-**“Snapshot”**: <span style="background:rgba(205, 244, 105, 0.55)">일정한 시간 간격</span>으로 전체 그래프(노드/엣지/속성 등)의 스냅샷을 연속적으로 나열한다. 
+**“Snapshot”**: ==일정한 시간 간격==으로 전체 그래프(노드/엣지/속성 등)의 스냅샷을 연속적으로 나열한다. 
 - 대표적 예시: 하루/1시간마다 찍힌 전체 네트워크 상태
 ### 6.1.1 Model Evolution
 - **GNN 모델 파라미터 자체**를 시간에 따라 업데이트
@@ -57,7 +57,7 @@ $$h_{v(t_i)}=REC(h_v(t_{i-j}), \dots)$$
 	- [VGRNN](https://arxiv.org/pdf/1908.09710): 각 snapshot에서 VGAE → 이후, 임베딩을 LSTM등으로 진화
 
 ## 6.2 Event-based Models 
-**“Event”**: <span style="background:rgba(205, 244, 105, 0.55)">개별 노드/엣지의 생성/삭제/변화의 ‘이벤트’ 단위</span>로 시간 정보를 다룬다. 
+**“Event”**: ==개별 노드/엣지의 생성/삭제/변화의 ‘이벤트’ 단위==로 시간 정보를 다룬다. 
 - 즉, 스냅샷 없이 한 번에 한 이벤트씩 흐름을 추적
 - 더 미세한/비정규 시간 단위 동적성을 표현
 ### 6.2.1 Temporal Embedding Methods

@@ -5,14 +5,15 @@ tags:
   - Temporal_Graphs
   - Surver_Paper
 ---
+> TGB 2.0, A Benchmark for Learning on Temporal Knowledge Graphs and Heterogeneous Graphs <br>
 > [paper link](https://www.arxiv.org/pdf/2406.09639)
 
 # Abstact
 - Multi-relational temporal graphs는 실제 데이터를 모델링할 때 매우 유용하며, 시간에 따라 변화하는 Entity들의 복잡한 상호작용을 잘 포착한다. 
-- 여러 새로운 ML 모델이 제안되고 있지만, <span style="background:#d3f8b6">대규모이고, 표준화된 벤치마크 데이터셋, 그리고 신뢰성 있는 평가 방법의 부족</span>으로 인해 연구 발전에 제약이 있다. 
+- 여러 새로운 ML 모델이 제안되고 있지만, **대규모이고, 표준화된 벤치마크 데이터셋, 그리고 신뢰성 있는 평가 방법의 부족**으로 인해 연구 발전에 제약이 있다. 
 ### Contribution
 **Temporal Graph Benchmark 2.0(TGB 2.0)** 을 제안한다. 
-- <span style="background:#d3f8b6">Temporal Knowledge Graph(TKG)</span> 및 <span style="background:#d3f8b6">Temporal Heterogeneous Graph(THG)</span> 상에서 <span style="background:#d3f8b6">link prediction을 평가</span>하는 데 특화된 벤치마킹 프레임워크이다. 
+- ==Temporal Knowledge Graph(TKG)== 및 ==Temporal Heterogeneous Graph(THG)==상에서 link prediction을 평가하는 데 특화된 벤치마킹 프레임워크이다. 
 - TGB 2.0은 **8개의 새로운 대규모 데이터셋**(최대 5300만 개의 엣지 포함, 5개 도메인에 걸침)을 제공하며, 기존 데이터셋보다 훨씬 크다. 
 - 단순히 임의의 음성(negative) 샘플이 아니라 edge(relation) type까지 고려해 음성 샘플을 생성하여 현실적 난이도를 갖추었다. 
 ### 실험을 통해 얻은 insight
@@ -50,12 +51,12 @@ Obama  --[president_of, 2009]-->  USA
 - TGB 2.0은 **Forecasting 문제를 중점적으로 다룸**
 
 ## Time Representations
-1. <span style="background:#d3f8b6">Discrete(불연속/스냅샷)</span> 방식:
+1. ==Discrete(불연속/스냅샷)== 방식:
 	- 시간별로 그래프의 전체 상태(스냅샷)가 주어짐. 
-	- <span style="background:#d3f8b6">주로 TKG에서 사용</span>
-2. <span style="background:#d3f8b6">Continuous(연속)</span> 방식:
+	- **주로 TKG에서 사용**
+2. ==Continuous(연속)== 방식:
 	- 엣지(행동/관계)가 정확한 시점(초 단위 등)에 일어남. 
-	- <span style="background:#d3f8b6">주로 THG에서 사용</span>
+	- **주로 THG에서 사용**
 	- 더 많은 정보를 보존 가능하다. (필요시 불연속으로 변환도 됨)
 
 
@@ -91,10 +92,10 @@ THG 예측 방법들은 시간 표현 방식에 따라 분류된다.
 ## 3. Graph Learning Benchmarks
 최근에는 **OGB(Open Graph Benchmark)** 나 **TGB(Temporal Graph Benchmark)** 등,  
 큰 규모의 다양한 벤치마크가 연구 커뮤니티에 큰 영향을 미치는 추세이다.
-- OGB: <span style="background:#d3f8b6">정적</span>(시간 없는) 그래프 기준
-- TGB: 시간 정보는 있으나, <span style="background:#d3f8b6">대부분 단일 관계(엣지 타입이 하나뿐)</span>
+- OGB: ==정적==(시간 없는) 그래프 기준
+- TGB: 시간 정보는 있으나, ==대부분 단일 관계(엣지 타입이 하나뿐)==
 → **TGB 2.0의 차별점:**  
-    → “진짜 현실에서처럼 <span style="background:#d3f8b6">다중 관계</span>+시간+대규모 데이터”를 한 번에 다룬다!
+    → “진짜 현실에서처럼 ==다중 관계==+시간+대규모 데이터”를 한 번에 다룬다!
 
 # 4. Datasets
 ![[스크린샷 2025-05-07 오후 1.41.48.png]]
@@ -128,12 +129,12 @@ THG 예측 방법들은 시간 표현 방식에 따라 분류된다.
 
 ![[스크린샷 2025-05-07 오후 2.14.29.png]]
 ### TKG vs. THG 
-- TKG(지식그래프): coarse(연 단위) 단위라 한 시점에 이벤트 수 많음, <span style="background:#d3f8b6">과거에는 적고 최근으로 갈수록 더 많아짐(=디지털화 진행)</span>
-- THG(이종 그래프): 초 단위로 매우 세분화, 한 시점당 이벤트 수가 적고, <span style="background:#d3f8b6">특정 시간대에만 급증(피크) 등 고유한 패턴</span>
+- TKG(지식그래프): coarse(연 단위) 단위라 한 시점에 이벤트 수 많음, ==과거에는 적고 최근으로 갈수록 더 많아짐(=디지털화 진행)==
+- THG(이종 그래프): 초 단위로 매우 세분화, 한 시점당 이벤트 수가 적고, ==특정 시간대에만 급증(피크) 등 고유한 패턴==
 
 # 5. Experiments 
 ## 1) Evaluation Protocol
-미래에 어떤 관계(Link)가 나타날지 예측, <span style="background:#d3f8b6">'정답이 위쪽에 오도록'</span> 랭킹을 매김
+미래에 어떤 관계(Link)가 나타날지 예측, =='정답이 위쪽에 오도록'== 랭킹을 매김
 ### 평가 지표(Metric)
 MRR(Mean Reciprocal Rank)
 - 정답이 리스트에서 몇 번째에 나오는지의 역수를 평균 내는 지표 (1등이면 1, 2등이면 0.5, 3등이면 0.33 ...)
@@ -161,7 +162,7 @@ MRR(Mean Reciprocal Rank)
     - **특정 환경(특히 반복 많은 데이터)** 에서는 복잡한 모델도 단순 휴리스틱보다 크게 나아지지 않거나 거의 비슷함
     - EdgeBank는 멀티-관계 정보 안 쓸 때 성능이 낮아지고
     - 대형 데이터셋(tkgl-wikidata 등)은 **EdgeBank**만 동작, 나머지는 메모리·시간 초과 → 확장성 문제 심각!
-    - Recurrency Degree(관계의 반복이 많을수록) 성능이 좋고, <span style="background:#d3f8b6">반복이 적은 관계에서는 개선 여지가 많음</span>
+    - Recurrency Degree(관계의 반복이 많을수록) 성능이 좋고, ==반복이 적은 관계에서는 개선 여지가 많음==
 
 #### **(2) THG 실험**
 - 비교 모델:
