@@ -6,10 +6,10 @@ $$
 $$
 다르게 말하면, “**모델 $p_\theta$가 관측된 $x$를 얼마나 잘 설명하느냐”를 수치화**한 것으로 볼 수 있다. <br>
 <br>![[스크린샷 2025-07-09 오후 1.54.22.png]]
-그림과 같이 $x_0$를 관측할 확률 $p_\theta(x_0)$은, **이전 단계에서 $x_0$로 오는 모든 가능한 trajectory(from latent $z$)를 marginalize**해야지 구할 수 있다. <br>
-왜 Generative Model은 $p_\theta(x)$를 배워야할까? [[Discrimininative vs. Generative]]
-<br><br>
-그러나, **가능한 전 영역을 적분한다는 건 불가능**하다.
+그림과 같이 $x_0$를 관측할 확률 $p_\theta(x_0)$은, **이전 단계에서 $x_0$로 오는 모든 가능한 trajectory(from latent $z$)를 marginalize**해야지 구할 수 있다.
+>왜 Generative Model은 $p_\theta(x)$를 배워야할까? [[Discrimininative vs. Generative]]
+
+<br>그러나, **가능한 전 영역을 적분한다는 건 불가능**하다.
 <br>
 <b><font color="#e36c09">그렇기에,</font></b> $p_\theta(x_0)$<b><font color="#e36c09">의 Lower Bound를 아래와 같이 Maximize한다. </font></b>
 
