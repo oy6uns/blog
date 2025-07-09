@@ -55,7 +55,7 @@ $$
 \underbrace{D_{\mathrm{KL}}\bigl(q(z\mid x)\,\|\,p(z)\bigr)}_{(B)}.
 $$
 ## (A), (B)가 갖는 의미
-### (A): Reconstruction Error
+### (A): Reconstruction Loss
 > reconstruction 성능을 높이는 항
 
 $\mathbb{E}_{q(z\mid x)}\bigl[\log p_\theta(x\mid z)\bigr]$는
@@ -64,7 +64,7 @@ $\mathbb{E}_{q(z\mid x)}\bigl[\log p_\theta(x\mid z)\bigr]$는
 
 쉽게 말해, **“우리 샘플링 방식으로 뽑은 latent variable $z$로 모델이 $x$를 잘 생성하느냐”** 를 측정한다!
 
-### (B): Regularization Error
+### (B): Regularization Loss
 > 샘플링 분포가 사전분포를 벗어나지 않도록 견제하는 항
 
 $D_{KL}​(q(z∣x)∥p(z))$는
@@ -73,6 +73,50 @@ $D_{KL}​(q(z∣x)∥p(z))$는
 - 값이 커지면 “$q$가 prior 밖으로 너무 튀어 나갔다”는 뜻이니,
 - 이 항을 최소화함으로써 **“$q$가 prior 범위 안에서 안정적으로 머물도록”** 억제하는 역할을 한다!
 
+
+## 다시 ELBO로 돌아가서,
+ELBO 식에서 잠재 변수 $z$를 확산 과정의 $x_{1:T}$​로, 관측 변수 $x$를 $x_0$​로 치환하면 다음과 같이 쓸 수 있다.
+$$
+\mathbb{E}_{\,q(x_{1:T}\mid x_0)}\bigl[\log p_\theta(x_0\mid x_{1:T})\bigr]
+\;-\;
+D_{\mathrm{KL}}\!\bigl(q(x_{1:T}\mid x_0)\,\|\,p_\theta(x_{1:T})\bigr)
+$$
+앞의 기댓값을 $\mathbb{E}_q$​로 간략히 표기하고, 뒤 항을 KL Divergence 형태의 기댓값으로 풀어쓰면,
+$$
+\mathbb{E}_q\bigl[\log p_\theta(x_0 \mid x_{1:T})\bigr]
+\;-\;
+\mathbb{E}_q\!\Bigl[\log \frac{q(x_{1:T}\mid x_0)}{p_\theta(x_{1:T})}\Bigr]
+$$
+
+> [!Note]- 이후 논문 수식 (18) 까지 유도
+> $$
+> \mathbb{E}_q\bigl[\log p_\theta(x_0 \mid x_{1:T})\bigr]
+\;+\;
+\log \frac{p_\theta(x_{1:T})}{q(x_{1:T}\mid x_0)}
+> $$
+> $$
+> =
+\mathbb{E}_q\;\!\Bigl[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T}\mid x_0)}\Bigr]
+> $$
+> $$
+> =
+\mathbb{E}_q\;\!\Bigl[\log p(x_T)
+\;+\;
+\sum_{t=1}^T \log \frac{p_\theta(x_{t-1}\mid x_t)}{q(x_t\mid x_{t-1})}\Bigr]
+> $$
+> 나머지 수식은 [paper link](https://www.notion.so/Diffusion-22bc798859de8046ac19d6da3288e984?source=copy_link) 참고
+
+결과적으로 
+$$
+\mathbb{E}_q\Bigl[
+-\,D_{\mathrm{KL}}\bigl(q(x_T\mid x_0)\,\|\,p(x_T)\bigr)
+\;-\;
+\sum_{t>1}D_{\mathrm{KL}}\bigl(q(x_{t-1}\mid x_t,x_0)\,\|\,p_\theta(x_{t-1}\mid x_t)\bigr)
+\;+\;
+\log p_\theta(x_0\mid x_1)
+\Bigr]
+$$
+위와 같은 수식으로 정리된다. 
 
 
 
