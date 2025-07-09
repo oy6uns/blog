@@ -2,7 +2,7 @@
 위 식을 보면 
 $q(x_0)$가 나온다. <br>
 
-사실상 Diffusion Process에서 특정 step의 분포 자체는 사용할 일이 없고, 조건부 분포만 사용한다. <br>
+사실상 Diffusion Process에서 forward step의 분포 자체는 사용할 일이 없고, 조건부 분포만 사용한다. <br>
 
 그럼에도 계산을 해보자면, <br>
 $q(x_1)$ 은 Noising 한 스텝 이후의 “원본 값별 조건부 노이즈 분포”를 **원본 분포로 가중합(적분)** 한 마진(marginal) 분포이다. 
