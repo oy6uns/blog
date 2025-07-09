@@ -15,6 +15,7 @@ Diffusion은 크게 2가지(**forward process, backward process**)로 구성된�
 위의 2번째 그림에 나와있듯이 노이즈를 추가하는 forward process는 단순히 노이즈를 이미지에 추가만 하면 되기에 따로 학습할 필요가 없고, 우리가 <b><font color="#e36c09">초점을 맞출 부분은 노이즈를 없애는 backward process(denoising)</font></b>이다. 
 
 # forward process
+> 노이즈를 점진적으로 추가해보자!
 
 $$
 \mathcal{N}(x_t;\;\sqrt{1-\beta_t}x_{t-1}, \beta_tI) 
@@ -99,7 +100,8 @@ $$
 계속해서 노이즈를 더해나가면, 최종적으로 $q(x_T)$ 라는 [[Gaussian Noise]]가 나오게 된다. 
 
 # Backward Process
-이젠 노이즈를 걷어낼 차례이다. <br>
+>이젠 노이즈를 걷어낼 차례이다! 
+
 ![[스크린샷 2025-07-08 오후 5.05.47.png]]
 - 흰점 $x_t$는 **“지금 우리가 보고 있는 $t$단계 샘플”** 이다. 
 - 녹색 곡선은 **“노이즈를 뿌린 뒤 $t-1$단계에서 나올 수 있는 값들의 전반적인 분포”** 이다. 
@@ -109,8 +111,7 @@ $$
 ![[스크린샷 2025-07-08 오후 5.45.08.png]]
 왜 time step을 작게 가져가야 할까?
 - **시간(step) 간격이 작다**는 건, 각 단계에서 섞는 노이즈 $\beta_t$​가 **매우 작다**는 뜻이다. 
-- 그러면
-$$
+- 그러면$$
 q(x_t\mid x_{t-1})=\mathcal N\bigl(\sqrt{1-\beta_t}\,x_{t-1},\;\beta_tI\bigr)
 $$    의 분산 $\beta_t$가 작아져서, 왼쪽 초록 그래프처럼 **매우 좁고 뾰족한 분포**가 된다. 
 - 이렇게 분포가 좁으면
@@ -131,10 +132,9 @@ input 확률 분포 $q(x_0)$ (그림의 파란색 영역) 로 부터
 > 확률 분포에 관한 내용은 [[Gaussian Noise]] 참고
 
 <font color="#e36c09">noise를 추가해가고(forward), noise를 다시 제거(backward)하는 과정을 통해 </font><br>
-기존의 확률 분포 $q(x_0)$로 돌아오는 것이 최종 목표이다. 
-
-
-
+기존의 확률 분포 $q(x_0)$로 돌아오는 것이최종 Goal이다. <br><br>
+그러면 잘 돌아오게끔 어떻게 유도할 수 있을까?
+> [[Variational Lower Bound]]
 
 
 
@@ -143,5 +143,6 @@ input 확률 분포 $q(x_0)$ (그림의 파란색 영역) 로 부터
 #### References
 1. https://www.youtube.com/watch?v=uFoGaIVHfoE
 2. https://www.youtube.com/watch?v=fbLgFrlTnGU
+3. https://wikidocs.net/275557
 
 
