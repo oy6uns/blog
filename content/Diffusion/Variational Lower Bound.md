@@ -33,3 +33,7 @@ $$
 \;\ge\;
 \mathbb{E}_{q(z\mid x)}\;\!\!\Bigl[\log \tfrac{p_\theta(x,z)}{q(z\mid x)}\Bigr]
 $$
+
+
+### References
+1. 
