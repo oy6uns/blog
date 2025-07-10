@@ -137,7 +137,7 @@ input 확률 분포 $q(x_0)$ (그림의 파란색 영역) 로 부터
 <font color="#e36c09">noise를 추가해가고(forward), noise를 다시 제거(backward)하는 과정을 통해 </font><br>
 기존의 확률 분포 $q(x_0)$로 돌아오는 것이최종 Goal이다. <br><br>
 그러면 잘 돌아오게끔 어떻게 유도할 수 있을까?
-> [[Variational Lower Bound]]
+> [[ELBO (Evidence Lower Bound)]]
 
 
 

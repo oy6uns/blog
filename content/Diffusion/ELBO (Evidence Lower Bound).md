@@ -87,17 +87,17 @@ $$
 \;-\;
 \mathbb{E}_q\!\Bigl[\log \frac{q(x_{1:T}\mid x_0)}{p_\theta(x_{1:T})}\Bigr]
 $$
-
-> [!Note]- 이후 논문 수식 (18) 까지 유도
-> $$
-> \mathbb{E}_q\bigl[\log p_\theta(x_0 \mid x_{1:T})\bigr]
+$$
+\mathbb{E}_q\bigl[\log p_\theta(x_0 \mid x_{1:T})\bigr]
 \;+\;
 \log \frac{p_\theta(x_{1:T})}{q(x_{1:T}\mid x_0)}
-> $$
-> $$
-> =
+$$
+$$
+=
 \mathbb{E}_q\;\!\Bigl[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T}\mid x_0)}\Bigr]
-> $$
+$$
+
+> [!Note]- 이후 논문 수식 (21) 까지 유도
 > $$
 > =
 \mathbb{E}_q\;\!\Bigl[\log p(x_T)
@@ -118,9 +118,15 @@ $$
 $$
 위와 같은 수식으로 정리된다. 
 
+이 값을 Maximize하는 것이 최종 목표이다. <br>DDPM에서는 이 <font color="#e36c09">ELBO의 음수(-ELBO)를 loss</font>로 보고, <font color="#e36c09">이를 Minimize하는 것을 목표</font>로 한다. 
+
+![[스크린샷 2025-07-10 오후 3.13.16.png]]
+
+
 
 
 ### References
 1. https://xoft.tistory.com/30
 2. https://www.youtube.com/watch?v=fbLgFrlTnGU
 3. https://heygeronimo.tistory.com/39
+4. https://viplab.snu.ac.kr/viplab/courses/mlvu_2025_1/index.html
