@@ -104,7 +104,7 @@ $$
 \;+\;
 \sum_{t=1}^T \log \frac{p_\theta(x_{t-1}\mid x_t)}{q(x_t\mid x_{t-1})}\Bigr]
 > $$
-> 나머지 수식은 [paper link](https://www.notion.so/Diffusion-22bc798859de8046ac19d6da3288e984?source=copy_link) 참고
+> 나머지 수식은 [수식 정리 링크](https://www.notion.so/Diffusion-22bc798859de8046ac19d6da3288e984?source=copy_link) 참고
 
 결과적으로 
 $$
