@@ -1,3 +1,9 @@
+---
+date: 2025-07-09
+created: 2025-07-09
+modified: 2025-07-10
+---
+
 Likelihood는 ‘어떤 일이 일어날 가능성’을 나타낸다. <br>
 더 정확히 말하면 관측된 사건이 고정된 상태에서, 확률 분포가 변할 때(=확률 분포를 모를 때 = 가정할 때), 확률을 표현하는 단어이다. <br><br>
 즉, 어떠한 관측값 $x$이 주어질 때, 변화되는 확률 분포 $p(\theta)$에서 주어진 관측값이 나올 확률이다. 
@@ -11,7 +17,8 @@ $$
 
 <br>그러나, **가능한 전 영역을 적분한다는 건 불가능**하다.
 <br>
-<b><font color="#e36c09">그렇기에,</font></b> $p_\theta(x_0)$<b><font color="#e36c09">의 Lower Bound를 아래와 같이 Maximize한다. </font></b>
+직접 계산하기 어려운 모델의 사후 분포 $p(z|x)$를 계산하기 편한 분포 $q(z|x)$로 근사해서 다룬다. 이를, <b><font color="#e36c09">Varaiational Inference</font></b>라고 한다. <br>
+$p_\theta(x_0)$<b><font color="#e36c09">의 Lower Bound는 아래와 같이 Maximize한다. </font></b>
 
 ## ELBO (Evidence Lower Bound)
 $$
@@ -114,7 +121,6 @@ $$
 이 값을 Maximize하는 것이 최종 목표이다. <br>DDPM에서는 이 <font color="#e36c09">ELBO의 음수(-ELBO)를 loss</font>로 보고, <font color="#e36c09">이를 Minimize하는 것을 목표</font>로 한다. 
 
 ![[스크린샷 2025-07-10 오후 3.13.16.png]]
-
 
 
 

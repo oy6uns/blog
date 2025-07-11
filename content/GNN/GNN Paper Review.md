@@ -1,3 +1,9 @@
+---
+date: 2025-05-06
+created: 2025-05-06
+modified: 2025-07-08
+---
+
 ## Basic GNN
 1. GCN 
 	[[GCN의 수식적 이해]]

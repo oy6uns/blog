@@ -1,6 +1,9 @@
 ---
 tags:
   - Diffusion
+date: 2025-07-08
+created: 2025-07-08
+modified: 2025-07-10
 ---
 
 > [!idea] Idea
