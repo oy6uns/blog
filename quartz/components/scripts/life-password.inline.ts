@@ -58,7 +58,7 @@
     }
     
     function showPasswordPrompt() {
-        console.log('🚀 showPasswordPrompt called');
+        console.log('showPasswordPrompt called');
         
         // 이미 암호 창이 있으면 리턴
         if (document.getElementById('password-protection')) {
