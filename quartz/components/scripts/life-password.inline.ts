@@ -1,6 +1,7 @@
 // Life 폴더 암호 보호
 (function() {
     let passwordProtectionActive = false;
+    let checkInterval;
     
     function checkAndProtectLifePage() {
         const currentPath = window.location.pathname;
@@ -14,7 +15,7 @@
             console.log('❌ Not a Life page, skipping password protection');
             // Life 페이지가 아니면 기존 보호 제거
             removePasswordProtection();
-            return;
+            return false;
         }
         
         console.log('✅ Life page detected!');
@@ -26,16 +27,17 @@
         if (hasAccess) {
             console.log('✅ Already authenticated, skipping');
             removePasswordProtection();
-            return;
+            return false;
         }
         
         if (passwordProtectionActive) {
             console.log('🔒 Password protection already active');
-            return;
+            return true;
         }
         
         console.log('🔒 Need authentication, showing password prompt');
         showPasswordPrompt();
+        return true;
     }
     
     function removePasswordProtection() {
@@ -223,8 +225,21 @@
     // 전역 함수로 등록
     (window as any).validateLifePassword = validateLifePassword;
     
-    // 초기 실행 (페이지 로드 시)
+    // 즉시 실행 (스크립트 로드와 함께)
+    console.log('🚀 Life password script loaded, immediate check...');
     checkAndProtectLifePage();
+    
+    // 조금 후 재실행 (DOM 요소가 준비될 시간 확보)
+    setTimeout(() => {
+        console.log('⏱️ Delayed check after script load...');
+        checkAndProtectLifePage();
+    }, 10);
+    
+    // 더 늦은 시점에도 실행
+    setTimeout(() => {
+        console.log('⏱️ Second delayed check...');
+        checkAndProtectLifePage();
+    }, 100);
     
     // DOM이 완전히 로드된 후에도 실행
     if (document.readyState === 'loading') {
@@ -270,4 +285,39 @@
         console.log('🔄 ReplaceState detected, checking Life page...');
         setTimeout(checkAndProtectLifePage, 100);
     };
+    
+    // 페이지 내용 변경 감지 (MutationObserver)
+    const observer = new MutationObserver(() => {
+        // 너무 자주 실행되지 않도록 디바운스
+        clearTimeout((window as any).lifePageCheckTimeout);
+        (window as any).lifePageCheckTimeout = setTimeout(() => {
+            console.log('🔍 DOM mutation detected, checking Life page...');
+            checkAndProtectLifePage();
+        }, 200);
+    });
+    
+    // body의 변경사항 감지
+    if (document.body) {
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    } else {
+        // body가 아직 없으면 DOM 로드 후 시작
+        document.addEventListener('DOMContentLoaded', () => {
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    }
+    
+    // 지속적인 체크 (2초마다 - Life 페이지일 때만)
+    checkInterval = setInterval(() => {
+        const isLifePage = /\/[Ll]ife($|\/)/i.test(window.location.pathname);
+        if (isLifePage) {
+            console.log('⏰ Periodic check for Life page...');
+            checkAndProtectLifePage();
+        }
+    }, 2000);
 })();

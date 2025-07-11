@@ -61,8 +61,8 @@ function getComponentResources(ctx: BuildCtx): ComponentResources {
 
   return {
     css: [...componentResources.css],
-    beforeDOMLoaded: [...componentResources.beforeDOMLoaded, lifePasswordScript],
-    afterDOMLoaded: [...componentResources.afterDOMLoaded],
+    beforeDOMLoaded: [...componentResources.beforeDOMLoaded],
+    afterDOMLoaded: [...componentResources.afterDOMLoaded, lifePasswordScript],
   }
 }
 
