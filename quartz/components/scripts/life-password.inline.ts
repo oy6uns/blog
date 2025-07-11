@@ -45,12 +45,14 @@
         }
         passwordProtectionActive = false;
         
-        // 콘텐츠 표시
+        // 콘텐츠 블러 제거
         const elements = document.querySelectorAll('body > *:not(#password-protection)');
         elements.forEach(el => {
             const element = el as HTMLElement;
-            if (element.style && element.style.display === 'none') {
-                element.style.display = '';
+            if (element.style) {
+                element.style.filter = '';
+                element.style.pointerEvents = '';
+                element.style.userSelect = '';
             }
         });
     }
@@ -67,15 +69,17 @@
         passwordProtectionActive = true;
         console.log('✅ Setting passwordProtectionActive to true');
         
-        // 페이지의 모든 콘텐츠 숨기기 (더 포괄적으로)
+        // 페이지 콘텐츠를 블러 처리
         const bodyChildren = document.querySelectorAll('body > *');
         console.log('🔍 Found', bodyChildren.length, 'body children');
         
         bodyChildren.forEach(el => {
             const element = el as HTMLElement;
             if (element.tagName !== 'SCRIPT' && element.tagName !== 'STYLE' && element.style) {
-                element.style.display = 'none';
-                console.log('🙈 Hiding element:', element.tagName, element.className);
+                element.style.filter = 'blur(5px)';
+                element.style.pointerEvents = 'none';
+                element.style.userSelect = 'none';
+                console.log('🌫️ Blurring element:', element.tagName, element.className);
             }
         });
         
@@ -85,64 +89,80 @@
         passwordDiv.innerHTML = `
             <div style="
                 position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: white;
+                padding: 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+                max-width: 350px;
+                width: 90%;
                 z-index: 9999;
+                border: 2px solid #007bff;
+                animation: slideDown 0.3s ease-out;
             ">
-                <div style="
-                    background: white;
-                    padding: 2rem;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                    max-width: 400px;
-                    width: 90%;
-                ">
-                    <h2 style="margin-bottom: 1rem; color: #333;">🔒 보호된 콘텐츠</h2>
-                    <p style="margin-bottom: 1.5rem; color: #666;">
-                        이 페이지는 암호로 보호되어 있습니다.
+                <style>
+                    @keyframes slideDown {
+                        from {
+                            opacity: 0;
+                            transform: translateX(-50%) translateY(-20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateX(-50%) translateY(0);
+                        }
+                    }
+                </style>
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔐</div>
+                    <h3 style="margin: 0; color: #333; font-size: 1.1rem;">Life 폴더 접근</h3>
+                    <p style="margin: 0.5rem 0 0; color: #666; font-size: 0.9rem;">
+                        비밀번호를 입력해주세요
                     </p>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
                     <input 
                         type="password" 
                         id="password-input" 
-                        placeholder="암호를 입력하세요"
+                        placeholder="암호"
                         style="
-                            width: 100%;
-                            padding: 0.75rem;
+                            flex: 1;
+                            padding: 0.6rem;
                             border: 1px solid #ddd;
-                            border-radius: 4px;
-                            margin-bottom: 1rem;
-                            font-size: 1rem;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
                             box-sizing: border-box;
+                            outline: none;
+                            transition: border-color 0.2s;
                         "
                     />
                     <button 
                         id="password-submit-btn"
                         style="
-                            width: 100%;
-                            padding: 0.75rem;
+                            padding: 0.6rem 1rem;
                             background: #007bff;
                             color: white;
                             border: none;
-                            border-radius: 4px;
-                            font-size: 1rem;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
                             cursor: pointer;
+                            transition: background 0.2s;
                         "
+                        onmouseover="this.style.background='#0056b3'"
+                        onmouseout="this.style.background='#007bff'"
                     >
                         확인
                     </button>
-                    <div id="password-error" style="
-                        color: #dc3545;
-                        margin-top: 1rem;
-                        display: none;
-                    ">
-                        잘못된 암호입니다.
-                    </div>
+                </div>
+                <div id="password-error" style="
+                    color: #dc3545;
+                    margin-top: 0.8rem;
+                    display: none;
+                    font-size: 0.8rem;
+                    text-align: center;
+                ">
+                    ❌ 잘못된 암호입니다
                 </div>
             </div>
         `;
