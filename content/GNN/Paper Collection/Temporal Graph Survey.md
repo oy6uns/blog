@@ -6,7 +6,7 @@ tags:
   - Surver_Paper
 date: 2025-04-21
 created: 2025-04-21
-modified: 2025-07-08
+modified: 2025-04-21
 ---
 > Graph Neural Networks for temporal graphs, State of the art, open challenges, and opportunities<br>
 > [paper link](https://arxiv.org/pdf/2302.01018)

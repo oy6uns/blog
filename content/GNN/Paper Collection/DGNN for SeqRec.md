@@ -6,7 +6,7 @@ tags:
   - Sequential
 date: 2025-05-21
 created: 2025-05-21
-modified: 2025-07-08
+modified: 2025-05-21
 ---
 > Dynamic Graph Neural Networks for Sequential Recommendation (TKDE ‘22)
 > https://arxiv.org/pdf/1609.02907

@@ -1,7 +1,7 @@
 ---
 date: 2025-07-09
 created: 2025-07-09
-modified: 2025-07-10
+modified: 2025-07-09
 ---
 
 왜 **“Generative” 모델**은 $p_\theta(x)$를 통째로 배워야할까?

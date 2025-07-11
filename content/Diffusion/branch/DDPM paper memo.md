@@ -1,3 +1,10 @@
+---
+date: 2025-07-10
+created: 2025-07-10
+modified: 2025-07-10
+tags:
+  - Diffusion
+---
 - parameterized Markov chain trained using variational inference
 - Transition of this chain are learned to reverse a diffusion preocess
 - **Markov chain gradually adds noise** to the data opposite direction of sampling

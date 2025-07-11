@@ -4,7 +4,7 @@ tags:
   - "#GCN"
 date: 2025-04-23
 created: 2025-04-23
-modified: 2025-07-08
+modified: 2025-04-23
 ---
 > Semi-Supervised Classification with Graph Convolutional Networks (ICLR ‘17)
 > https://arxiv.org/pdf/1609.02907

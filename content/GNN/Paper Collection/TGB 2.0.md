@@ -6,7 +6,7 @@ tags:
   - Surver_Paper
 date: 2025-05-06
 created: 2025-05-06
-modified: 2025-07-08
+modified: 2025-05-06
 ---
 > TGB 2.0, A Benchmark for Learning on Temporal Knowledge Graphs and Heterogeneous Graphs <br>
 > [paper link](https://www.arxiv.org/pdf/2406.09639)
