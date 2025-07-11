@@ -5,6 +5,8 @@ import { QuartzEmitterPlugin } from "../types"
 import spaRouterScript from "../../components/scripts/spa.inline"
 // @ts-ignore
 import popoverScript from "../../components/scripts/popover.inline"
+// @ts-ignore
+import lifePasswordScript from "../../components/scripts/life-password.inline"
 import styles from "../../styles/custom.scss"
 import popoverStyle from "../../components/styles/popover.scss"
 import { BuildCtx } from "../../util/ctx"
@@ -59,7 +61,7 @@ function getComponentResources(ctx: BuildCtx): ComponentResources {
 
   return {
     css: [...componentResources.css],
-    beforeDOMLoaded: [...componentResources.beforeDOMLoaded],
+    beforeDOMLoaded: [...componentResources.beforeDOMLoaded, lifePasswordScript],
     afterDOMLoaded: [...componentResources.afterDOMLoaded],
   }
 }
