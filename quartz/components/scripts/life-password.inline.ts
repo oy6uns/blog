@@ -48,23 +48,34 @@
         // 콘텐츠 표시
         const elements = document.querySelectorAll('body > *:not(#password-protection)');
         elements.forEach(el => {
-            if ((el as HTMLElement).style.display === 'none') {
-                (el as HTMLElement).style.display = '';
+            const element = el as HTMLElement;
+            if (element.style && element.style.display === 'none') {
+                element.style.display = '';
             }
         });
     }
     
     function showPasswordPrompt() {
+        console.log('🚀 showPasswordPrompt called');
+        
         // 이미 암호 창이 있으면 리턴
-        if (document.getElementById('password-protection')) return;
+        if (document.getElementById('password-protection')) {
+            console.log('❌ Password protection already exists');
+            return;
+        }
         
         passwordProtectionActive = true;
+        console.log('✅ Setting passwordProtectionActive to true');
         
         // 페이지의 모든 콘텐츠 숨기기 (더 포괄적으로)
         const bodyChildren = document.querySelectorAll('body > *');
+        console.log('🔍 Found', bodyChildren.length, 'body children');
+        
         bodyChildren.forEach(el => {
-            if (el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE') {
-                (el as HTMLElement).style.display = 'none';
+            const element = el as HTMLElement;
+            if (element.tagName !== 'SCRIPT' && element.tagName !== 'STYLE' && element.style) {
+                element.style.display = 'none';
+                console.log('🙈 Hiding element:', element.tagName, element.className);
             }
         });
         
@@ -137,12 +148,14 @@
         `;
         
         document.body.appendChild(passwordDiv);
+        console.log('✅ Password modal added to body');
         
         // 이벤트 리스너 추가
         const input = document.getElementById('password-input');
         const submitBtn = document.getElementById('password-submit-btn');
         
         if (input && submitBtn) {
+            console.log('✅ Found input and submit button');
             // 버튼 클릭 이벤트
             submitBtn.addEventListener('click', validateLifePassword);
             
@@ -154,7 +167,12 @@
             });
             
             // 포커스
-            setTimeout(() => input.focus(), 100);
+            setTimeout(() => {
+                (input as HTMLInputElement).focus();
+                console.log('✅ Input focused');
+            }, 100);
+        } else {
+            console.log('❌ Could not find input or submit button');
         }
         
         console.log('🔒 Password prompt created and shown');
