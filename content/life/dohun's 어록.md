@@ -25,5 +25,5 @@
 ## 4/24(목)
 ![[Pasted image 20250424151719.png]]
 
-his heart~
+his heart~~
 
