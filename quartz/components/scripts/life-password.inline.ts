@@ -223,12 +223,51 @@
     // 전역 함수로 등록
     (window as any).validateLifePassword = validateLifePassword;
     
-    // 초기 실행
+    // 초기 실행 (페이지 로드 시)
     checkAndProtectLifePage();
+    
+    // DOM이 완전히 로드된 후에도 실행
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('📄 DOM loaded, checking Life page...');
+            setTimeout(checkAndProtectLifePage, 50);
+        });
+    } else {
+        // DOM이 이미 로드된 경우 즉시 실행
+        setTimeout(checkAndProtectLifePage, 50);
+    }
+    
+    // 윈도우 로드 완료 후에도 실행 (이미지 등 모든 리소스 로드 후)
+    window.addEventListener('load', () => {
+        console.log('🌍 Window loaded, checking Life page...');
+        setTimeout(checkAndProtectLifePage, 100);
+    });
     
     // Quartz SPA 네비게이션 대응
     document.addEventListener('nav', () => {
         console.log('🔄 Navigation detected, checking Life page...');
         setTimeout(checkAndProtectLifePage, 100);
     });
+    
+    // 브라우저의 뒤로 가기/앞으로 가기 버튼 대응
+    window.addEventListener('popstate', () => {
+        console.log('⬅️ Popstate detected, checking Life page...');
+        setTimeout(checkAndProtectLifePage, 100);
+    });
+    
+    // URL 변경 감지 (pushState, replaceState 감지)
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+    
+    history.pushState = function(...args) {
+        originalPushState.apply(this, args);
+        console.log('📍 PushState detected, checking Life page...');
+        setTimeout(checkAndProtectLifePage, 100);
+    };
+    
+    history.replaceState = function(...args) {
+        originalReplaceState.apply(this, args);
+        console.log('🔄 ReplaceState detected, checking Life page...');
+        setTimeout(checkAndProtectLifePage, 100);
+    };
 })();
