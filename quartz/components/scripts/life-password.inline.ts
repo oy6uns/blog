@@ -7,8 +7,16 @@
         const currentPath = window.location.pathname;
         console.log('🔍 Current path:', currentPath);
         
-        // Life 폴더 경로 확인 (더 정확한 패턴 매칭)
+        // ===== URL 패턴 설정 =====
         const isLifePage = /\/[Ll]ife($|\/)/i.test(currentPath);
+        
+        // 다른 패턴 예시들:
+        // 1. 여러 폴더 보호: const isLifePage = /\/(life|private|secret)($|\/)/i.test(currentPath);
+        // 2. 특정 파일만: const isLifePage = /\/secret-diary\.html$/.test(currentPath);
+        // 3. 하위 폴더 포함: const isLifePage = /\/life\//i.test(currentPath);
+        // 4. 정확한 경로만: const isLifePage = currentPath === '/life' || currentPath === '/life/';
+        // ============================================
+        
         console.log('🔍 Is Life page:', isLifePage);
         
         if (!isLifePage) {
