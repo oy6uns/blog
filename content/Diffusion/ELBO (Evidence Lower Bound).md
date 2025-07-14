@@ -121,8 +121,27 @@ $$
 이 값을 Maximize하는 것이 최종 목표이다. <br>DDPM에서는 이 <font color="#e36c09">ELBO의 음수(-ELBO)를 loss</font>로 보고, <font color="#e36c09">이를 Minimize하는 것을 목표</font>로 한다. 
 
 ![[스크린샷 2025-07-10 오후 3.13.16.png]]
+## Final Loss Term
+본 논문에서는 $L_T$와 $L_0$는 상수로 생각하고, <br>각 $t$에 대한 Consistency Term $L_{t-1}$ (noise-prediction MSE) 만 모아서 최적화 한다. <br><br>$p_\theta(x_{t-1}|x_t)$ 는 reverse step에서 모델이 학습한 가우시안 분포이므로 **$q(x_{t-1}|x_t, x_0)$만 가우시안 분포로 나타낼 수 있다면**, Consistency Term을 훨씬 더 간단하게 계산할 수 있다. 
 
+![[스크린샷 2025-07-14 오전 11.07.29.png]]![[스크린샷 2025-07-14 오전 11.08.14 1.png]]
+![[스크린샷 2025-07-14 오전 11.11.39.png|420]]
+![[스크린샷 2025-07-14 오후 12.31.54.png|370]]
+![[스크린샷 2025-07-14 오전 11.13.28 2.png|550]]
+결과적으로, $q, p_\theta$ 모두 가우시안 분포로 표현된다. 
 
+두 가우시안 분포가 **동일한 공분산 $\Sigma$를 가질 때**, 이들 **분포 간의 차이는 평균 벡터 $\mu$의 차이만으로 계산**할 수 있다. 
+
+> [!quote] 3.2 “Reverse process and $L_{t-1}$”
+> “First, we set $\sum_\theta(x_t, t)=\sigma_t^2I$ to untrained time-dependent constants. Experimentally, both $\sigma_t^2=\beta_t$ and $\sigma_t^2=\tilde{\beta_t}=\frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_t}\beta_t$” had similar results.”
+
+논문에서는 실험적으로 forward process의 Noise 공분산 $\beta_tI$와 reverse process의 공분산$\sum_\theta(x_t, t)=\sigma_t^2I$ 이 거의 동일했다고 한다. <br>따라서 두 분포의 공분산은 제외하고, **평균끼리의 차이를 consistency loss term $L_{t-1}$으로 계산**하면,
+![[스크린샷 2025-07-14 오후 2.02.00 1.png]]
+위와 같이 정리된다. <br>최종 Loss term은 **Noise $\epsilon$를 예측하도록 reparameterize된 식**으로 나오게 되는데, <br>이는 **학습을 훨씬 안정적이고 간단하게** 만들어주기 때문이다. <br><br>$μ$를 예측했을 때는 복잡한 계수($\frac{βₜ}{\sqrt{(1−ᾱₜ)}}, \frac{1}{\sqrt{αₜ}}, \frac{1}{2σₜ²}$) 등을 전부 고려해야 하지만, 반면 ε를 예측하면, 이 모든 계수가 **단 하나의 상수 $w_t$ 로 묶여서**
+$$
+L_{t-1}\;\propto\; w_t\;\|\epsilon - \epsilon_\theta(x_t,t)\|^2
+$$
+같은 **MSE 형태**로 단순해진다. 이 덕분에 구현도, 튜닝도 훨씬 수월해지게 된다!
 
 ### References
 1. https://xoft.tistory.com/30
