@@ -4,6 +4,11 @@ created: 2025-07-11
 modified: 2025-07-11
 tags:
   - Diffusion
+conf:
+  - ICLR
+year:
+  - "2021"
+link: https://arxiv.org/pdf/2010.02502
 ---
 
 > [!check] Title

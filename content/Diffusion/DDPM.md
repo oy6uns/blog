@@ -4,6 +4,11 @@ tags:
 date: 2025-07-08
 created: 2025-07-08
 modified: 2025-07-08
+conf:
+  - NeurIPS
+year:
+  - "2020"
+link: https://arxiv.org/pdf/2006.11239
 ---
 
 > [!idea] Idea
