@@ -28,6 +28,6 @@ $$
 - What <b><font color="#e36c09">distinguishes diffusion models from other types of latent variable models</font></b> is that the approximate posterior $q(\mathbf{x}_{1:T}|x_0)$, called the <b><font color="#e36c09">diffusion process or forward process, is fixed to a Markov chain</font></b><br>Diffusion model이 다른 모델들과 다른 점은 forward process를 고정된 Gaussian Markov chain으로 정해놓고, backward만 학습한다는 점이다. 
 
 ### TODO
-- 3.2절 reverse process 수식 전개 부분 다시 봐보기
-- 3.3절 Data Scaling 부분 다시 봐보기
-- DDIM, paper reading
+- 3.2절 reverse process 수식 전개 부분 다시 봐보기 ✅
+- 3.3절 Data Scaling 부분 다시 봐보기 ✅
+- DDIM, paper reading ✅

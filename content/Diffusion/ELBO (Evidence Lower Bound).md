@@ -126,16 +126,15 @@ $$
 
 ![[스크린샷 2025-07-14 오전 11.07.29.png]]![[스크린샷 2025-07-14 오전 11.08.14 1.png]]
 ![[스크린샷 2025-07-14 오전 11.11.39.png|420]]
-![[스크린샷 2025-07-14 오후 12.31.54.png|370]]
-![[스크린샷 2025-07-14 오전 11.13.28 2.png|550]]
+![[스크린샷 2025-07-14 오후 2.24.51.png]]<br>
 결과적으로, $q, p_\theta$ 모두 가우시안 분포로 표현된다. 
 
 두 가우시안 분포가 **동일한 공분산 $\Sigma$를 가질 때**, 이들 **분포 간의 차이는 평균 벡터 $\mu$의 차이만으로 계산**할 수 있다. 
 
-> [!quote] 3.2 “Reverse process and $L_{t-1}$”
+> [!quote] 논문의 3.2절 “Reverse process”
 > “First, we set $\sum_\theta(x_t, t)=\sigma_t^2I$ to untrained time-dependent constants. Experimentally, both $\sigma_t^2=\beta_t$ and $\sigma_t^2=\tilde{\beta_t}=\frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_t}\beta_t$” had similar results.”
 
-논문에서는 실험적으로 forward process의 Noise 공분산 $\beta_tI$와 reverse process의 공분산$\sum_\theta(x_t, t)=\sigma_t^2I$ 이 거의 동일했다고 한다. <br>따라서 두 분포의 공분산은 제외하고, **평균끼리의 차이를 consistency loss term $L_{t-1}$으로 계산**하면,
+논문에서는 실험적으로 forward process의 Noise 공분산 $\beta_tI$와<br>reverse process의 공분산$\sum_\theta(x_t, t)=\sigma_t^2I$ 이 거의 동일했다고 한다. <br><br>따라서 두 분포의 공분산은 제외하고, **평균끼리의 차이를 consistency loss term $L_{t-1}$으로 계산**하면,
 ![[스크린샷 2025-07-14 오후 2.02.00 1.png]]
 위와 같이 정리된다. <br>최종 Loss term은 **Noise $\epsilon$를 예측하도록 reparameterize된 식**으로 나오게 되는데, <br>이는 **학습을 훨씬 안정적이고 간단하게** 만들어주기 때문이다. <br><br>$μ$를 예측했을 때는 복잡한 계수($\frac{βₜ}{\sqrt{(1−ᾱₜ)}}, \frac{1}{\sqrt{αₜ}}, \frac{1}{2σₜ²}$) 등을 전부 고려해야 하지만, 반면 ε를 예측하면, 이 모든 계수가 **단 하나의 상수 $w_t$ 로 묶여서**
 $$
