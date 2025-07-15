@@ -25,7 +25,7 @@ L_{\mathrm{simple}}(\theta)
 \epsilon_{\theta}\bigl(\sqrt{\bar\alpha_t}\,x_0 \;+\;\sqrt{1-\bar\alpha_t}\,\epsilon,\;t\bigr)
 \right\|^2
 $$
-**기존에 학습된 Diffusion Model**을 그대로 가져와서 <b><font color="#e36c09">샘플링 시에만 Non-Markovian Sampling을 선택</font></b>하여 **훨씬 적은 단계로 빠르게 고품질의 이미지를 생성**하는 것이 가능하다!
+**기존에 학습된 Diffusion Model**을 그대로 가져와서 <b><font color="#e36c09">샘플링 시에만 Non-Markovian Sampling을 선택</font></b>하여 **훨씬 적은 단계로 빠르게 고품질의 이미지를 생성**하는 것이 가능하다!<br>
 
 # forward process
 ## DDIM’s Non-Markovian Process
@@ -71,10 +71,10 @@ $$
 &= q(x_2\mid x_0)\,q(x_1\mid x_2,x_0)\,q(x_3\mid x_2)\,\dots\,q(x_T\mid x_{T-1})\\
 &= q(x_3\mid x_0)\,q(x_2\mid x_3,x_0)\,q(x_1\mid x_2,x_0)\,\dots\,q(x_T\mid x_{T-1})\\
 &\ \ \vdots\\
-&= q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0).
+&= q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)
 \end{aligned}
 $$
-맨 마지막에는 오직 $q(x_T\mid x_0)$ 와 $\prod_{t=2}^T q(x_{t-1}\mid x_t, x_0)$ 만이 남게된다. <br><br>결과적으로, **DDIM의 forward process 식**은 **DDPM의 forward process 식과 동일하게 표현**될 수 있다는 것을 알 수 있다. 
+맨 마지막에는 오직 $q(x_T\mid x_0)$ 와 $\prod_{t=2}^T q(x_{t-1}\mid x_t, x_0)$ 만이 남게된다. <br><br>결과적으로, **DDIM의 forward process 식**은 **DDPM의 forward process 식과 동일하게 표현**될 수 있다는 것을 알 수 있다. 즉, DDIM의 forward process는 DDPM과 동치이다!
 
 ## So what's the benefit?
 그래서 식을 위와 같이 바꾸면 어떤 이점이 있는걸까?
@@ -89,5 +89,31 @@ $$
 $$
 x_{τ_{k−1}}​​∼p_θ​(x_{τ_{k−1}}​​∣x_{τ_k}​​)≈q(x_{τ_{k−1}}​​∣x_{τ_k}​​,x_0​)
 $$
-결과적으로, denoising 횟수가 $T \rightarrow K$ 로 줄어 속도는 $\frac{K}{T}$배 빨라지고, 샘플 품질은 DDPM 대비 큰 손실 없이 유지된다!
+결과적으로, denoising 횟수가 $T \rightarrow K$ 로 줄어 속도는 $\frac{K}{T}$배 빨라지고, 샘플 품질은 DDPM 대비 큰 손실 없이 유지된다!<br>
 
+## 중간 스텝을 어떻게 건너뛸 수 있는걸까?
+전체 **스텝을 모두 거치지 않고 일부를 건너뛰기**만 해도, 원**본 DDPM과 동등한 성능을 유지**하면서 **훨씬 빠르게 작동**할 수 있다는 것이 가능한건가 싶다. 이번 단락에서는 위에서 다룬 내용들의 엄밀성을 차근차근 살펴보겠다. 
+
+### 우선 다시 식으로 돌아가서, 
+왜 DDIM paper에서 사용한 식에서
+$$
+q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)
+$$
+$q(x_{t-1}\mid x_t, x_0)$는 bayesian rule에 따라 다음과 같이 풀어 쓸 수 있다. 
+$$
+q(x_{t-1}\mid x_t, x_0)
+= \frac{q(x_t\mid x_{t-1},x_0)\;q(x_{t-1}\mid x_0)}{q(x_t\mid x_0)}
+$$<br>
+$q(x_t\mid x_0)$과 $q(x_t\mid x_{t-1},x_0)$는 [[DDPM]]에서 구한대로,
+$$
+q(x_t\mid x_{t-1},x_0) := \mathcal{N}\bigg(\mathbf{x}_t;\sqrt{1-\beta_t}\mathbf{x}_{t-1}, \beta_t\mathbf{I}\bigg)
+$$$$
+q(x_t\mid x_0)=\mathcal{N}\bigg(\mathbf{x}_t;\sqrt{1-\beta}\mathbf{x}_{t-1}, \beta_t\mathbf{I}\bigg)
+$$
+
+
+
+### References
+1. https://arxiv.org/pdf/2010.02502
+2. https://www.youtube.com/watch?v=uFoGaIVHfoE&t=3657s
+3. https://www.youtube.com/watch?v=TscMZOf5gXg

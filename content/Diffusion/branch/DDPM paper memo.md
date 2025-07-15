@@ -31,3 +31,6 @@ $$
 - 3.2절 reverse process 수식 전개 부분 다시 봐보기 ✅
 - 3.3절 Data Scaling 부분 다시 봐보기 ✅
 - DDIM, paper reading ✅
+
+> https://www.youtube.com/watch?v=zcEe78I_4TU
+![[스크린샷 2025-07-15 오후 4.07.46.png]]
