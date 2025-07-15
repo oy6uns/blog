@@ -132,7 +132,7 @@ $$
 두 가우시안 분포가 **동일한 공분산 $\Sigma$를 가질 때**, 이들 **분포 간의 차이는 평균 벡터 $\mu$의 차이만으로 계산**할 수 있다. 
 
 > [!quote] 논문의 3.2절 “Reverse process”
-> “First, we set $\sum_\theta(x_t, t)=\sigma_t^2I$ to untrained time-dependent constants. Experimentally, both $\sigma_t^2=\beta_t$ and $\sigma_t^2=\tilde{\beta_t}=\frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_t}\beta_t$” had similar results.”
+> “First, we set $\sum_\theta(x_t, t)=\sigma_t^2I$ to untrained time-dependent constants. Experimentally, both $\sigma_t^2=\beta_t$ and $\sigma_t^2=\tilde{\beta_t}=\frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_t}\beta_t$ had similar results.”
 
 논문에서는 실험적으로 forward process의 Noise 공분산 $\beta_tI$와<br>reverse process의 공분산$\sum_\theta(x_t, t)=\sigma_t^2I$ 이 거의 동일했다고 한다. <br><br>따라서 두 분포의 공분산은 제외하고, **평균끼리의 차이를 consistency loss term $L_{t-1}$으로 계산**하면,
 ![[스크린샷 2025-07-14 오후 2.02.00 1.png]]

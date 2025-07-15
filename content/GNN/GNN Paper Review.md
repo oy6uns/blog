@@ -8,7 +8,7 @@ modified: 2025-05-06
 1. GCN 
 	[[GCN의 수식적 이해]]
 2. GraphSAGE
-	[[GraphSAGE]]
+	[[blog/content/GNN/Paper Collection/GraphSAGE]]
 
 ## Temporal GNN
 1. [[Temporal Graph Survey]]
