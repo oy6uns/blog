@@ -10,6 +10,8 @@ year:
   - "2021"
 link: https://arxiv.org/pdf/2010.02502
 ---
+> Denoising Diffusion Implicit Models (ICLR ‘21)
+> https://arxiv.org/pdf/2010.02502
 
 > [!check] Title
 > 매 time step $t$마다 sampling을 수행하는 것은 지나치게 많은 시간이 소요된다.<br>”DDPM이 가정한 마르코프 과정을 <b><font color="#e36c09">Non-Markovian Diffusion Process(비마르코프 확산)으로 대체</font></b>해서 **sampling 속도를 더 빠르게** 해보자!” 가 DDIM의 Novelty이다. 
