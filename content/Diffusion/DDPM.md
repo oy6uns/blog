@@ -25,7 +25,7 @@ Diffusion은 크게 2가지(**forward process, backward process**)로 구성된�
 **backward process**는 노이즈를 지워나가며 input으로 넣어준 이미지를 다시 복원해나가는 과정이다. <br>
 위의 2번째 그림에 나와있듯이 노이즈를 추가하는 forward process는 단순히 노이즈를 이미지에 추가만 하면 되기에 따로 학습할 필요가 없고, 우리가 <b><font color="#e36c09">초점을 맞출 부분은 노이즈를 없애는 backward process(denoising)</font></b>이다. 
 
-# forward process
+# Forward Process
 > 노이즈를 점진적으로 추가해보자!
 
 $$
@@ -140,14 +140,14 @@ $$
 
 즉, **짧게, 세세하게** 여러 스텝을 거칠수록  
 각 스텝의 노이즈 주입량이 작아져 분포가 좁아지고,  
-결국 **“한 단계씩 복원” 하기가 쉬워진다**는 의미가 된다. 
+결국 **“한 단계씩 복원” 하기가 쉬워진다**는 의미가 된다. <br>
 
-## training
-2015년에 나왔던 [Diffusion Model](https://arxiv.org/pdf/1503.03585)과 2020년에 나온 DDPM의 차이를 들자면, <br>우선은 둘 다 본질적으로 **같은 목표**(<b><font color="#e36c09">각 단계의 reverse process</font></b> $p_θ(x_{t−1}​∣x_t​)$가 <b><font color="#e36c09">진짜 posterior</font></b> $q(x_{t-1}|x_t, x_0)$를 잘 근사하도록 학습)
+# Training
+**2015년에 나왔던 [Diffusion Model](https://arxiv.org/pdf/1503.03585)** 과 **2020년에 나온 DDPM의 차이**를 들자면, <br>우선은 둘 다 본질적으로 **같은 목표**(<b><font color="#e36c09">각 단계의 reverse process</font></b> $p_θ(x_{t−1}​∣x_t​)$가 <b><font color="#e36c09">진짜 posterior</font></b> $q(x_{t-1}|x_t, x_0)$를 <b><font color="#e36c09">잘 근사하도록</font></b> 학습)
 $$
 \sum_{t=1}^T​D_{KL}​(q(x_{t−1}​∣x_t​,x_0​)∥p_θ​(x_{t−1}​∣x_t​))
 $$
-를 갖고 있지만, <b><font color="#e36c09">parameterization</font></b>과 <b><font color="#e36c09">loss function의 형태</font></b>에서 차이가 존재한다. 
+를 갖고 있지만, <b>parameterization</b>과 <b>loss function의 형태</b>에서 차이가 존재한다. 
 ### 1. Diffusion Model(2015)
 [Diffusion Model](https://arxiv.org/pdf/1503.03585)에서는 $p_\theta$의 **평균 $\mu_\theta(\mathbf{x}_t, t)$과 분산 $\Sigma_\theta(\mathbf{x}_t, t)$을 직접 예측**하도록 설계되었다. 
 ### 2. DDPM(2020)
@@ -163,7 +163,7 @@ $$
 $$
 → 결과적으로 2015년 논문과 Posterior matching을 사용한 것은 완전히 동일하지만,  
 DDPM은 posterior 유도 과정을 “노이즈 예측”이라는 한 줄 MSE로 압축하여  
-**학습 안정성과 구현 편의성을 크게 개선한 것**이라 할 수 있다!
+**학습 안정성과 구현 편의성을 크게 개선한 것**이라 할 수 있다!<br>
 
 
 # Overall Step
