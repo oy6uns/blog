@@ -143,11 +143,27 @@ $$
 결국 **“한 단계씩 복원” 하기가 쉬워진다**는 의미가 된다. 
 
 ## training
-2015년에 나왔던 [Diffusion Model](https://arxiv.org/pdf/1503.03585)과 2020년에 나온 DDPM의 차이를 들자면, <br>우선은 둘 다 본질적으로 같은 목표(<b><font color="#e36c09">각 단계의 reverse process</font></b> $p_θ(x_{t−1}​∣x_t​)$가 <b><font color="#e36c09">진짜 posterior</font></b> $q(x_{t-1}|x_t, x_0)$를 잘 근사하도록 학습)를 갖고 있지만, <b><font color="#e36c09">parameterization</font></b>과 <b><font color="#e36c09">loss function의 형태</font></b>에서 차이가 존재한다. 
-
+2015년에 나왔던 [Diffusion Model](https://arxiv.org/pdf/1503.03585)과 2020년에 나온 DDPM의 차이를 들자면, <br>우선은 둘 다 본질적으로 **같은 목표**(<b><font color="#e36c09">각 단계의 reverse process</font></b> $p_θ(x_{t−1}​∣x_t​)$가 <b><font color="#e36c09">진짜 posterior</font></b> $q(x_{t-1}|x_t, x_0)$를 잘 근사하도록 학습)
+$$
+\sum_{t=1}^T​D_{KL}​(q(x_{t−1}​∣x_t​,x_0​)∥p_θ​(x_{t−1}​∣x_t​))
+$$
+를 갖고 있지만, <b><font color="#e36c09">parameterization</font></b>과 <b><font color="#e36c09">loss function의 형태</font></b>에서 차이가 존재한다. 
 ### 1. Diffusion Model(2015)
-
-[Diffusion Model](https://arxiv.org/pdf/1503.03585)에서는 Denoising one step에 대해 
+[Diffusion Model](https://arxiv.org/pdf/1503.03585)에서는 $p_\theta$의 **평균 $\mu_\theta(\mathbf{x}_t, t)$과 분산 $\Sigma_\theta(\mathbf{x}_t, t)$을 직접 예측**하도록 설계되었다. 
+### 2. DDPM(2020)
+같은 KL 목표를 가지지만, <b><font color="#e36c09">reparameterization</font></b>을 진행하였다. 
+1. Forward를 “노이즈 $\epsilon$”에 대한 관점으로 바꿈
+$$
+x_t​=\sqrt{\bar{α}_t}​​x_0​+\sqrt{1−\bar{α}_t​}​ϵ,\quadϵ∼N(0,I)
+$$
+2. $p_\theta$의 평균 $\mu_\theta(\mathbf{x}_t, t)$ 대신, noise $\epsilon$을 직접 예측하도록 네트워크 $\epsilon_\theta(\mathbf{x}_t, t)$를 학습
+3. 손실을 단순한 **MSE**로 정리 
+$$
+\mathbb{E}\big[∥ϵ−ϵ_θ​(x_t​,t)∥^2\big]
+$$
+→ 결과적으로 2015년 논문과 Posterior matching을 사용한 것은 완전히 동일하지만,  
+DDPM은 posterior 유도 과정을 “노이즈 예측”이라는 한 줄 MSE로 압축하여  
+**학습 안정성과 구현 편의성을 크게 개선한 것**이라 할 수 있다!
 
 
 # Overall Step
