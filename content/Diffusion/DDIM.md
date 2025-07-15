@@ -99,16 +99,20 @@ $$
 $$
 q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)
 $$
-$q(x_{t-1}\mid x_t, x_0)$는 bayesian rule에 따라 다음과 같이 풀어 쓸 수 있다. 
+$q(x_{t-1}\mid x_t, x_0)$는 $x_t$와 $x_0$가 주어졌을 때, denoising 방향의 single step 이고, <br>bayesian rule에 따라 다음과 같이 풀어 쓸 수 있다. 
 $$
 q(x_{t-1}\mid x_t, x_0)
 = \frac{q(x_t\mid x_{t-1},x_0)\;q(x_{t-1}\mid x_0)}{q(x_t\mid x_0)}
 $$<br>
-$q(x_t\mid x_0)$과 $q(x_t\mid x_{t-1},x_0)$는 [[DDPM]]에서 구한대로,
+$q(x_t\mid x_{t-1},x_0)$와 $q(x_t\mid x_0)$는 [[DDPM]]에서 아래와 같이 구하였다. 
 $$
 q(x_t\mid x_{t-1},x_0) := \mathcal{N}\bigg(\mathbf{x}_t;\sqrt{1-\beta_t}\mathbf{x}_{t-1}, \beta_t\mathbf{I}\bigg)
-$$$$
-q(x_t\mid x_0)=\mathcal{N}\bigg(\mathbf{x}_t;\sqrt{1-\beta}\mathbf{x}_{t-1}, \beta_t\mathbf{I}\bigg)
+$$
+$$
+\begin{aligned}
+q(x_t\mid x_0)=\mathcal{N}\bigg(\mathbf{x}_t;\sqrt{\bar{\alpha}_t}\mathbf{x}_0, (1-\bar{\alpha}_t)\mathbf{I}\bigg), \\ 
+where \quad \alpha_t:=1-\beta_t \;and\; \bar{\alpha}_t:=\prod^t_{s=1}\alpha_s
+\end{aligned}
 $$
 
 

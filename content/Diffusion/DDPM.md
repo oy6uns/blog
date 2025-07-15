@@ -10,6 +10,9 @@ year:
   - "2020"
 link: https://arxiv.org/pdf/2006.11239
 ---
+> Denoising Diffusion Probabilistic Models (NeurIPS ‘20)
+> https://arxiv.org/pdf/2006.11239
+
 
 > [!idea] Idea
 >작은 sequence에서의 확산은 forward와 reverse **모두 가우시안**일 수 있다. <br>
@@ -115,7 +118,7 @@ $$
 >이젠 노이즈를 걷어낼 차례이다! 
 
 ![[스크린샷 2025-07-08 오후 5.05.47.png]]
-- 흰점 $x_t$는 **“지금 우리가 보고 있는 노이즈가 t번 추가된$t$단계 샘플”** 이다. 
+- 흰점 $x_t$는 **“지금 우리가 보고 있는 노이즈가 t번 추가된 $t$단계 샘플”** 이다. 
 - 녹색 곡선은 **“노이즈를 뿌린 뒤 $t-1$단계에서 나올 수 있는 값들의 전반적인 분포”** 이다. 
 
 우리의 목표는 **“관측한 $x_t​$의 이전 step $x_{t-1}$가 어떤 값이었을지”** **사후분포(posterior)** $q(x_{t-1}|x_t)$를 추정하는 것이다. 
@@ -139,6 +142,13 @@ $$
 각 스텝의 노이즈 주입량이 작아져 분포가 좁아지고,  
 결국 **“한 단계씩 복원” 하기가 쉬워진다**는 의미가 된다. 
 
+## training
+2015년에 나왔던 [Diffusion Model](https://arxiv.org/pdf/1503.03585)과 2020년에 나온 DDPM의 차이를 들자면, <br>우선은 둘 다 본질적으로 같은 목표(<b><font color="#e36c09">각 단계의 reverse process</font></b> $p_θ(x_{t−1}​∣x_t​)$가 <b><font color="#e36c09">진짜 posterior</font></b> $q(x_{t-1}|x_t, x_0)$를 잘 근사하도록 학습)를 갖고 있지만, <b><font color="#e36c09">parameterization</font></b>과 <b><font color="#e36c09">loss function의 형태</font></b>에서 차이가 존재한다. 
+
+### 1. Diffusion Model(2015)
+
+[Diffusion Model](https://arxiv.org/pdf/1503.03585)에서는 Denoising one step에 대해 
+
 
 # Overall Step
 결과적으로, 
@@ -159,5 +169,6 @@ input 확률 분포 $q(x_0)$ (그림의 파란색 영역) 로 부터
 1. https://www.youtube.com/watch?v=uFoGaIVHfoE
 2. https://www.youtube.com/watch?v=fbLgFrlTnGU
 3. https://wikidocs.net/275557
+4. https://www.youtube.com/watch?v=zcEe78I_4TU
 
 
