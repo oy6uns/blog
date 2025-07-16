@@ -81,6 +81,7 @@ $$
 noise를 추가하는 **forward process는 동일**하다는 것을 알았으니, 이제 **sampling** 과정에서의 둘의 차이를 알아보자!
 
 ## 학습 과정 (Training, Loss 계산 시):
+DDIM의 학습 또한 DDPM과 동일하다. 
 - 우리는 원본 이미지 **$x_0$​를 가지고 있다.** 따라서 $q(x_{t-1}|x_t, x_0)$라는 **'이상적인 정답' 분포**를 계산할 수 있다. 
 - DDPM, DDIM의 궁극적인 목표는 우리 모델($p_θ​(x_{t−1}​∣x_t​)$)이 이 정답 분포($q$)를 최대한 똑같이 모방하도록 학습시키는 것이다. 
 
@@ -180,7 +181,7 @@ $q(x_{t-1}\mid x_t, x_0)$는 $x_t$와 $x_0$가 주어졌을 때, denoising 방�
 $$
 q(x_{t-1}\mid x_t, x_0)
 = \frac{q(x_t\mid x_{t-1},x_0)\;q(x_{t-1}\mid x_0)}{q(x_t\mid x_0)}
-$$<br>
+$$
 $q(x_t\mid x_{t-1},x_0)$와 $q(x_t\mid x_0)$는 [[DDPM]]에서 아래와 같이 구하였다. 
 $$
 q(x_t\mid x_{t-1},x_0) := \mathcal{N}\bigg(\mathbf{x}_t;\sqrt{1-\beta_t}\mathbf{x}_{t-1}, \beta_t\mathbf{I}\bigg)
