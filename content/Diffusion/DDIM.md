@@ -110,7 +110,7 @@ $$
 
 - DDIM은 노이즈를 예측($ϵ_θ​$)하는 모델을 이용해 **현재 $x_t$​로부터 온전한 $x_0$​를 먼저 만든다** (**이를 $\hat{x}_0$​라고 하자!)** <br>→ $x_t$에 예측한 노이즈 $\epsilon_\theta$를 빼주면 $\hat{x}_0$를 얻어낼 수 있다. 
 - 그다음, **예측한​** $\hat{x}_0$를 '정답지'처럼 사용하여 $q(x_{t-1}|x_t, \hat{x}_0)$ 공식에 따라 $x_{t-1}$을 **결정론적으로 계산**해낸다. 
-- $x_0$를 (비록 예측값 $\hat{x}_0$이지만) 직접적으로 사용하기 때문에 이 과정은 **Non-Markovian**이 된다!
+- $x_0$를 (비록 예측값 $\hat{x}_0$이지만) 직접적으로 사용하기 때문에 이 과정은 <b><font color="#e36c09">Non-Markovian</font></b>이 된다!
 #### 샘플링 수식
 $$
 \hat x_0
@@ -141,9 +141,22 @@ $$
 처럼 결정론적으로 한 step씩 복원해나간다.<br><br><br>
 
 ## So what's the benefit?
-그래서 non-Markovian 가정으로 sampling 시에 어떤 이점이 있는걸까? 
-![[스크린샷 2025-07-15 오후 2.34.31.png]]
-**DDPM(Figure 1 왼쪽)** 에서는 **Markovian Process 전제**로 하기 때문에 매 타임스텝 $t=T, T-1, …, 1$ 마다 차례대로 한 칸씩 denoising을 수행해야 해서 총 T번의 네트워크 호출이 필요하다. <br>하지만, **DDIM(Figure 1 오른쪽)** 에서는 reverse process에 $x_0$(*위에서 설명했듯 실제로는 예측한 noise를 통해 근사적으로 계산된 $\hat{x}_0$를 사용한다.*) 를 명시적으로 집어넣어 “$x_t→x_{t-1}$” posterior에 **$x_0$가 조건으로 항상 쓰이게 된다.** <br>
+그래서 <b><font color="#e36c09">non-Markovian 가정으로 sampling 시에 어떤 이점</font></b>이 있는걸까? <br>
+**DDPM(Figure 1 왼쪽)** 에서는 **Markovian Process 전제**로 하기 때문에 매 타임스텝 $t=T, T-1, …, 1$ 마다 차례대로 한 칸씩 denoising을 수행해야 해서 총 T번의 네트워크 호출이 필요하다. 
+$$
+\begin{aligned}
+x_{t-1}
+&=
+\underbrace{\sqrt{\alpha_{t-1}}\,\hat x_0}
+          _{\substack{\text{predicted }x_0\text{을}\\\text{t-1 시점으로 보낸 항}}}
+\;+\;
+\underbrace{\sqrt{1-\alpha_{t-1}-\sigma_t^2}\,\epsilon_\theta(x_t, t)}
+          _{\text{“}x_t\text{를 향하는 방향”}}
+\;+\;
+\underbrace{\sigma_t\,\epsilon_t}_{\text{random noise (보통 0)}}
+\end{aligned}
+$$
+하지만, **DDIM(Figure 1 오른쪽)** 에서는 reverse process에 $x_0$(*위에서 설명했듯 실제로는 예측한 noise를 통해 근사적으로 계산된 $\hat{x}_0$를 사용한다.*) 를 명시적으로 집어넣어 “$x_t→x_{t-1}$” posterior에 **$x_0$가 조건으로 항상 쓰이게 된다.** <br>
 ![[스크린샷 2025-07-15 오후 2.06.15.png]]
 DDIM의 <b><font color="#e36c09">non-Markovian posterior</font></b>를 이용하면, 중간 스텝을 <b><font color="#e36c09">“건너뛰는”</font></b> accelerated generation이 가능해진다!<br><br>skip schedule $\tau$를 정의하고, 
 $$
