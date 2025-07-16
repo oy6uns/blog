@@ -10,13 +10,13 @@ year:
   - "2021"
 link: https://arxiv.org/pdf/2010.02502
 ---
-> Denoising Diffusion Implicit Models (ICLR ‘21)
+> Denoising Diffusion Implicit Models (ICLR ‘21)<br>
 > https://arxiv.org/pdf/2010.02502
 
 > [!check] Title
 > 매 time step $t$마다 sampling을 수행하는 것은 지나치게 많은 시간이 소요된다.<br>”DDPM이 가정한 마르코프 과정을 <b><font color="#e36c09">Non-Markovian Diffusion Process(비마르코프 확산)으로 대체</font></b>해서 **sampling 속도를 더 빠르게** 해보자!” 가 DDIM의 Novelty이다. 
 
-DDIM은 기존 DDPM이 가정한 ‘**마르코프(Markovian) Diffusion(Forward) Process**’ 대신, 과거 상태 $x_{t-1}$뿐 아니라 원본 $x_0$ 정보까지 활용하는 ‘**비마르코프(non-Markovian) Diffusion Process**’와 그에 대응하는 **Reverse Process**을 새롭게 정의한다. <br><br>DDIM은 원래 DDPM에서 쓰던 **surrogate objective**(간소화된 손실 함수)를 그대로 최적화할 수 있도록 고안되어 
+DDIM은 기존 DDPM이 가정한 ‘**마르코프(Markovian) Diffusion(Forward) Process**’ 대신, <br>과거 상태 $x_{t-1}$뿐 아니라 원본 $x_0$ 정보까지 활용하는 ‘**비마르코프(non-Markovian) Diffusion Process**’와 그에 대응하는 **Reverse Process**을 새롭게 정의한다. <br><br>DDIM은 원래 DDPM에서 쓰던 **surrogate objective**(간소화된 손실 함수)를 그대로 최적화할 수 있도록 고안되어 
 > 자세한 DDPM Loss식에 관한 설명은 [[ELBO (Evidence Lower Bound)]] 참고
 
 $$
@@ -75,7 +75,7 @@ $$
 &= q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)
 \end{aligned}
 $$
-맨 마지막에는 오직 $q(x_T\mid x_0)$ 와 $\prod_{t=2}^T q(x_{t-1}\mid x_t, x_0)$ 만이 남게된다. <br><br>**“원래 DDPM의 forward $q(x_{1:T}\mid x_0)=\prod_t q(x_t\mid x_{t-1})$ process”** 를 bayesian rule과 **Markovian 가정**으로 텔레스코핑(telescoping) 해 보면 $\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)$ 이라는 <b><font color="#e36c09">non-Markovian한 인자</font></b>를 얻을 수 있게 된다! <br>결과적으로, **DDIM의 forward process 식**은 **DDPM의 forward process 식과 동일하게 표현**될 수 있다는 것을 알 수 있다
+맨 마지막에는 오직 $q(x_T\mid x_0)$ 와 $\prod_{t=2}^T q(x_{t-1}\mid x_t, x_0)$ 만이 남게된다. <br><br>**“원래 DDPM의 forward $q(x_{1:T}\mid x_0)=\prod_t q(x_t\mid x_{t-1})$ process”** 를 bayesian rule과 **Markovian 가정**으로 텔레스코핑(telescoping) 해 보면 $\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)$ 이라는 <b><font color="#e36c09">non-Markovian한 인자</font></b>를 얻을 수 있게 된다! <br>또한, **DDIM의 forward process 식**은 **DDPM의 forward process 식과 동일하게 표현**될 수 있다는 것도 알 수 있다.
 
 # DDPM vs. DDIM
 noise를 추가하는 **forward process는 동일**하다는 것을 알았으니, 이제 **sampling** 과정에서의 둘의 차이를 알아보자!
