@@ -89,9 +89,8 @@ DDIM의 학습 또한 DDPM과 동일하다.
 ### 📌 DDPM
 > **“학습할 때만 정답지를 보고, 시험 볼 땐 안 봐요”**
 
-- 우리는 **$x_0$​가 없는 상태**에서 랜덤 노이즈 $x_T$​로부터 이미지를 만들어야 한다. 
-- 이때 모델 $p_\theta(x_{t-1}|x_t)$는 정답지($x_0$) 없이, 오직 현재 상태 $x_t$​만 보고 "훈련받은 대로" 한 step씩 복원해가며 $x_{t-1}$을 생성한다. 
-- $x_0$​를 모르기 때문에 이 과정은 순차적인 **Markovian**일 수밖에 없다.
+우리는 **$x_0$​가 없는 상태**에서 랜덤 노이즈 $x_T$​로부터 이미지를 만들어야 한다. 이때 모델 $p_\theta(x_{t-1}|x_t)$는 정답지($x_0$) 없이, 오직 현재 상태 $x_t$​만 보고 "훈련받은 대로" 한 step씩 복원해가며 $x_{t-1}$을 생성한다. <br>
+$x_0$​를 모르기 때문에 이 과정은 순차적인 **Markovian**일 수밖에 없다.
 #### 샘플링 수식
 $$
 x_{t−1}​∼\mathcal{N}(μ_θ​(x_t​,t),σ_t^2​I)
@@ -109,28 +108,49 @@ $$
 ### 📌 DDIM
 > **“시험 볼 때도 정답지를 예측해서 봐요”**
 
-- DDIM은 노이즈를 예측($ϵ_θ​$)하는 모델을 이용해 **현재 $x_t$​로부터 온전한 $x_0$​를 먼저 만든다** (**이를 $\hat{x}_0$​라고 하자!)** <br>→ $x_t$에 예측한 노이즈 $\epsilon_\theta$를 빼주면 $\hat{x}_0$를 얻어낼 수 있다. 
-- 그다음, **예측한​** $\hat{x}_0$를 '정답지'처럼 사용하여 $q(x_{t-1}|x_t, \hat{x}_0)$ 공식에 따라 $x_{t-1}$을 **결정론적으로 계산**해낸다. 
-- $x_0$를 (비록 예측값 $\hat{x}_0$이지만) 직접적으로 사용하기 때문에 이 과정은 <b><font color="#e36c09">Non-Markovian</font></b>이 된다!
-#### 샘플링 수식
+#### 1. 원본 $x_0$ 복원하기 
+DDIM은 먼저 모델이 예측한 **노이즈 $ϵ_θ(x_t, t)​$로부터 “지금 이 시점의 이미지 $x_t$”가 어떤 원본 $x_0$에서 온 것인지를 역추정한다.** 
 $$
 \hat x_0
 = \frac{x_t - \sqrt{1-\alpha_t}\,\epsilon_\theta(x_t, t)}{\sqrt{\alpha_t}}
-\quad(\text{“예측된 }x_0\text{”})
+\quad(\text{여기서 }\bar{\alpha}_t=\prod^t_{s=1}\alpha_s)
 $$
+- $\sqrt{\bar\alpha_t}x_0 + \sqrt{1-\bar\alpha_t}\epsilon$ 의 선형 결합으로 $x_t$​가 만들어졌다는 forward 식을 재구성 한 것이다.
+- 이 값이 **“예측된 원본”** $\hat{x}_0$이다. 
+#### 2. step 건너뛰기
+이제 진짜 posterior
 $$
-\begin{aligned}
+   q\bigl(x_{t-1}\mid x_t,x_0\bigr)
+   =\mathcal{N}\bigl(\underbrace{\mu_q}_{\text{posterior mean}},\;\Sigma_q\bigr)   
+$$
+의 **평균 $\mu_q$** 만 써서, $x_{t–1}$을 직접 계산한다. <br>그 평균은 수학적으로 다음과 같이 깔끔히 정리된다. 
+$$
+   \mu_q
+   =\sqrt{\bar\alpha_{t-1}}\,x_0
+   \;+\;
+   \sqrt{\,1-\bar\alpha_{t-1}-\sigma_t^2\,}\;\epsilon_\theta(x_t,t)
+   $$
+실제 inference(sampling)에서는 **“진짜 $x_0$”** 대신 **“예측된 $\hat{x}_0$”** 를 넣어, 
+$$
 x_{t-1}
-&=
-\underbrace{\sqrt{\alpha_{t-1}}\,\hat x_0}
-          _{\substack{\text{predicted }x_0\text{을}\\\text{t-1 시점으로 보낸 항}}}
+= \underbrace{\sqrt{\bar\alpha_{t-1}}\,\hat x_0}_{\substack{\text{한 스텝 전 분포로}\\\text{되돌린 예측 원본}}}
 \;+\;
-\underbrace{\sqrt{1-\alpha_{t-1}-\sigma_t^2}\,\epsilon_\theta(x_t, t)}
-          _{\text{“}x_t\text{를 향하는 방향”}}
-\;+\;
-\underbrace{\sigma_t\,\epsilon_t}_{\text{random noise (보통 0)}}
-\end{aligned}
+\underbrace{\sqrt{1-\bar\alpha_{t-1}-\sigma_t^2}\;\epsilon_\theta(x_t,t)}_{\substack{\text{남아 있는 노이즈 성분을}\\\text{적절히 반영하는 항}}}
 $$
+- 첫 번째 항은 “모델이 생각하는 clean image($\hat x_0$)를 <br>바로 $t-1$ 정도의 노이즈 수준으로 되돌린” 부분이고,
+- 두 번째 항은 “원래 $x_t$​의 노이즈 방향($\epsilon_\theta$​)을<br>부족하지 않게 섞어 줘서 자연스러운 transition을 만드는” 부분이다. 
+
+이 한 번의 계산으로 $t \to t-1$을 뛰어넘어버리니,  
+
+> [!note] DDIM’s skip schedule
+> Contents
+
+만약 $t$ 대신 $\tau_k$에서 $\tau_{k-1}$​로 건너뛴다면  
+“중간 모든 스텝($\tau_k-1, \tau_k-2, \dots$)”을 전혀 거치지 않고도
+$$
+x_{\tau_k} \;\to\; x_{\tau_{k-1}}​​
+$$
+을 
 DDIM에서는 보통 $(\sigma_t = 0)$으로 두어
 ![[스크린샷 2025-07-16 오후 9.07.35.png]]
 $$
@@ -139,11 +159,16 @@ x_{t-1}
 \;+\;
 \sqrt{1-\alpha_{t-1}}\,\epsilon_\theta(x_t, t)
 $$
-처럼 결정론적으로 한 step씩 복원해나간다.<br><br><br>
+처럼 결정론적으로 한 step씩 복원해나간다.
+그렇구만.. 그런데 그렇게 deterministic하게 점추정을 가능케 하는 요인은?
+<br>
+<br><br>
 
 ## So what's the benefit?
 그래서 <b><font color="#e36c09">non-Markovian 가정으로 sampling 시에 어떤 이점</font></b>이 있는걸까? <br>
-**DDPM(Figure 1 왼쪽)** 에서는 **Markovian Process 전제**로 하기 때문에 매 타임스텝 $t=T, T-1, …, 1$ 마다 차례대로 한 칸씩 denoising을 수행해야 해서 총 T번의 네트워크 호출이 필요하다. 
+위에서 설명했던 DDIM의 sampling 과정을 다시 살펴보자. 
+
+**DDPM** 에서는 **Markovian Process 전제**로 하기 때문에 매 타임스텝 $t=T, T-1, …, 1$ 마다 차례대로 한 칸씩 denoising을 수행해야 해서 총 T번의 네트워크 호출이 필요했다. 
 $$
 \begin{aligned}
 x_{t-1}
@@ -157,7 +182,7 @@ x_{t-1}
 \underbrace{\sigma_t\,\epsilon_t}_{\text{random noise (보통 0)}}
 \end{aligned}
 $$
-하지만, **DDIM(Figure 1 오른쪽)** 에서는 reverse process에 $x_0$(*위에서 설명했듯 실제로는 예측한 noise를 통해 근사적으로 계산된 $\hat{x}_0$를 사용한다.*) 를 명시적으로 집어넣어 “$x_t→x_{t-1}$” posterior에 **$x_0$가 조건으로 항상 쓰이게 된다.** <br>
+하지만, **DDIM(위의 샘플링 식)** 에서는 reverse process에 $x_0$(*위에서 설명했듯 실제로는 예측한 noise를 통해 근사적으로 계산된 $\hat{x}_0$를 사용한다.*) 를 명시적으로 집어넣어 “$x_t→x_{t-1}$” posterior에 **$x_0$가 조건으로 항상 쓰이게 된다.** <br>
 ![[스크린샷 2025-07-15 오후 2.06.15.png]]
 DDIM의 <b><font color="#e36c09">non-Markovian posterior</font></b>를 이용하면, 중간 스텝을 <b><font color="#e36c09">“건너뛰는”</font></b> accelerated generation이 가능해진다!<br><br>skip schedule $\tau$를 정의하고, 
 $$
