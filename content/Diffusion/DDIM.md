@@ -75,7 +75,43 @@ $$
 &= q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)
 \end{aligned}
 $$
-맨 마지막에는 오직 $q(x_T\mid x_0)$ 와 $\prod_{t=2}^T q(x_{t-1}\mid x_t, x_0)$ 만이 남게된다. <br><br>**“원래 DDPM의 forward $q(x_{1:T}\mid x_0)=\prod_t q(x_t\mid x_{t-1})$ process”** 를 bayesian rule과 **Markovian 가정**으로 텔레스코핑(telescoping) 해 보면 $\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)$ 이라는 <b><font color="#e36c09">non-Markovian한 인자</font></b>를 얻을 수 있게 된다! <br>또한, **DDIM의 forward process 식**은 **DDPM의 forward process 식과 동일하게 표현**될 수 있다는 것도 알 수 있다.
+
+^86dd67
+
+맨 마지막에는 오직 $q(x_T\mid x_0)$ 와 $\prod_{t=2}^T q(x_{t-1}\mid x_t, x_0)$ 만이 남게된다. <br><br>**“원래 DDPM의 forward $q(x_{1:T}\mid x_0)=\prod_t q(x_t\mid x_{t-1})$ process”** 를 bayesian rule과 **Markovian 가정**으로 텔레스코핑(telescoping) 해 보면 $\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)$ 이라는 <b><font color="#e36c09">non-Markovian한 인자</font></b>를 얻을 수 있게 된다! <br>또한, **DDIM의 forward process 식**은 **DDPM의 forward process 식과 동일하게 표현**될 수 있다는 것도 알 수 있다. ^4e02d1
+
+## ✅ forward 과정 수식 요약
+### 1. forward 과정
+$$
+q(x_t \mid x_{t-1})
+= \mathcal{N}\bigl(\sqrt{1-\beta_t}\,x_{t-1},\;\beta_t\,I\bigr)
+$$
+$$
+\begin{align}
+q(x_t \mid x_0)
+= \mathcal{N}\bigl(\sqrt{\bar\alpha_t}\,x_0,\;(1-\bar\alpha_t)\,I\bigr), \quad\bar\alpha_t = \prod_{s=1}^t (1-\beta_s)
+\end{align}
+$$
+### 2. Posterior 구하기 
+Posterior를 Bayes 법칙과 가우시안 연산을 통해 유도하면,
+$$
+q(x_{t-1}\mid x_t,x_0)
+= \mathcal{N}\bigl(x_{t-1};\;\mu_q,\;\Sigma_q\bigr)
+$$
+이고, 그 평균 ($\mu_q$)는
+$$
+\mu_q
+= \frac{\sqrt{\bar\alpha_{t-1}}\,\beta_t}{1-\bar\alpha_t}\,x_0
+\;+\;
+\frac{\sqrt{1-\beta_t}\,(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}\,x_t
+$$
+로 쓸 수 있다. 이를 다음과 같이 정리할 수도 있다:
+$$
+\mu_q
+= \sqrt{\bar\alpha_{t-1}}\,x_0
+\;+\;
+\sqrt{\,1-\bar\alpha_{t-1}-\sigma_t^2\,}\;\frac{x_t - \sqrt{\bar\alpha_t}\,x_0}{\sqrt{1-\bar\alpha_t}}, \quad \sigma_t^2 = \frac{(1-\bar\alpha_{t-1})\,\beta_t}{1-\bar\alpha_t}
+$$
 
 # DDPM vs. DDIM
 noise를 추가하는 **forward process는 동일**하다는 것을 알았으니, 이제 **sampling** 과정에서의 둘의 차이를 알아보자!
@@ -148,7 +184,8 @@ x_{t-1}
 \;+\;
 \sqrt{1-\alpha_{t-1}}\,\epsilon_\theta(x_t, t)
 $$
-처럼 결정론적으로 한 step씩 복원해나간다.<br><br>
+처럼 결정론적으로 한 step씩 복원해나간다.
+<br><br>
 
 ## So what's the benefit?
 그래서 <b><font color="#e36c09">non-Markovian 가정으로 sampling 시에 어떤 이점</font></b>이 있는걸까? <br>
@@ -181,31 +218,18 @@ $$
 결과적으로, denoising 횟수가 $T \rightarrow N$ 로 줄어 속도는 $\frac{K}{N}$배 빨라지고, 샘플 품질은 DDPM 대비 큰 손실 없이 유지된다!<br>
 
 ## 중간 스텝을 어떻게 건너뛸 수 있는걸까?
-전체 **스텝을 모두 거치지 않고 일부를 건너뛰기**만 해도, **원본 DDPM과 동등한 성능을 유지**하면서 **훨씬 빠르게 작동**할 수 있다는 것이 가능한건가 싶다. 이번 단락에서는 위에서 다룬 내용들의 엄밀성을 차근차근 살펴보겠다. 
-
-### 우선 다시 식으로 돌아가서, 
-왜 DDIM paper에서 사용한 식에서
+전체 **스텝을 모두 거치지 않고 일부를 건너뛰기**만 해도, **원본 DDPM과 동등한 성능을 유지**하면서 **훨씬 빠르게 작동**할 수 있다는 것이 가능한건가 싶다.<br>아까 [DDIM’s non-Markovian Forward Process](DDIM#^4e02d1) 에서 우리는 **DDIM의 모든 forward 과정이 모든 $t$에 대해 가우시안으로 명시**돼 있기 때문에, 이론상으로는 어떤 시점 $t$에 대해서도 posterior
 $$
-q(x_T\mid x_0)\;\prod_{t=2}^T q(x_{t-1}\mid x_t,\,x_0)
+q(x_t\mid x_{t-1},x_0) = \mathcal{N}\bigg(\mathbf{x}_{t-1};\;\mu_q(x_t, x_0), \;\Sigma_q\bigg)
 $$
-$q(x_{t-1}\mid x_t, x_0)$는 $x_t$와 $x_0$가 주어졌을 때, denoising 방향의 single step 이고, <br>bayesian rule에 따라 다음과 같이 풀어 쓸 수 있다. 
+의 평균 $\mu_q$와 분산 $\Sigma_q$를 정확히 계산할 수 있다. <br><br>따라서 이론적으로는 $x_t$와 진짜 $x_0$가 주어지면, 모든 $t$에 대해 이 posterior를 **closed-form**으로 구할 수 있다. <br><br>다만 실제 샘플링(inference) 단계에서는 진짜 $x_0$를 모르기 때문에, <br>**네트워크로 예측한 $\hat{x}_0$을 넣어서**
 $$
-q(x_{t-1}\mid x_t, x_0)
-= \frac{q(x_t\mid x_{t-1},x_0)\;q(x_{t-1}\mid x_0)}{q(x_t\mid x_0)}
+x_{t-1}=\tilde{\mu}_t(x_t, \hat{x}_0)
 $$
-$q(x_t\mid x_{t-1},x_0)$와 $q(x_t\mid x_0)$는 [[DDPM]]에서 아래와 같이 구하였다. 
-$$
-q(x_t\mid x_{t-1},x_0) := \mathcal{N}\bigg(\mathbf{x}_t;\sqrt{1-\beta_t}\mathbf{x}_{t-1}, \beta_t\mathbf{I}\bigg)
-$$
-$$
-\begin{aligned}
-q(x_t\mid x_0)=\mathcal{N}\bigg(\mathbf{x}_t;\sqrt{\bar{\alpha}_t}\mathbf{x}_0, (1-\bar{\alpha}_t)\mathbf{I}\bigg), \\ 
-where \quad \alpha_t:=1-\beta_t \;and\; \bar{\alpha}_t:=\prod^t_{s=1}\alpha_s
-\end{aligned}
-$$
+형태로 **근사하여 사용**한다는 점만 기억하면 된다!
 
 
-
+<br><br><br>
 
 ### References
 1. https://arxiv.org/pdf/2010.02502
