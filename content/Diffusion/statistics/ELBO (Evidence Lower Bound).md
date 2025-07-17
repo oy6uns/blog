@@ -2,6 +2,8 @@
 date: 2025-07-09
 created: 2025-07-09
 modified: 2025-07-09
+tags:
+  - statistics
 ---
 
 Likelihood는 ‘어떤 일이 일어날 가능성’을 나타낸다. <br>
