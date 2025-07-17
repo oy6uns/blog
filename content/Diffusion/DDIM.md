@@ -140,17 +140,6 @@ $$
 - 첫 번째 항은 “모델이 생각하는 clean image($\hat x_0$)를 <br>바로 $t-1$ 정도의 노이즈 수준으로 되돌린” 부분이고,
 - 두 번째 항은 “원래 $x_t$​의 노이즈 방향($\epsilon_\theta$​)을<br>부족하지 않게 섞어 줘서 자연스러운 transition을 만드는” 부분이다. 
 
-이 한 번의 계산으로 $t \to t-1$을 뛰어넘어버리니,  
-
-> [!note] DDIM’s skip schedule
-> Contents
-
-만약 $t$ 대신 $\tau_k$에서 $\tau_{k-1}$​로 건너뛴다면  
-“중간 모든 스텝($\tau_k-1, \tau_k-2, \dots$)”을 전혀 거치지 않고도
-$$
-x_{\tau_k} \;\to\; x_{\tau_{k-1}}​​
-$$
-을 
 DDIM에서는 보통 $(\sigma_t = 0)$으로 두어
 ![[스크린샷 2025-07-16 오후 9.07.35.png]]
 $$
@@ -159,10 +148,7 @@ x_{t-1}
 \;+\;
 \sqrt{1-\alpha_{t-1}}\,\epsilon_\theta(x_t, t)
 $$
-처럼 결정론적으로 한 step씩 복원해나간다.
-그렇구만.. 그런데 그렇게 deterministic하게 점추정을 가능케 하는 요인은?
-<br>
-<br><br>
+처럼 결정론적으로 한 step씩 복원해나간다.<br><br>
 
 ## So what's the benefit?
 그래서 <b><font color="#e36c09">non-Markovian 가정으로 sampling 시에 어떤 이점</font></b>이 있는걸까? <br>
