@@ -153,7 +153,9 @@ $$
 $$
 - $\sqrt{\bar\alpha_t}x_0 + \sqrt{1-\bar\alpha_t}\epsilon$ 의 선형 결합으로 $x_t$​가 만들어졌다는 forward 식을 재구성 한 것이다.
 - 이 값이 **“예측된 원본”** $\hat{x}_0$이다. 
-#### 2. step 건너뛰기
+#### 2. 샘플링
+> skip step 내용은 [아래 단락](DDIM#^58a6d6)에서 다룸
+
 이제 진짜 posterior
 $$
    q\bigl(x_{t-1}\mid x_t,x_0\bigr)
@@ -188,6 +190,9 @@ $$
 <br><br>
 
 ## So what's the benefit?
+
+^58a6d6
+
 그래서 <b><font color="#e36c09">non-Markovian 가정으로 sampling 시에 어떤 이점</font></b>이 있는걸까? <br>
 위에서 설명했던 DDIM의 sampling 과정을 다시 살펴보자. 
 
