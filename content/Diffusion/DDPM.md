@@ -10,8 +10,7 @@ year:
   - "2020"
 link: https://arxiv.org/pdf/2006.11239
 ---
-> Denoising Diffusion Probabilistic Models (NeurIPS ‘20)
-> https://arxiv.org/pdf/2006.11239
+> Denoising Diffusion Probabilistic Models (NeurIPS ‘20)<br>https://arxiv.org/pdf/2006.11239
 
 
 > [!idea] Idea
