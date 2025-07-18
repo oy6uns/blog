@@ -41,7 +41,18 @@ $$
 # Classifier-free Guidance
 > Classifier-Free Diffusion Guidance (ICLR’ 22)<br>https://arxiv.org/pdf/2207.12598
 
-Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위해 나온 논문이다. 이 논문의 핵심은 **Classifier 없이 Diffusion 모델을 Guidance**할 수 있는 방법을 제시한다. 따라서 “Classifier-free Guidance”라는 이름으로 더 널리 알려져있다. <br><br>
+Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위해 나온 논문이다. <br><br>Classifier Guidance는 
+1. 추가 Classifier를 학습해야 하고, 
+2. 그 Classifier는 노이즈가 섞인 이미지로 학습해야 하므로 Pretrained된 일반적인 Classifier를 바로 사용할 수 없으며, 
+3. 확산 모델의 본래 스코어(“데이터 분포에서 자연스러운 이미지 방향”)와 Classifier Gradient(“분류기에는 $y$로 보이는 방향”)는 항상 일치하지 않는다. 따라서, 정도를 잘못 조절하면 모델이 학습한 **“자연스러운 분포”** 에서 꽤 벗어난 지점까지 샘플이 이동하게 될 수 있다. <br>
+는 단점들이 존재한다. <br>이 논문의 핵심은 **Classifier 없이 Diffusion 모델을 Guidance**할 수 있는 방법을 제시한다. 따라서 **“Classifier-free Guidance”** 라는 이름으로 더 널리 알려져있다. 
+
+본 논문은 단순히 샘플이 품질을 SOTA로 올리는 것에 집중하기 보다, **classifier-free guidance가 classifier guidance와 비슷하게 FID/ID를 달성할 수 있는지**를 보이고, classifier-free guidance를 이해하는 것을 목표로 한다. 
+
+
+
+
+
 
 
 
@@ -56,3 +67,5 @@ Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위�
 
 ### References 
 1. https://ffighting.net/deep-learning-paper-review/diffusion-model/classifier-guidance/
+2. https://kimjy99.github.io/%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0/cfdg/
+3. 
