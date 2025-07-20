@@ -1,8 +1,9 @@
 ---
 date: 2025-07-18
 created: 2025-07-18
-modified: 2025-07-18
+modified: 2025-07-20
 tags:
+  - Diffusion
 ---
 [[DDPM]] 내용을 안다는 가정 하에 아래 다양한 Diffusion 논문들은 핵심들만 짚어서 정리하였다. <br><br>
 # Classifier Guidance 
