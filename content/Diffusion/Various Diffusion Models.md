@@ -55,8 +55,8 @@ Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위�
 ![[스크린샷 2025-07-20 오후 6.40.57.png]]
 원본 이미지 $x$와, 그 이미지의 레이블(class) $c$를 데이터셋에서 꺼내온다. <br><br>
 **일정 확률 $p_{uncond}$에 따라, “아예 아무 레이블도 주지 않고($c\leftarrow \varnothing$)” 학습**한다. 이렇게 하면 모델이
-- **레이블이 있을 때**는 <font color="#e36c09">“고양이면 고양이, 개면 개” 처럼 조건부로 배우고</font>, 
-- **레이블이 없을 때**는 그냥 <font color="#e36c09">“있는 그대로의 자연스러운 이미지도 배우게 된다.”</font>
+- **레이블이 있을 때**는 <font color="#de7802">“고양이면 고양이, 개면 개” 처럼 조건부로 배우고</font>, 
+- **레이블이 없을 때**는 그냥 <font color="#de7802">“있는 그대로의 자연스러운 이미지도 배우게 된다.”</font>
 
 
 모델은 
@@ -67,14 +67,27 @@ Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위�
 ## Sampling
 ![[스크린샷 2025-07-20 오후 7.45.04.png]]
 1. 훈련이 끝나면, 순수 가우시안 노이즈 $z_1 \sim \mathcal{N}(0, I)$를 뽑고
-2. 매 denoising 스텝마다 <b><font color="#e36c09">꺼낼 노이즈량</font></b> $\tilde{\epsilon_t}$을 정한다. <br>조건부, 무조건부 Score를 섞어서 계산하면 된다. 
-   - **조건부 Score**: $\epsilon_+=\epsilon_\theta(z_t, c)$ → <b><font color="#e36c09">label이 c일 때 이렇게 노이즈를 빼라!</font></b>
-   - **무조건부 Score**: $\epsilon_0=\epsilon_\theta(z_t)$ → <b><font color="#e36c09">아무 조건 없을 때 이렇게 노이즈를 빼라!</font></b>
+2. 매 denoising 스텝마다 <b><font color="#de7802">꺼낼 노이즈량</font></b> $\tilde{\epsilon_t}$을 정한다. <br>조건부, 무조건부 Score를 섞어서 계산하면 된다. 
+   - **조건부 Score**: $\epsilon_+=\epsilon_\theta(z_t, c)$ → <b><font color="#de7802">label이 c일 때 이렇게 노이즈를 빼라!</font></b>
+   - **무조건부 Score**: $\epsilon_0=\epsilon_\theta(z_t)$ → <b><font color="#de7802">아무 조건 없을 때 이렇게 노이즈를 빼라!</font></b>
 $$
 \tilde{\epsilon_t}=(1+w)\epsilon_+\;-\;w\;\epsilon_0
 $$
 
-**샘플링할 때 별도의 Classifier를 쓰지 않고도**, <br>제거할 노이즈 값을 $ε_θ(z,c)$와 $ε_θ(z)$ 로 가중합만 해도 <b><font color="#e36c09">원하는 Lable(Class)</font></b> $c$ <b><font color="#e36c09">방향으로 denosing을 유도할 수 있게 된다!</font></b><br><br>Classifier-Guidance와 달리 
+**샘플링할 때 별도의 Classifier를 쓰지 않고도**, <br>제거할 노이즈 값을 $ε_θ(z,c)$와 $ε_θ(z)$의 가중합으로만 정해도<br><b><font color="#de7802">원하는 Lable(Class)</font></b> $c$ <b><font color="#de7802">방향으로 denosing을 유도할 수 있게 된다!</font></b>
+<br>![[스크린샷 2025-07-20 오후 8.39.44.png]]
+위 그림과 같이 $w$ 값을 키울수록 **원하는 클래스에 더욱 가깝고 뚜렷한 샘플이 점점 더 많이 생성**되는 것을 확인할 수 있다. 
+
+## Discussion
+<br>추가적인 Classifier의 log-prob Gradient를 쓰는 **Classifier-Guidance와 달리** <br>Classifier-free Guidance는 **순수 생성모델의 Score 두 개를 섞은 비보존(non-conservative) 벡터장**이 된다.
+
+> [!question] non-conservative vector field의 문제점?
+> ![[스크린샷 2025-07-20 오후 8.23.22.png]]
+> 순수 $∇log\;p$ 라면 보장되던 SDE/ODE 샘플링 수렴성이 무너져, 일부 sample에 과도하게 몰리거나(mode collapse), 편향된 샘플이 나올 수 있다. 또한, 소용돌이 치는 방향성 때문에 가끔 샘플이 비현실적으로 튀는 문제가 발생할 수도 있다. 
+
+그럼에도 불구하고, **Classifier-free Guidance**가 실험적으로는 매우 선명하면서도 Condition에 충실한 이미지를 뽑아냈다고 한다. <br>즉, <b><font color="#de7802">수학적 엄밀성을 조금 포기해도, 실제 생성 품질·효율 면에서는 “좋은 근사(non-conservative)”가 더 강력하게 작용할 수 있다</font></b>고 저자는 말하였다. 
+
+
 
 
 
@@ -88,4 +101,4 @@ $$
 ### References 
 1. https://ffighting.net/deep-learning-paper-review/diffusion-model/classifier-guidance/
 2. https://kimjy99.github.io/%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0/cfdg/
-3. 
+3. https://www.youtube.com/watch?v=E0ksC0fTN_Q&pp=0gcJCfwAo7VqN5tD
