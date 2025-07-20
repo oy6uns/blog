@@ -42,19 +42,28 @@ $$
 > Classifier-Free Diffusion Guidance (ICLR’ 22)<br>https://arxiv.org/pdf/2207.12598
 
 Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위해 나온 논문이다. <br><br>Classifier Guidance는 
-1. 추가 Classifier를 학습해야 하고, 
-2. 그 Classifier는 노이즈가 섞인 이미지로 학습해야 하므로 Pretrained된 일반적인 Classifier를 바로 사용할 수 없으며, 
+1. **추가 Classifier를 학습**해야 하고, 
+2. 그 Classifier는 노이즈가 섞인 이미지로 학습해야 하므로 **Pretrained된 일반적인 Classifier를 바로 사용할 수 없으며**, 
 3. 확산 모델의 본래 스코어(“데이터 분포에서 자연스러운 이미지 방향”)와 Classifier Gradient(“분류기에는 $y$로 보이는 방향”)는 항상 일치하지 않는다. 따라서, 정도를 잘못 조절하면 모델이 학습한 **“자연스러운 분포”** 에서 꽤 벗어난 지점까지 샘플이 이동하게 될 수 있다. <br>
 는 단점들이 존재한다. 
 
 <br>이 논문의 핵심은 **Classifier 없이 Diffusion 모델을 Guidance**할 수 있는 방법을 제시한다. 따라서 **“Classifier-free Guidance”** 라는 이름으로 더 널리 알려져있다. 
 
-본 논문은 단순히 샘플이 품질을 SOTA로 올리는 것에 집중하기 보다, **classifier-free guidance가 classifier guidance와 비슷하게 FID/ID를 달성할 수 있는지**를 보이고, classifier-free guidance를 이해하는 것을 목표로 한다. 
+본 논문은 단순히 샘플이 품질을 SOTA로 올리는 것에 집중하기 보다, **classifier-free guidance가 classifier guidance와 비슷하게 FID/ID를 달성할 수 있는지**를 보이고, classifier-free guidance를 이해하는 것을 목표로 한다. <br><br>
 
-
-
-
-
+## Classifier-free training
+![[스크린샷 2025-07-20 오후 6.40.57.png]]
+원본 이미지 $x$와, 그 이미지의 레이블(class) $c$를 데이터셋에서 꺼내온다. <br><br>
+**일정 확률 $p_{uncond}$에 따라, “아예 아무 레이블도 주지 않고($c\leftarrow \varnothing$)” 학습**한다. 이렇게 하면 모델이
+- **레이블이 있을 때**는 “고양이면 고양이, 개면 개” 처럼 조건부로 배우고, 
+- **레이블이 없을 때**는 그냥 “있는 그대로의 자연스러운 이미지도 배우게 된다.”<br><br>
+모델은 
+- **노이즈가 섞인 $z_\lambda$** 와 (있다면) **레이블 $c$를 입력**으로 받아 
+- 원래 이미지에 섞인 노이즈 양 $\hat{\epsilon}=ϵ_θ​(z_λ​,c)$를 예측한다. 
+- DDPM과 마찬가지로, $∇_θ ‖ \epsilon_θ(z_λ, c) − \epsilon‖^2$ 노이즈 오차를 통해 $\theta$를 조금씩 업데이트한다. 
+<br>
+## Sampling
+훈련이 끝나면, “완전한 ”
 
 
 
