@@ -67,12 +67,14 @@ Classifier를 추가적으로 학습해야 한다는 단점을 극복하기 위�
 ## Sampling
 ![[스크린샷 2025-07-20 오후 7.45.04.png]]
 1. 훈련이 끝나면, 순수 가우시안 노이즈 $z_1 \sim \mathcal{N}(0, I)$를 뽑고
-2. 매 denoising 스텝마다 <b><font color="#e36c09">꺼낼 노이즈량</font></b>을 정한다. <br>
-   - 조건부 Score: $\epsilon_+=\epsilon_\theta(z_t, c)$ → <b><font color="#e36c09">label이 c일 때 이렇게 노이즈를 빼라!</font></b>
-   - 무조건부 스코어: $\epsilon_0=\epsilon_\theta(z_t)$ → <b><font color="#e36c09">아무 조건 없을 때 이렇게 노이즈를 빼라!</font></b>
+2. 매 denoising 스텝마다 <b><font color="#e36c09">꺼낼 노이즈량</font></b> $\tilde{\epsilon_t}$을 정한다. <br>조건부, 무조건부 Score를 섞어서 계산하면 된다. 
+   - **조건부 Score**: $\epsilon_+=\epsilon_\theta(z_t, c)$ → <b><font color="#e36c09">label이 c일 때 이렇게 노이즈를 빼라!</font></b>
+   - **무조건부 Score**: $\epsilon_0=\epsilon_\theta(z_t)$ → <b><font color="#e36c09">아무 조건 없을 때 이렇게 노이즈를 빼라!</font></b>
 $$
 \tilde{\epsilon_t}=(1+w)\epsilon_+\;-\;w\;\epsilon_0
 $$
+
+**샘플링할 때 별도의 Classifier를 쓰지 않고도**, <br>제거할 노이즈 값을 $ε_θ(z,c)$와 $ε_θ(z)$ 로 가중합만 해도 <b><font color="#e36c09">원하는 Lable(Class)</font></b> $c$ <b><font color="#e36c09">방향으로 denosing을 유도할 수 있게 된다!</font></b><br><br>Classifier-Guidance와 달리 
 
 
 
