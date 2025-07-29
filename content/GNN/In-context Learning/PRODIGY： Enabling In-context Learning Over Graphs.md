@@ -41,6 +41,7 @@ $$
 결과적으로, $H \in \mathbb{R}^{|\mathcal{V}^T|\times d}$ 는 그래프의 모든 subgraph의 업데이트된 $d$차원의 벡터가 된다. <br>$$
 O_i​=[cosine\;similarity(H_{x_i}​​,H_y​)]_{y∈Y}​
 $$
+
 <font color="#65b855">쿼리 노드에 대한 최종 subgraph의 벡터</font>와 <font color="#65b855">각 label 의 벡터</font>의 <font color="#65b855">cosine similarity를 비교</font>하여 가장 유사도가 높은 label을 선택해 쿼리 결과로 사용한다. <br>
 - 예시: $\mathcal{y}=\{Red, Blue\}$라면, 
 $$
