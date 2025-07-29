@@ -38,11 +38,11 @@ where $||$ represents concatenation, $W ∈ \mathcal{R}^{3d×d}$ is a learnable 
 $$
 H=M_T(G^T)
 $$
-결과적으로, $H \in \mathbb{R}^{|\mathcal{V}^T|\times d}$ 는 그래프의 모든 subgraph의 업데이트된 $d$차원의 벡터가 된다. <br>$$
+결과적으로, $H \in \mathbb{R}^{|\mathcal{V}^T|\times d}$ 는 그래프의 모든 subgraph의 업데이트된 $d$차원의 벡터가 된다. 
+$$
 O_i​=[cosine\;similarity(H_{x_i}​​,H_y​)]_{y∈Y}​
 $$
-
-<font color="#65b855">쿼리 노드에 대한 최종 subgraph의 벡터</font>와 <font color="#65b855">각 label 의 벡터</font>의 <font color="#65b855">cosine similarity를 비교</font>하여 가장 유사도가 높은 label을 선택해 쿼리 결과로 사용한다. <br>
+<br><br><font color="#65b855">쿼리 노드에 대한 최종 subgraph의 벡터</font>와 <font color="#65b855">각 label 의 벡터</font>의 <font color="#65b855">cosine similarity를 비교</font>하여 가장 유사도가 높은 label을 선택해 쿼리 결과로 사용한다. <br>
 - 예시: $\mathcal{y}=\{Red, Blue\}$라면, 
 $$
 O_i=\big[cos(H_{x_i}, H_{Red}), cos(H_{x_i}, H_{Blue})]
@@ -106,4 +106,9 @@ $$
 $$
 Q_{\rm NM} =\{(C,B),\;(G,E),\;(H,G)\}
 $$
-
+#### 5) Few-shot task 완성
+$$
+(G_{pretrain​},S_{NM}​,Q_{NM}​)∼NM_{k=2,m=3}​(G_{pretrain​})
+$$
+- **train sample** $S_{\rm NM}$:  $\{(A,B),(D,B),\;(C,E),(H,E),\;(E,G),(F,G)\}$
+- **쿼리** $Q_{\rm NM}​$: $\{(C,B),\;(G,E),\;(H,G)\}$
