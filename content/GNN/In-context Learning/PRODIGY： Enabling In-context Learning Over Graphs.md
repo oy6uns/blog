@@ -37,5 +37,6 @@ $$
 
 이제 각 subgraph의 Embedding을 만들었으니, 각 subgraph의 Embedding들과 label node를 연결시켜 최종 Task Graph를 만들고, 이를 어텐션 기반 GNN 모듈 $M_T$에 입력으로 넣어준다. 
 $$
-
+H=M_T(G^T)
 $$
+결과적으로 
