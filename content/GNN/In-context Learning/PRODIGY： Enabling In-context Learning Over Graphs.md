@@ -99,13 +99,10 @@ S_3=\{(E,G),\,(F,G)\},\quad y=G
 $$
 #### 4) 쿼리 $Q_i$ 샘플링($\lceil n/m\rceil=1$)
 - $Q_1\subset N_1$에서 1개:  $Q_1=\{(C,B)\}$
-- Q2⊂N2Q_2\subset N_2Q2​⊂N2​에서 1개:
-    
-    Q2={(G,E)} Q_2=\{(G,E)\}Q2​={(G,E)}
-- Q3⊂N3Q_3\subset N_3Q3​⊂N3​에서 1개:
-    
-    Q3={(H,G)} Q_3=\{(H,G)\}Q3​={(H,G)}
-
+- $Q_2\subset N_2$에서 1개:  $Q_2=\{(G,E)\}$
+- $Q_3\subset N_3$에서 1개:  $Q_3=\{(H,G)\}$
 합치면
+$$
+Q_{\rm NM} =\{(C,B),\;(G,E),\;(H,G)\}
+$$
 
-QNM={(C,B),  (G,E),  (H,G)}.Q_{\rm NM} =\{(C,B),\;(G,E),\;(H,G)\}.QNM​={(C,B),(G,E),(H,G)}.
