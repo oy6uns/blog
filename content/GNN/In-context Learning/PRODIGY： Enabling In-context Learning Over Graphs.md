@@ -54,12 +54,10 @@ $$
 - downstream task의 graph $G$와 독립적인 대규모 pretrain용 그래프 $G_{pretrain}$만으로, 
 - <font color="#65b855">별도의 fine-tuning 없이</font> 그대로 few-shot <font color="#65b855">in-context learning이 가능한 모델이 키우기 위한 pretraining loss function</font>을 설계
 ### 3.2.1 Pretraining Task Generation
-**두 가지 과제**를 수행한다. 
-1. **어떤 노드가 같은 Local 이웃 그룹(subgraph)에 속하는지 분류**하는 self-supervised task
-2. $G_{pretrain}$에 이미 있는 Node/Edge Label $f(x_i)=y_i$를 직접 활용하는 supervised task
+**두 가지 과제**를 수행한다. <br>1️⃣ **어떤 노드가 같은 Local 이웃 그룹(subgraph)에 속하는지 분류**하는 self-supervised task<br>2️⃣ $G_{pretrain}$에 이미 있는 Node/Edge Label $f(x_i)=y_i$를 직접 활용하는 supervised task
 <br>
 ---
-#### 첫번째 과제, 
+#### 1️⃣ 첫번째 과제(Neighbor Matching)
 ![[스크린샷 2025-07-29 오후 5.19.41.png]]
 예로 위와 같은 그래프가 있다고 할 때, 
 - 클래스 개수 $m=3$
@@ -102,7 +100,7 @@ $$
 - $Q_1\subset N_1$에서 1개:  $Q_1=\{(C,B)\}$
 - $Q_2\subset N_2$에서 1개:  $Q_2=\{(G,E)\}$
 - $Q_3\subset N_3$에서 1개:  $Q_3=\{(H,G)\}$
-합치면
+<br>합치면
 $$
 Q_{\rm NM} =\{(C,B),\;(G,E),\;(H,G)\}
 $$
@@ -112,3 +110,31 @@ $$
 $$
 - **train sample** $S_{\rm NM}$:  $\{(A,B),(D,B),\;(C,E),(H,E),\;(E,G),(F,G)\}$
 - **쿼리** $Q_{\rm NM}​$: $\{(C,B),\;(G,E),\;(H,G)\}$
+
+#### 2️⃣ 두번째 과제(Multi‑task)
+- 전체 레이블 집합 $\mathcal{Y}$에서 **무작위로 $m$개 레이블** $\{c_i\}$ 추출 
+- 각 $c_i$레이블 가진 노드들 중 $k$개를 참고할 예시 $S_i$​로 샘플링
+- $\lceil n/m\rceil$개 를 쿼리 $Q_i$​로 샘플
+$$
+(G_{pretrain​},S_{MT}​,Q_{MT}​)∼MT_{k,m}​(G_{pretrain​}, f)
+$$<br><br>
+### 3.2.2 Prompt Graph Generation with Augmentation
+앞서 생성된 few‑shot 프롬프트 $(S,Q)$를 **프롬프트 그래프** 형태로 바꾸는 과정에, **그래프 증강(graph augmentation)** 을 추가한다. 
+- **하위그래프 샘플링:**
+    - 각 입력 $x_i$​에 대해 $k$-hop 이웃으로 데이터 그래프 $G_i^D$​ 생성
+- **증강 기법 두 가지:**
+    1. <b><font color="#65b855">Node Dropping</font></b>: $G_i^D$​에서 무작위로 일부 노드 제거 → $G_i^{\text{aug}}=\mathrm{DropNode}(G_i^D)$
+    2. <b><font color="#65b855">Feature Masking</font></b>: **무작위 노드 속성(feature)을 0으로 마스킹** → $G_i^{\text{aug}}=\mathrm{MaskNode}(G_i^D)$
+
+
+### 3.2.3 Pretraining Loss
+$$
+\begin{align}
+​(G_{pretrain}​,S_{NM​},Q_{NM​})∼NM_{k,m}​(G_{pretrain​}) \\
+​(G_{pretrain}​,S_{MT​},Q_{MT​})∼MT_{k,m}​(G_{pretrain​}, f)
+\end{align}​
+$$
+$$
+\mathcal{L}=\mathbb{E}_{x_i​∈Q_{NM}}​​[CE(O_{NM,i}​,y_{NM,i}​)]+\mathbb{E}_{x_i​∈Q_{MT}}​​[CE(O_{MT,i}​,y_{MT,i}​)]
+$$
+
