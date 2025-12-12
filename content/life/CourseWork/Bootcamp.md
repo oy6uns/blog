@@ -4,18 +4,19 @@ created: 2025-07-27
 modified: 2025-07-27
 tags:
 ---
+# Probability-Statistics
 - [x] quiz 1 ✅ 2025-07-27
 - [x] quiz 2 ✅ 2025-07-28
 - [x] quiz 3 ⏳ 2025-07-29 ✅ 2025-07-29
-- [ ] quiz 4 ⏳ 2025-07-30
-- [ ] quiz 5 ⏳ 2025-07-31 
+- [x] quiz 4 ⏳ 2025-07-30 ✅ 2025-08-01
+- [x] quiz 5 ⏳ 2025-07-31 ✅ 2025-08-01
 - [x] Problem set 1 ✅ 2025-07-28
 - [x] Problem set 2 ✅ 2025-07-28
 - [x] Problem set 3 ⏳ 2025-07-29 ✅ 2025-07-29
-- [ ] Problem set 4 ⏳ 2025-07-30
-- [ ] Problem set 5 ⏳ 2025-07-31
+- [x] Problem set 4 ⏳ 2025-07-30 ✅ 2025-08-01
+- [x] Problem set 5 ⏳ 2025-07-31 ✅ 2025-08-01
 
-# Sample Space 
+## Sample Space 
 - set of all possible outcomes 
 	- rolled one die: {1, 2, 3, 4, 5, 6}
 	- tossed three conis together: {HHT, HHT, HTH, HTT, THH, THT, TTH, TTT}
@@ -39,3 +40,30 @@ E_{\text{sum}=6} = \{(1,5),(2,4),(3,3),(4,2),(5,1)\}
 $$
 → 여러개의 단순 사건으로 구성된다. 
 
+
+# C
+- [x] quiz 1 ✅ 2025-07-30 6/8
+- [x] quiz 2 ✅ 2025-07-30 5.8/8
+- [x] quiz 3 ✅ 2025-07-30 4/5
+- [x] quiz 4 ✅ 2025-07-30 4/5
+- [x] quiz 5 ✅ 2025-07-30 2.6/4
+- [x] quiz 6 ✅ 2025-07-30
+- [x] quiz 8 ✅ 2025-07-30
+- [x] quiz 9 ✅ 2025-08-01
+- [x] quiz 10 ✅ 2025-08-01
+---
+- [x] practice 3 ✅ 2025-07-30
+- [x] practice 4 ✅ 2025-07-31
+- [x] practice 5 ✅ 2025-07-31
+- [x] practice 6 ✅ 2025-07-31
+- [x] practice 7 ✅ 2025-07-31
+- [x] practice 8 ✅ 2025-08-01
+- [ ] practice 9
+- [ ] practice 10
+# Memo
+### C언어 
+day 7 - 1, 2, strlen, strcmp / 5
+day 8 / io 다시 보기
+day 10 - 1
+### 확통 
+problem set 5번문제 
