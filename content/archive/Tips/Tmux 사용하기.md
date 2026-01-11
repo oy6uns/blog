@@ -42,3 +42,7 @@ tmux kill-session -t {세션n 이름}
 tmux kill-server # 모든 세션 강제 종료
 ```
 
+## 마우스 scroll 가능하게 하기 
+```shell
+tmux set -g mouse on
+```
